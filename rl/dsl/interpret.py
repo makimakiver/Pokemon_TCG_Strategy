@@ -94,7 +94,11 @@ def build_optinfo(obs, o) -> OptInfo:
         card = encode.get_card(obs, AreaType.HAND, o.index, my_index)
         kind = _play_kind(card.id) if card is not None else "other"
     elif t == int(OptionType.ATTACH):
-        card = encode.get_card(obs, AreaType.HAND, o.index, my_index)
+        # For ATTACH, o.area/o.index identify the card BEING attached (energy/tool,
+        # normally in HAND); o.inPlayArea/o.inPlayIndex identify the target Pokemon
+        # (resolved below via _card_of_option). Kind is decided by the attached card.
+        attach_area = o.area if o.area is not None else AreaType.HAND
+        card = encode.get_card(obs, attach_area, o.index, my_index)
         cd = encode.CARD_TABLE.get(getattr(card, "id", None))
         kind = "attach_tool" if cd and cd.cardType == CardType.TOOL else "attach_energy"
 
@@ -144,4 +148,5 @@ def compile(ruleset: dict):
 
 
 def load(path: str) -> dict:
-    return json.load(open(path))
+    with open(path) as f:
+        return json.load(f)

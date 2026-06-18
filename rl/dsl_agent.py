@@ -8,7 +8,8 @@ import os
 from .config import solver_deck_path, REPO_ROOT
 from .dsl.interpret import compile, load
 
-my_deck = json.load(open(solver_deck_path()))
+with open(solver_deck_path()) as _f:
+    my_deck = json.load(_f)
 assert len(my_deck) == 60
 
 _RULESET = os.environ.get("RL_RULESET",
