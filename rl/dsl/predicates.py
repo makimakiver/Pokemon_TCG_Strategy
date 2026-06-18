@@ -154,15 +154,15 @@ def score_options(ruleset: dict, ctx: RuleContext, opts: list[OptInfo]) -> list[
 def pick_from_scores(scores: list, min_count: int, max_count: int) -> list:
     """Indices chosen by descending score, honoring the engine's min/max.
 
-    When max_count < n (engine restricts the selection), pick max_count top options.
-    When max_count >= n (engine allows all), return exactly min_count top options.
-    Always returns [] when no options exist.
+    Matches agents/bare_agent selection: pick max(min_count, min(max_count, n))
+    top-scored options; fall back to min_count if short. [] when no options.
     """
     n = len(scores)
     if n == 0:
         return []
     order = sorted(range(n), key=lambda i: scores[i], reverse=True)
-    k = max_count if max_count < n else min_count
-    k = max(k, min_count)  # floor at min_count
-    k = min(k, max_count, n)  # ceiling at max_count and n
-    return order[:k]
+    k = max(min_count, min(max_count, n))
+    picks = order[:k]
+    if len(picks) < min_count:
+        picks = order[:min_count]
+    return picks

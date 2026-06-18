@@ -10,8 +10,8 @@ def test_pick_from_scores_respects_min_max():
     assert pick_from_scores(scores, min_count=1, max_count=1) == [2]
     # maxCount 2 -> top two by score, descending
     assert pick_from_scores(scores, min_count=1, max_count=2) == [2, 0]
-    # minCount 3 -> exactly 3 even if it wants fewer
-    assert pick_from_scores(scores, min_count=3, max_count=4) == [2, 0, 3]
+    # minCount 3, maxCount 4, 4 options -> all four by descending score (bare_agent semantics)
+    assert pick_from_scores(scores, min_count=3, max_count=4) == [2, 0, 3, 1]
 
 
 def test_pick_no_options():
