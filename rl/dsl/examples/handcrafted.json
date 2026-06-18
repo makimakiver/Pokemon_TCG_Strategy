@@ -1,0 +1,27 @@
+{
+  "name": "handcrafted-p0",
+  "default_weight": 0.0,
+  "rules": [
+    {"when": [{"pred": "is_attack"}, {"pred": "attack_is_lethal"}, {"pred": "opp_prizes_le", "n": 1}], "weight": 50000},
+    {"when": [{"pred": "is_attack"}, {"pred": "attack_is_lethal"}], "weight": 1500},
+    {"when": [{"pred": "is_attack"}, {"pred": "attack_hits_weakness"}], "weight": 1200},
+    {"when": [{"pred": "is_attack"}, {"pred": "attack_damage_ge", "n": 90}], "weight": 1000},
+    {"when": [{"pred": "is_attack"}], "weight": 800},
+    {"when": [{"pred": "is_evolve"}], "weight": 900},
+    {"when": [{"pred": "is_play_pokemon"}], "weight": 600},
+    {"when": [{"pred": "is_play_pokemon"}, {"pred": "bench_count_ge", "n": 3}], "weight": -570},
+    {"when": [{"pred": "is_play_item"}], "weight": 350},
+    {"when": [{"pred": "is_play_supporter"}], "weight": 300},
+    {"when": [{"pred": "is_play_stadium"}], "weight": 150},
+    {"when": [{"pred": "is_ability"}], "weight": 1500},
+    {"when": [{"pred": "is_attach_energy"}, {"pred": "target_is_mine"}, {"pred": "target_is_attacker"}], "weight": 700},
+    {"when": [{"pred": "is_attach_energy"}, {"pred": "target_is_mine"}], "weight": 500},
+    {"when": [{"pred": "is_attach_tool"}, {"pred": "target_is_attacker"}], "weight": 700},
+    {"when": [{"pred": "is_card_select"}, {"pred": "ctx_to_hand"}, {"pred": "target_is_attacker"}], "weight": 300},
+    {"when": [{"pred": "is_card_select"}, {"pred": "ctx_to_hand"}, {"pred": "target_is_pokemon"}], "weight": 260},
+    {"when": [{"pred": "is_card_select"}, {"pred": "ctx_setup"}, {"pred": "target_is_basic"}], "weight": 100},
+    {"when": [{"pred": "is_card_select"}, {"pred": "ctx_discard"}, {"pred": "target_is_pokemon"}], "weight": -50},
+    {"when": [{"pred": "is_yes"}], "weight": 30},
+    {"when": [{"pred": "is_end"}], "weight": 1}
+  ]
+}
