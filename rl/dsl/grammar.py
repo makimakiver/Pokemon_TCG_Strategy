@@ -36,7 +36,8 @@ def validate(ruleset: dict) -> tuple[bool, list[str]]:
     errors: list[str] = []
     if not isinstance(ruleset, dict):
         return False, ["ruleset must be a JSON object"]
-    if "default_weight" in ruleset and not isinstance(ruleset["default_weight"], (int, float)):
+    dw = ruleset.get("default_weight")
+    if dw is not None and (isinstance(dw, bool) or not isinstance(dw, (int, float))):
         errors.append("default_weight must be a number")
     rules = ruleset.get("rules")
     if not isinstance(rules, list):

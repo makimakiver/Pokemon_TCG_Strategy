@@ -37,3 +37,8 @@ def test_bool_weight_rejected():
     bad = {"rules": [{"when": [{"pred": "is_end"}], "weight": True}]}
     ok, errors = validate(bad)
     assert not ok and any("weight" in e for e in errors)
+
+def test_bool_default_weight_rejected():
+    bad = {"default_weight": True, "rules": [{"when": [{"pred": "is_end"}], "weight": 1}]}
+    ok, errors = validate(bad)
+    assert not ok and any("default_weight" in e for e in errors)
