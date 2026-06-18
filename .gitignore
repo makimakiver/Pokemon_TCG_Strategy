@@ -13,3 +13,4 @@ out/
 
 # Oversized reference PDFs (use Git LFS or keep local; >100MB, GitHub-blocked)
 data/card_reference/*.pdf
+data/card_reference/*.pdf
