@@ -1,3 +1,12 @@
 __pycache__/
 *.pyc
 rl/runs/
+
+# macOS
+.DS_Store
+
+# Generated training artifacts: kaggle_mcts run dirs, checkpoints, logs, metrics.
+# (Reproducible from rl/kaggle_mcts.py; ~48 MB per .pth — never commit these.)
+out/
+*.pth
+*.log
