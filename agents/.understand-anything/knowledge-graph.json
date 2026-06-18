@@ -1,0 +1,1290 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "Pokemon TCG Agent Pilots",
+    "languages": [
+      "Python"
+    ],
+    "frameworks": [],
+    "description": "A lineage of Python AI \"pilot\" strategies that play Pokemon TCG decks inside an external simulator engine (cg). Each file is a self-contained agent(obs) decision function for a specific deck archetype; files relate to each other as iterations and variants of evolving strategies.",
+    "analyzedAt": "2026-06-17T15:55:41.119Z",
+    "gitCommitHash": ""
+  },
+  "nodes": [
+    {
+      "id": "file:__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "__init__.py",
+      "summary": "Empty package marker that makes the agents directory importable as a Python package.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "package-marker"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "type": "file",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "summary": "Ignore-list file used by the Understand-Anything tool to exclude paths from analysis.",
+      "tags": [
+        "configuration",
+        "tooling",
+        "ignore-file"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:bare_agent.py",
+      "type": "file",
+      "name": "bare_agent.py",
+      "filePath": "bare_agent.py",
+      "summary": "Baseline generic Pokemon TCG pilot with no archetype-specific logic; scores attacks, energy attachment, and bench decisions purely from the engine observation.",
+      "tags": [
+        "baseline",
+        "generic-engine",
+        "agent-pilot",
+        "decision-engine"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Self-contained agent built around a single large agent(obs_dict) decision function plus shared card/attack helper functions."
+    },
+    {
+      "id": "file:bare_agent2.py",
+      "type": "file",
+      "name": "bare_agent2.py",
+      "filePath": "bare_agent2.py",
+      "summary": "Near-identical variant of bare_agent.py providing a second baseline generic pilot for A/B comparison in the gauntlet.",
+      "tags": [
+        "baseline",
+        "generic-engine",
+        "agent-pilot",
+        "variant"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:fire.py",
+      "type": "file",
+      "name": "fire.py",
+      "filePath": "fire.py",
+      "summary": "Anti-Crustle Fire-type aggro pilot that exploits the opponent's Grass weakness; adds a heal-awareness helper on top of the generic scoring engine.",
+      "tags": [
+        "fire-aggro",
+        "agent-pilot",
+        "counter-deck",
+        "decision-engine"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Extends the baseline scaffold with a _heals(cid) helper to value healing trainers/abilities."
+    },
+    {
+      "id": "file:honchkrow.py",
+      "type": "file",
+      "name": "honchkrow.py",
+      "filePath": "honchkrow.py",
+      "summary": "Combo-aware Rocket's Honchkrow pilot whose Rocket Feathers attack damage scales with discarded ammo; the strongest hand-tuned anti-meta agent in the project.",
+      "tags": [
+        "honchkrow-combo",
+        "agent-pilot",
+        "damage-correction",
+        "combo"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Adds card/attack name lookups (_card_named, _attack_named), weakness application, and a dedicated rocket_feathers_damage model on top of the shared scaffold."
+    },
+    {
+      "id": "file:main_bench.py",
+      "type": "file",
+      "name": "main_bench.py",
+      "filePath": "main_bench.py",
+      "summary": "Bench-focused variant of the main generic pilot that emphasizes bench-development heuristics in its decision scoring.",
+      "tags": [
+        "generic-engine",
+        "agent-pilot",
+        "variant",
+        "bench-strategy"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:main_crustle_base.py",
+      "type": "file",
+      "name": "main_crustle_base.py",
+      "filePath": "main_crustle_base.py",
+      "summary": "Baseline pilot for the Crustle archetype deck, identical scaffold to main.py used as the Crustle-family reference point.",
+      "tags": [
+        "crustle-typhlosion",
+        "agent-pilot",
+        "baseline",
+        "decision-engine"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:main_cur.py",
+      "type": "file",
+      "name": "main_cur.py",
+      "filePath": "main_cur.py",
+      "summary": "Current working main pilot variant, a snapshot of main.py used as the active comparison baseline.",
+      "tags": [
+        "generic-engine",
+        "agent-pilot",
+        "baseline",
+        "variant"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:main_honch_base.py",
+      "type": "file",
+      "name": "main_honch_base.py",
+      "filePath": "main_honch_base.py",
+      "summary": "Baseline (untuned) Honchkrow pilot using the generic scaffold, the starting point that honchkrow.py later improves with combo-aware damage.",
+      "tags": [
+        "honchkrow-combo",
+        "agent-pilot",
+        "baseline",
+        "decision-engine"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:main_megalucario_backup.py",
+      "type": "file",
+      "name": "main_megalucario_backup.py",
+      "filePath": "main_megalucario_backup.py",
+      "summary": "Backup of the original Mega Lucario pilot; the earliest deck strategy that later variants were benchmarked against and beat.",
+      "tags": [
+        "mega-lucario",
+        "agent-pilot",
+        "baseline",
+        "legacy"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Largest single agent() body (~415 lines) with fewer extracted helpers, reflecting an earlier monolithic implementation style."
+    },
+    {
+      "id": "file:main_typh_base.py",
+      "type": "file",
+      "name": "main_typh_base.py",
+      "filePath": "main_typh_base.py",
+      "summary": "Baseline pilot for the Typhlosion archetype, the reference variant for the Crustle/Typhlosion two-line deck.",
+      "tags": [
+        "crustle-typhlosion",
+        "agent-pilot",
+        "baseline",
+        "decision-engine"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:main_typhlosion.py",
+      "type": "file",
+      "name": "main_typhlosion.py",
+      "filePath": "main_typhlosion.py",
+      "summary": "Typhlosion archetype pilot (the main_v2 = Typhlosion deck); generic engine playing the Crustle/Typhlosion two-line deck.",
+      "tags": [
+        "crustle-typhlosion",
+        "agent-pilot",
+        "generic-engine",
+        "decision-engine"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:main_v1.py",
+      "type": "file",
+      "name": "main_v1.py",
+      "filePath": "main_v1.py",
+      "summary": "First iteration of the evolving main pilot lineage; generic scoring engine that later versions (v2, v3, v4) build upon.",
+      "tags": [
+        "generic-engine",
+        "agent-pilot",
+        "baseline",
+        "iteration"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:main_v2.py",
+      "type": "file",
+      "name": "main_v2.py",
+      "filePath": "main_v2.py",
+      "summary": "Second iteration pilot (the Typhlosion-deck generic engine) that proved strongest as an untuned generic pilot in the gauntlet.",
+      "tags": [
+        "generic-engine",
+        "agent-pilot",
+        "crustle-typhlosion",
+        "iteration"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Introduces _stage and _best_dmg helpers refining the v1 scaffold."
+    },
+    {
+      "id": "file:main_v2_baseline.py",
+      "type": "file",
+      "name": "main_v2_baseline.py",
+      "filePath": "main_v2_baseline.py",
+      "summary": "Frozen baseline copy of main_v2 used as the control for measuring whether later tuning overlays improve or regress the gauntlet.",
+      "tags": [
+        "generic-engine",
+        "agent-pilot",
+        "baseline",
+        "iteration"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:main_v2_rebel.py",
+      "type": "file",
+      "name": "main_v2_rebel.py",
+      "filePath": "main_v2_rebel.py",
+      "summary": "Experimental v2 overlay adding cheap-damage, energy-acceleration, and heal heuristics; an archetype-tuning branch off main_v2.",
+      "tags": [
+        "generic-engine",
+        "agent-pilot",
+        "experiment",
+        "iteration"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Adds _heals, _cheap_dmg, and _accels heuristic helpers exploring archetype overlays."
+    },
+    {
+      "id": "file:main_v3.py",
+      "type": "file",
+      "name": "main_v3.py",
+      "filePath": "main_v3.py",
+      "summary": "Third iteration pilot with full combo modeling: detects Ethan's Pokemon in discard and models Buddy Blast damage scaling plus hand/field awareness.",
+      "tags": [
+        "generic-engine",
+        "agent-pilot",
+        "damage-correction",
+        "combo"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Largest helper set: _ethan_in_discard, _buddy_blast_damage, _is_buddy_blast, _hand_has, _field_has feed an ethan_fuel-aware attack_damage."
+    },
+    {
+      "id": "file:main_v3_pure.py",
+      "type": "file",
+      "name": "main_v3_pure.py",
+      "filePath": "main_v3_pure.py",
+      "summary": "Strongest pilot: the v2 generic engine plus only the pure Buddy Blast real-damage correction, deliberately omitting all regressing archetype overlays.",
+      "tags": [
+        "generic-engine",
+        "agent-pilot",
+        "damage-correction",
+        "iteration"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Pares main_v3 back to the v2 scaffold (no combo helper sprawl), isolating the single damage-correction fact the engine cannot read."
+    },
+    {
+      "id": "file:main_v4.py",
+      "type": "file",
+      "name": "main_v4.py",
+      "filePath": "main_v4.py",
+      "summary": "Fourth iteration pilot retaining the Ethan's-in-discard damage correction with a trimmed helper set compared to v3.",
+      "tags": [
+        "generic-engine",
+        "agent-pilot",
+        "damage-correction",
+        "iteration"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Keeps _ethan_in_discard and an ethan_fuel-aware attack_damage but drops the broader buddy-blast/hand/field helpers of v3."
+    },
+    {
+      "id": "file:main.py",
+      "type": "file",
+      "name": "main.py",
+      "filePath": "main.py",
+      "summary": "Primary entry-point pilot for the project, currently running the Crustle-family generic decision engine that the other variants are benchmarked against.",
+      "tags": [
+        "entry-point",
+        "agent-pilot",
+        "generic-engine",
+        "decision-engine"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:bare_agent.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "bare_agent.py",
+      "lineRange": [
+        163,
+        394
+      ],
+      "summary": "Main decision entry point: parses the observation, enumerates legal moves, and selects an action by scoring attacks, energy attachment, evolution, and bench plays.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "scoring",
+        "agent-pilot"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:bare_agent2.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "bare_agent2.py",
+      "lineRange": [
+        163,
+        394
+      ],
+      "summary": "Decision entry point for the second baseline pilot, scoring and selecting moves from the engine observation.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "scoring",
+        "agent-pilot"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:fire.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "fire.py",
+      "lineRange": [
+        175,
+        430
+      ],
+      "summary": "Fire-deck decision entry point that biases scoring toward exploiting Grass-weak opponents and values healing effects.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "fire-aggro",
+        "counter-deck"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:honchkrow.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "honchkrow.py",
+      "lineRange": [
+        228,
+        541
+      ],
+      "summary": "Honchkrow decision entry point that plans Rocket Feathers ammo discards and selects attacks using the combo-aware damage model.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "honchkrow-combo",
+        "combo"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:honchkrow.py:rocket_feathers_damage",
+      "type": "function",
+      "name": "rocket_feathers_damage",
+      "filePath": "honchkrow.py",
+      "lineRange": [
+        209,
+        211
+      ],
+      "summary": "Computes Rocket Feathers attack damage scaled by available ammo and weakness, the core combo-correction the engine cannot infer.",
+      "tags": [
+        "damage-correction",
+        "honchkrow-combo",
+        "combo",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:main_bench.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "main_bench.py",
+      "lineRange": [
+        164,
+        437
+      ],
+      "summary": "Bench-oriented decision entry point that scores moves with added weight on bench development.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "bench-strategy",
+        "agent-pilot"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:main_crustle_base.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "main_crustle_base.py",
+      "lineRange": [
+        164,
+        447
+      ],
+      "summary": "Crustle-baseline decision entry point using the shared generic scoring engine.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "crustle-typhlosion",
+        "baseline"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:main_cur.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "main_cur.py",
+      "lineRange": [
+        165,
+        446
+      ],
+      "summary": "Current-main decision entry point, an active snapshot of the generic scoring engine.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "generic-engine",
+        "baseline"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:main_honch_base.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "main_honch_base.py",
+      "lineRange": [
+        164,
+        432
+      ],
+      "summary": "Untuned Honchkrow-baseline decision entry point using the generic engine without combo damage modeling.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "honchkrow-combo",
+        "baseline"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:main_megalucario_backup.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "main_megalucario_backup.py",
+      "lineRange": [
+        131,
+        546
+      ],
+      "summary": "Monolithic Mega Lucario decision entry point, the project's earliest full-game move-selection logic.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "mega-lucario",
+        "legacy"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:main_typh_base.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "main_typh_base.py",
+      "lineRange": [
+        167,
+        398
+      ],
+      "summary": "Typhlosion-baseline decision entry point using the shared generic scoring engine.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "crustle-typhlosion",
+        "baseline"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:main_typhlosion.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "main_typhlosion.py",
+      "lineRange": [
+        167,
+        398
+      ],
+      "summary": "Typhlosion-deck decision entry point driving the Crustle/Typhlosion two-line strategy.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "crustle-typhlosion",
+        "generic-engine"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:main_v1.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "main_v1.py",
+      "lineRange": [
+        164,
+        432
+      ],
+      "summary": "First-iteration decision entry point that establishes the generic scoring engine reused by later versions.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "generic-engine",
+        "iteration"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:main_v2.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "main_v2.py",
+      "lineRange": [
+        167,
+        398
+      ],
+      "summary": "Second-iteration decision entry point; the strongest untuned generic pilot in the gauntlet.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "generic-engine",
+        "iteration"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:main_v2_baseline.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "main_v2_baseline.py",
+      "lineRange": [
+        167,
+        398
+      ],
+      "summary": "Frozen v2-baseline decision entry point used as the control for tuning experiments.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "generic-engine",
+        "baseline"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:main_v2_rebel.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "main_v2_rebel.py",
+      "lineRange": [
+        206,
+        475
+      ],
+      "summary": "Experimental v2 decision entry point layering cheap-damage, energy-acceleration, and heal heuristics over the baseline scoring.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "experiment",
+        "iteration"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:main_v3.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "main_v3.py",
+      "lineRange": [
+        252,
+        554
+      ],
+      "summary": "Third-iteration decision entry point integrating Ethan's-in-discard detection and Buddy Blast damage scaling into move scoring.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "damage-correction",
+        "combo"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:main_v3.py:_buddy_blast_damage",
+      "type": "function",
+      "name": "_buddy_blast_damage",
+      "filePath": "main_v3.py",
+      "lineRange": [
+        131,
+        133
+      ],
+      "summary": "Models the real Buddy Blast attack damage (40 + 60 per Ethan's Pokemon in discard) that the simulator engine cannot read.",
+      "tags": [
+        "damage-correction",
+        "combo",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:main_v3_pure.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "main_v3_pure.py",
+      "lineRange": [
+        186,
+        417
+      ],
+      "summary": "Strongest pilot's decision entry point: the v2 engine with only the isolated Buddy Blast damage correction applied.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "damage-correction",
+        "iteration"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:main_v4.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "main_v4.py",
+      "lineRange": [
+        196,
+        429
+      ],
+      "summary": "Fourth-iteration decision entry point retaining the Ethan's-in-discard damage correction with a trimmed helper set.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "damage-correction",
+        "iteration"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:main.py:agent",
+      "type": "function",
+      "name": "agent",
+      "filePath": "main.py",
+      "lineRange": [
+        166,
+        447
+      ],
+      "summary": "Primary entry-point decision function that selects the project's default deck moves via the generic scoring engine.",
+      "tags": [
+        "entry-point",
+        "decision-engine",
+        "generic-engine",
+        "agent-pilot"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:bare_agent.py",
+      "target": "function:bare_agent.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:bare_agent.py",
+      "target": "function:bare_agent.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:bare_agent2.py",
+      "target": "function:bare_agent2.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:bare_agent2.py",
+      "target": "function:bare_agent2.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:fire.py",
+      "target": "function:fire.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:fire.py",
+      "target": "function:fire.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:honchkrow.py",
+      "target": "function:honchkrow.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:honchkrow.py",
+      "target": "function:honchkrow.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:honchkrow.py",
+      "target": "function:honchkrow.py:rocket_feathers_damage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "function:honchkrow.py:agent",
+      "target": "function:honchkrow.py:rocket_feathers_damage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main_bench.py",
+      "target": "function:main_bench.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:main_bench.py",
+      "target": "function:main_bench.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main_crustle_base.py",
+      "target": "function:main_crustle_base.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:main_crustle_base.py",
+      "target": "function:main_crustle_base.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main_cur.py",
+      "target": "function:main_cur.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:main_cur.py",
+      "target": "function:main_cur.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main_honch_base.py",
+      "target": "function:main_honch_base.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:main_honch_base.py",
+      "target": "function:main_honch_base.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main_megalucario_backup.py",
+      "target": "function:main_megalucario_backup.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:main_megalucario_backup.py",
+      "target": "function:main_megalucario_backup.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main_typh_base.py",
+      "target": "function:main_typh_base.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:main_typh_base.py",
+      "target": "function:main_typh_base.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main_typhlosion.py",
+      "target": "function:main_typhlosion.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:main_typhlosion.py",
+      "target": "function:main_typhlosion.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main_v1.py",
+      "target": "function:main_v1.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:main_v1.py",
+      "target": "function:main_v1.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main_v2.py",
+      "target": "function:main_v2.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:main_v2.py",
+      "target": "function:main_v2.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main_v2_baseline.py",
+      "target": "function:main_v2_baseline.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:main_v2_baseline.py",
+      "target": "function:main_v2_baseline.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main_v2_rebel.py",
+      "target": "function:main_v2_rebel.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:main_v2_rebel.py",
+      "target": "function:main_v2_rebel.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main_v3.py",
+      "target": "function:main_v3.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:main_v3.py",
+      "target": "function:main_v3.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main_v3.py",
+      "target": "function:main_v3.py:_buddy_blast_damage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "function:main_v3.py:agent",
+      "target": "function:main_v3.py:_buddy_blast_damage",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main_v3_pure.py",
+      "target": "function:main_v3_pure.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:main_v3_pure.py",
+      "target": "function:main_v3_pure.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main_v4.py",
+      "target": "function:main_v4.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:main_v4.py",
+      "target": "function:main_v4.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:main.py",
+      "target": "function:main.py:agent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:main.py",
+      "target": "function:main.py:agent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:bare_agent2.py",
+      "target": "file:bare_agent.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_v1.py",
+      "target": "file:main.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_v2.py",
+      "target": "file:main_v1.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_v3.py",
+      "target": "file:main_v2.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_v4.py",
+      "target": "file:main_v3.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_v3_pure.py",
+      "target": "file:main_v3.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_v3_pure.py",
+      "target": "file:main_v2.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_v2_baseline.py",
+      "target": "file:main_v2.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_v2_rebel.py",
+      "target": "file:main_v2.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_cur.py",
+      "target": "file:main.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_typhlosion.py",
+      "target": "file:main_typh_base.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_typhlosion.py",
+      "target": "file:main_v2.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_typh_base.py",
+      "target": "file:main_crustle_base.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_crustle_base.py",
+      "target": "file:main.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:honchkrow.py",
+      "target": "file:main_honch_base.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_honch_base.py",
+      "target": "file:main_v1.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:fire.py",
+      "target": "file:main_crustle_base.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:fire.py",
+      "target": "file:bare_agent.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:bare_agent.py",
+      "target": "file:main_v1.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_megalucario_backup.py",
+      "target": "file:main.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:main_bench.py",
+      "target": "file:main.py",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:generic-engine",
+      "name": "Generic Engine & Baselines",
+      "description": "Archetype-agnostic auto-role pilots that form the lineage backbone, including the main.py decision engine (fan-in 4) and its v1/v2 iterations plus bare and bench baselines that every other pilot descends from.",
+      "nodeIds": [
+        "file:main.py",
+        "file:main_cur.py",
+        "file:main_v1.py",
+        "file:main_v2.py",
+        "file:main_v2_baseline.py",
+        "file:main_bench.py",
+        "file:bare_agent.py",
+        "file:bare_agent2.py"
+      ]
+    },
+    {
+      "id": "layer:crustle-typhlosion",
+      "name": "Crustle / Typhlosion Line",
+      "description": "Dual-line Crustle/Typhlosion deck pilots derived from main and main_v2, representing the strongest gauntlet engine in the lineage.",
+      "nodeIds": [
+        "file:main_crustle_base.py",
+        "file:main_typh_base.py",
+        "file:main_typhlosion.py"
+      ]
+    },
+    {
+      "id": "layer:buddy-blast-series",
+      "name": "Buddy Blast Damage-Correction Series (v3-v4)",
+      "description": "The ablation series branching off main_v2 that layers in the Buddy Blast real-damage correction, including the v3 base, v4 extension, and the mirror-neutral v3_pure isolate.",
+      "nodeIds": [
+        "file:main_v3.py",
+        "file:main_v3_pure.py",
+        "file:main_v4.py"
+      ]
+    },
+    {
+      "id": "layer:honchkrow-combo",
+      "name": "Honchkrow Combo",
+      "description": "Combo-aware Honchkrow pilots with precise ammo-discard logic; main_honch_base feeds back into the v1 lineage via the related chain.",
+      "nodeIds": [
+        "file:honchkrow.py",
+        "file:main_honch_base.py"
+      ]
+    },
+    {
+      "id": "layer:fire-counter",
+      "name": "Fire Counter Deck",
+      "description": "Anti-Crustle Fire aggro counter pilots that combine the crustle base and bare baseline lineages to exploit the all-Grass Fire weakness.",
+      "nodeIds": [
+        "file:fire.py",
+        "file:main_v2_rebel.py"
+      ]
+    },
+    {
+      "id": "layer:mega-lucario-legacy",
+      "name": "Mega Lucario (Legacy)",
+      "description": "Legacy Mega Lucario backup pilot retained as a historical baseline branch off main.py.",
+      "nodeIds": [
+        "file:main_megalucario_backup.py"
+      ]
+    },
+    {
+      "id": "layer:package-tooling",
+      "name": "Package & Tooling",
+      "description": "Package marker and tooling configuration that scaffold the agents package without participating in pilot strategy.",
+      "nodeIds": [
+        "file:__init__.py",
+        "file:.understand-anything/.understandignore"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "The Production Pilot",
+      "description": "Start at main.py, the current production pilot and the root of the entire lineage. Every file in this folder follows the same contract it defines: a single agent(obs) function that takes the game observation and returns an action. main.py currently runs the strongest known strategy (Shun's Palace deck from the main_v3_pure lineage), so reading it first shows you both the shared scaffold and where the project's evolution has landed.",
+      "nodeIds": [
+        "file:main.py"
+      ],
+      "languageLesson": "Every pilot exposes a single top-level agent(obs) function as its public interface. The simulator imports this function by name, so the function signature is the contract — the rest of each file is private strategy logic supporting that one entry point."
+    },
+    {
+      "order": 2,
+      "title": "The Generic Auto-Role Engine",
+      "description": "bare_agent.py is the archetype-agnostic engine underneath everything. Instead of hardcoding which Pokemon attacks, it auto-assigns attacker and support roles from whatever cards are in play, making it deck-independent. This is the conceptual foundation: most later pilots are this generic engine plus small, deck-aware overlays. The fire.py counter deck even branches directly from it.",
+      "nodeIds": [
+        "file:bare_agent.py",
+        "file:bare_agent2.py"
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Lineage Origins: v1",
+      "description": "main_v1.py is the first named iteration in the lineage chain that flows from main.py. It is also a hub: both the main line and the Honchkrow combo line (via main_honch_base.py) trace back through it, which is why it ranks high in fan-in. Reading it shows the earliest codified strategy that every later branch refines or reacts against.",
+      "nodeIds": [
+        "file:main_v1.py"
+      ]
+    },
+    {
+      "order": 4,
+      "title": "The v2 Branch Point",
+      "description": "main_v2.py is the busiest node in the graph by fan-out: it spawns five descendants (v3, v2_baseline, v2_rebel, the Typhlosion pilot, and feeds the v3-pure ablation). It introduces the Typhlosion-flavored generic engine. Critically, the untuned main_typhlosion.py from this line turned out to be the strongest base, teaching the recurring lesson that the generic engine beats over-tuning.",
+      "nodeIds": [
+        "file:main_v2.py",
+        "file:main_typhlosion.py"
+      ]
+    },
+    {
+      "order": 5,
+      "title": "The Crustle / Typhlosion Dual Line",
+      "description": "Building on the main line, main_crustle_base.py and main_typh_base.py form the dual-line deck branch. main_crustle_base.py is a high-fan-in hub feeding both the Typhlosion base and the fire counter deck, anchoring the two-Pokemon-line archetype. These pilots show how a base strategy gets specialized for a specific deck composition without abandoning the shared agent(obs) scaffold.",
+      "nodeIds": [
+        "file:main_crustle_base.py",
+        "file:main_typh_base.py"
+      ]
+    },
+    {
+      "order": 6,
+      "title": "The Key Ablation: v3 vs v3-pure",
+      "description": "This is the heart of the tour. main_v3.py is the full overlay pilot, layering many archetype heuristics on top of v2 and defining the _buddy_blast_damage helper. main_v3_pure.py keeps ONLY that one fix and discards every other overlay. The pure version wins 83.2% of the gauntlet while the full overlay regresses, proving the central project lesson: isolate the one correction the engine literally cannot read (real Buddy Blast damage), and never bundle speculative heuristics.",
+      "nodeIds": [
+        "file:main_v3.py",
+        "file:main_v3_pure.py"
+      ],
+      "languageLesson": "_buddy_blast_damage encodes a game fact the generic engine cannot observe: an attack does 40 base, +60 more if Ethan's is in the discard pile. Both v3 and v3_pure call this same helper (note the shared call edge), so the only difference between them is what else got bundled around it — a clean ablation."
+    },
+    {
+      "order": 7,
+      "title": "The Hidden Win Condition: Honchkrow Combo",
+      "description": "honchkrow.py is a different philosophy: a combo pilot built around a hidden win condition rather than the generic engine. It derives from main_honch_base.py (which itself comes from v1) and centers on rocket_feathers_damage, the helper that computes the precise ammo-discard combo damage. Getting that discard accounting exactly right was the lever that pushed it to beat main.py around 56% of the time.",
+      "nodeIds": [
+        "file:honchkrow.py",
+        "file:main_honch_base.py"
+      ]
+    },
+    {
+      "order": 8,
+      "title": "The Hard Counter: Fire vs Grass",
+      "description": "fire.py demonstrates matchup-specific design rather than general strength. It branches from both main_crustle_base.py and the bare_agent.py generic engine, then specializes into Fire aggro that exploits main's all-Grass weakness, beating the production pilot 74% of the time. It is a reminder that strategy lives in the matchup: a deck need not be globally best to dominate one opponent.",
+      "nodeIds": [
+        "file:fire.py"
+      ]
+    },
+    {
+      "order": 9,
+      "title": "The Replaced Legacy: Mega Lucario",
+      "description": "Close with main_megalucario_backup.py, the legacy meta-aware multi-attacker pilot that the v3 line replaced. It branches directly from main.py and represents the prior generation of strategy. Reading it last lets you contrast the heavily meta-tuned ancestor against the lesson the lineage ultimately learned — that the lean generic engine plus a single surgical fix outperforms elaborate meta-awareness.",
+      "nodeIds": [
+        "file:main_megalucario_backup.py",
+        "file:main_bench.py"
+      ]
+    }
+  ]
+}

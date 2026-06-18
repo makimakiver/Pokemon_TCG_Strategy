@@ -1,0 +1,27 @@
+{
+  "projectRoot": "/Users/makimakiver/pokemon-tcg/agents",
+  "files": [
+    {"path": "__init__.py", "language": "python", "fileCategory": "code"},
+    {"path": ".understand-anything/.understandignore", "language": "unknown", "fileCategory": "code"},
+    {"path": "bare_agent.py", "language": "python", "fileCategory": "code"},
+    {"path": "bare_agent2.py", "language": "python", "fileCategory": "code"},
+    {"path": "fire.py", "language": "python", "fileCategory": "code"},
+    {"path": "honchkrow.py", "language": "python", "fileCategory": "code"},
+    {"path": "main_bench.py", "language": "python", "fileCategory": "code"},
+    {"path": "main_crustle_base.py", "language": "python", "fileCategory": "code"},
+    {"path": "main_crustle_cook.py", "language": "python", "fileCategory": "code"},
+    {"path": "main_cur.py", "language": "python", "fileCategory": "code"},
+    {"path": "main_honch_base.py", "language": "python", "fileCategory": "code"},
+    {"path": "main_megalucario_backup.py", "language": "python", "fileCategory": "code"},
+    {"path": "main_typh_base.py", "language": "python", "fileCategory": "code"},
+    {"path": "main_typhlosion.py", "language": "python", "fileCategory": "code"},
+    {"path": "main_v1.py", "language": "python", "fileCategory": "code"},
+    {"path": "main_v2_baseline.py", "language": "python", "fileCategory": "code"},
+    {"path": "main_v2_rebel.py", "language": "python", "fileCategory": "code"},
+    {"path": "main_v2.py", "language": "python", "fileCategory": "code"},
+    {"path": "main_v3_pure.py", "language": "python", "fileCategory": "code"},
+    {"path": "main_v3.py", "language": "python", "fileCategory": "code"},
+    {"path": "main_v4.py", "language": "python", "fileCategory": "code"},
+    {"path": "main.py", "language": "python", "fileCategory": "code"}
+  ]
+}

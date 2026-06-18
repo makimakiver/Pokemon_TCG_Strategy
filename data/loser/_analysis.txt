@@ -1,0 +1,67 @@
+### Analyzed 5 lost games
+
+Loss reasons: {None: 5}
+Opponents: {'zakopuro': 1, 'Tensa.bit': 1, 'seven': 1, 'Josh Greiff': 1, 'Pokemon Garı Gacıyo': 1}
+Final turn stats: min=4 median=14 max=22
+Avg per game: attacks=3.6 evolves=1.2 attaches=3.8 abilities=0.4 plays=8.4 ends=4.8
+
+Most common opponent cards across losses:
+  1: 51
+  3: 34
+  344: 12
+  345: 12
+  1147: 12
+  1227: 12
+  11: 8
+  14: 8
+  1212: 8
+  18: 8
+  1121: 8
+  1086: 8
+  1219: 4
+  1235: 4
+  722: 4
+  723: 4
+  1192: 4
+  119: 4
+  120: 4
+  1120: 4
+
+======================================================================
+PER-GAME DETAIL
+======================================================================
+
+## losers_log.json  vs zakopuro  seat=1  reward=-1  reason=None  final_turn=16
+  actions: attacks=4 evolves=2 attaches=7 abilities=0 plays=21 ends=1
+  opp deck top: 1x13, 344x4, 345x4, 11x4, 14x4, 1147x4, 1212x4, 1219x4
+  FINAL BOARD: my_active=['678'] my_bench=['675', '676'] my_prizes=6 my_deck=7 my_hand=8
+                opp_active=[] opp_bench(2) opp_prizes=1 opp_deck=35
+  prize race (turn,my,opp): (9,6,2) (10,6,2) (11,6,1) (12,6,1) (14,6,1) (16,6,1)
+
+## lost.json  vs Tensa.bit  seat=0  reward=-1  reason=None  final_turn=12
+  actions: attacks=4 evolves=0 attaches=3 abilities=0 plays=0 ends=4
+  opp deck top: 1x19, 344x4, 345x4, 1147x4, 1227x4, 1212x4, 1235x4, 18x4
+  FINAL BOARD: my_active=[] my_bench=[] my_prizes=6 my_deck=40 my_hand=2
+                opp_active=['345'] opp_bench(2) opp_prizes=5 opp_deck=34
+  prize race (turn,my,opp): (3,6,6) (5,6,6) (7,6,6) (8,6,5) (9,6,5) (11,6,5)
+
+## lost_1.json  vs seven  seat=1  reward=-1  reason=None  final_turn=4
+  actions: attacks=1 evolves=2 attaches=0 abilities=1 plays=2 ends=1
+  opp deck top: 3x34, 722x4, 723x4, 1121x4, 1192x4, 1227x4, 1262x3, 721x2
+  FINAL BOARD: my_active=['353'] my_bench=[] my_prizes=6 my_deck=41 my_hand=7
+                opp_active=['723'] opp_bench(1) opp_prizes=6 opp_deck=37
+  prize race (turn,my,opp): (0,0,6) (2,6,6) (4,6,6)
+
+## lost_2.json  vs Josh Greiff  seat=0  reward=-1  reason=None  final_turn=14
+  actions: attacks=3 evolves=2 attaches=5 abilities=1 plays=16 ends=12
+  opp deck top: 119x4, 120x4, 1086x4, 1120x4, 1121x4, 1198x4, 1227x4, 2x4
+  FINAL BOARD: my_active=[] my_bench=['344'] my_prizes=5 my_deck=25 my_hand=4
+                opp_active=['121'] opp_bench(5) opp_prizes=1 opp_deck=11
+  prize race (turn,my,opp): (8,6,3) (9,6,3) (10,6,2) (11,6,2) (12,5,1) (13,5,1)
+
+## lost_3.json  vs Pokemon Garı Gacıyo  seat=0  reward=-1  reason=None  final_turn=22
+  actions: attacks=6 evolves=0 attaches=4 abilities=0 plays=3 ends=6
+  opp deck top: 1x19, 11x4, 14x4, 18x4, 344x4, 345x4, 1086x4, 1147x4
+  FINAL BOARD: my_active=[] my_bench=[] my_prizes=6 my_deck=30 my_hand=0
+                opp_active=['345'] opp_bench(3) opp_prizes=3 opp_deck=26
+  prize race (turn,my,opp): (14,6,4) (15,6,4) (17,6,4) (18,6,4) (19,6,3) (21,6,3)

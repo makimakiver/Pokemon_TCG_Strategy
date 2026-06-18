@@ -1,0 +1,6 @@
+# RL stack deps (installed on top of the engine image; engine itself is pure ctypes).
+numpy>=1.24
+torch>=2.1
+# LLM-driven policy backend (rl/llm_agent.py). Reads ANTHROPIC_API_KEY at runtime;
+# falls back to the scripted prior when absent, so it's optional for net training.
+anthropic>=0.69

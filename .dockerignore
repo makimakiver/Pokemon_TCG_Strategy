@@ -1,0 +1,6 @@
+*.json
+__pycache__/
+cg/__pycache__/
+.git/
+docs/
+submissions/

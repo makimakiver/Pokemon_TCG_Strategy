@@ -1,0 +1,165 @@
+{
+  "scriptCompleted": true,
+  "directoryGroups": {
+    "root": [
+      "file:__init__.py",
+      "file:bare_agent.py",
+      "file:bare_agent2.py",
+      "file:fire.py",
+      "file:honchkrow.py",
+      "file:main_bench.py",
+      "file:main_crustle_base.py",
+      "file:main_cur.py",
+      "file:main_honch_base.py",
+      "file:main_megalucario_backup.py",
+      "file:main_typh_base.py",
+      "file:main_typhlosion.py",
+      "file:main_v1.py",
+      "file:main_v2.py",
+      "file:main_v2_baseline.py",
+      "file:main_v2_rebel.py",
+      "file:main_v3.py",
+      "file:main_v3_pure.py",
+      "file:main_v4.py",
+      "file:main.py"
+    ],
+    ".understand-anything": [
+      "file:.understand-anything/.understandignore"
+    ]
+  },
+  "nodeTypeGroups": {
+    "file": [
+      "file:__init__.py",
+      "file:bare_agent.py",
+      "file:bare_agent2.py",
+      "file:fire.py",
+      "file:honchkrow.py",
+      "file:main_bench.py",
+      "file:main_crustle_base.py",
+      "file:main_cur.py",
+      "file:main_honch_base.py",
+      "file:main_megalucario_backup.py",
+      "file:main_typh_base.py",
+      "file:main_typhlosion.py",
+      "file:main_v1.py",
+      "file:main_v2.py",
+      "file:main_v2_baseline.py",
+      "file:main_v2_rebel.py",
+      "file:main_v3.py",
+      "file:main_v3_pure.py",
+      "file:main_v4.py",
+      "file:main.py"
+    ],
+    "config": [
+      "file:.understand-anything/.understandignore"
+    ]
+  },
+  "crossCategoryEdges": [
+    {
+      "fromType": "file",
+      "toType": "file",
+      "edgeType": "related",
+      "count": 16
+    }
+  ],
+  "interGroupImports": [],
+  "intraGroupDensity": {
+    "root": {
+      "internalEdges": 16,
+      "totalEdges": 16,
+      "density": 1
+    },
+    ".understand-anything": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    }
+  },
+  "patternMatches": {},
+  "filePatternMatches": {
+    "file:__init__.py": "entry",
+    "file:.understand-anything/.understandignore": "config",
+    "file:main.py": "entry"
+  },
+  "deploymentTopology": {
+    "hasDockerfile": false,
+    "hasCompose": false,
+    "hasK8s": false,
+    "hasTerraform": false,
+    "hasCI": false,
+    "infraFiles": []
+  },
+  "dataPipeline": {
+    "schemaFiles": [],
+    "migrationFiles": [],
+    "dataModelFiles": [],
+    "apiHandlerFiles": []
+  },
+  "docCoverage": {
+    "groupsWithDocs": 0,
+    "totalGroups": 2,
+    "coverageRatio": 0,
+    "undocumentedGroups": [
+      "root",
+      ".understand-anything"
+    ]
+  },
+  "dependencyDirection": [],
+  "fileStats": {
+    "totalFileNodes": 21,
+    "filesPerGroup": {
+      "root": 20,
+      ".understand-anything": 1
+    },
+    "nodeTypeCounts": {
+      "file": 20,
+      "config": 1
+    }
+  },
+  "fileFanIn": {
+    "file:__init__.py": 0,
+    "file:.understand-anything/.understandignore": 0,
+    "file:bare_agent.py": 1,
+    "file:bare_agent2.py": 0,
+    "file:fire.py": 0,
+    "file:honchkrow.py": 1,
+    "file:main_bench.py": 0,
+    "file:main_crustle_base.py": 2,
+    "file:main_cur.py": 0,
+    "file:main_honch_base.py": 1,
+    "file:main_megalucario_backup.py": 0,
+    "file:main_typh_base.py": 0,
+    "file:main_typhlosion.py": 0,
+    "file:main_v1.py": 1,
+    "file:main_v2.py": 5,
+    "file:main_v2_baseline.py": 0,
+    "file:main_v2_rebel.py": 0,
+    "file:main_v3.py": 1,
+    "file:main_v3_pure.py": 0,
+    "file:main_v4.py": 0,
+    "file:main.py": 4
+  },
+  "fileFanOut": {
+    "file:__init__.py": 0,
+    "file:.understand-anything/.understandignore": 0,
+    "file:bare_agent.py": 0,
+    "file:bare_agent2.py": 0,
+    "file:fire.py": 2,
+    "file:honchkrow.py": 0,
+    "file:main_bench.py": 1,
+    "file:main_crustle_base.py": 1,
+    "file:main_cur.py": 0,
+    "file:main_honch_base.py": 1,
+    "file:main_megalucario_backup.py": 1,
+    "file:main_typh_base.py": 1,
+    "file:main_typhlosion.py": 1,
+    "file:main_v1.py": 2,
+    "file:main_v2.py": 1,
+    "file:main_v2_baseline.py": 1,
+    "file:main_v2_rebel.py": 1,
+    "file:main_v3.py": 1,
+    "file:main_v3_pure.py": 1,
+    "file:main_v4.py": 1,
+    "file:main.py": 0
+  }
+}

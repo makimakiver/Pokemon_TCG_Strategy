@@ -1,0 +1,273 @@
+[
+  {
+    "id": "file:__init__.py",
+    "type": "file",
+    "name": "__init__.py",
+    "filePath": "__init__.py",
+    "summary": "Empty package marker that makes the agents directory importable as a Python package.",
+    "tags": [
+      "entry-point",
+      "barrel",
+      "package-marker"
+    ]
+  },
+  {
+    "id": "file:.understand-anything/.understandignore",
+    "type": "file",
+    "name": ".understandignore",
+    "filePath": ".understand-anything/.understandignore",
+    "summary": "Ignore-list file used by the Understand-Anything tool to exclude paths from analysis.",
+    "tags": [
+      "configuration",
+      "tooling",
+      "ignore-file"
+    ]
+  },
+  {
+    "id": "file:bare_agent.py",
+    "type": "file",
+    "name": "bare_agent.py",
+    "filePath": "bare_agent.py",
+    "summary": "Baseline generic Pokemon TCG pilot with no archetype-specific logic; scores attacks, energy attachment, and bench decisions purely from the engine observation.",
+    "tags": [
+      "baseline",
+      "generic-engine",
+      "agent-pilot",
+      "decision-engine"
+    ]
+  },
+  {
+    "id": "file:bare_agent2.py",
+    "type": "file",
+    "name": "bare_agent2.py",
+    "filePath": "bare_agent2.py",
+    "summary": "Near-identical variant of bare_agent.py providing a second baseline generic pilot for A/B comparison in the gauntlet.",
+    "tags": [
+      "baseline",
+      "generic-engine",
+      "agent-pilot",
+      "variant"
+    ]
+  },
+  {
+    "id": "file:fire.py",
+    "type": "file",
+    "name": "fire.py",
+    "filePath": "fire.py",
+    "summary": "Anti-Crustle Fire-type aggro pilot that exploits the opponent's Grass weakness; adds a heal-awareness helper on top of the generic scoring engine.",
+    "tags": [
+      "fire-aggro",
+      "agent-pilot",
+      "counter-deck",
+      "decision-engine"
+    ]
+  },
+  {
+    "id": "file:honchkrow.py",
+    "type": "file",
+    "name": "honchkrow.py",
+    "filePath": "honchkrow.py",
+    "summary": "Combo-aware Rocket's Honchkrow pilot whose Rocket Feathers attack damage scales with discarded ammo; the strongest hand-tuned anti-meta agent in the project.",
+    "tags": [
+      "honchkrow-combo",
+      "agent-pilot",
+      "damage-correction",
+      "combo"
+    ]
+  },
+  {
+    "id": "file:main_bench.py",
+    "type": "file",
+    "name": "main_bench.py",
+    "filePath": "main_bench.py",
+    "summary": "Bench-focused variant of the main generic pilot that emphasizes bench-development heuristics in its decision scoring.",
+    "tags": [
+      "generic-engine",
+      "agent-pilot",
+      "variant",
+      "bench-strategy"
+    ]
+  },
+  {
+    "id": "file:main_crustle_base.py",
+    "type": "file",
+    "name": "main_crustle_base.py",
+    "filePath": "main_crustle_base.py",
+    "summary": "Baseline pilot for the Crustle archetype deck, identical scaffold to main.py used as the Crustle-family reference point.",
+    "tags": [
+      "crustle-typhlosion",
+      "agent-pilot",
+      "baseline",
+      "decision-engine"
+    ]
+  },
+  {
+    "id": "file:main_cur.py",
+    "type": "file",
+    "name": "main_cur.py",
+    "filePath": "main_cur.py",
+    "summary": "Current working main pilot variant, a snapshot of main.py used as the active comparison baseline.",
+    "tags": [
+      "generic-engine",
+      "agent-pilot",
+      "baseline",
+      "variant"
+    ]
+  },
+  {
+    "id": "file:main_honch_base.py",
+    "type": "file",
+    "name": "main_honch_base.py",
+    "filePath": "main_honch_base.py",
+    "summary": "Baseline (untuned) Honchkrow pilot using the generic scaffold, the starting point that honchkrow.py later improves with combo-aware damage.",
+    "tags": [
+      "honchkrow-combo",
+      "agent-pilot",
+      "baseline",
+      "decision-engine"
+    ]
+  },
+  {
+    "id": "file:main_megalucario_backup.py",
+    "type": "file",
+    "name": "main_megalucario_backup.py",
+    "filePath": "main_megalucario_backup.py",
+    "summary": "Backup of the original Mega Lucario pilot; the earliest deck strategy that later variants were benchmarked against and beat.",
+    "tags": [
+      "mega-lucario",
+      "agent-pilot",
+      "baseline",
+      "legacy"
+    ]
+  },
+  {
+    "id": "file:main_typh_base.py",
+    "type": "file",
+    "name": "main_typh_base.py",
+    "filePath": "main_typh_base.py",
+    "summary": "Baseline pilot for the Typhlosion archetype, the reference variant for the Crustle/Typhlosion two-line deck.",
+    "tags": [
+      "crustle-typhlosion",
+      "agent-pilot",
+      "baseline",
+      "decision-engine"
+    ]
+  },
+  {
+    "id": "file:main_typhlosion.py",
+    "type": "file",
+    "name": "main_typhlosion.py",
+    "filePath": "main_typhlosion.py",
+    "summary": "Typhlosion archetype pilot (the main_v2 = Typhlosion deck); generic engine playing the Crustle/Typhlosion two-line deck.",
+    "tags": [
+      "crustle-typhlosion",
+      "agent-pilot",
+      "generic-engine",
+      "decision-engine"
+    ]
+  },
+  {
+    "id": "file:main_v1.py",
+    "type": "file",
+    "name": "main_v1.py",
+    "filePath": "main_v1.py",
+    "summary": "First iteration of the evolving main pilot lineage; generic scoring engine that later versions (v2, v3, v4) build upon.",
+    "tags": [
+      "generic-engine",
+      "agent-pilot",
+      "baseline",
+      "iteration"
+    ]
+  },
+  {
+    "id": "file:main_v2.py",
+    "type": "file",
+    "name": "main_v2.py",
+    "filePath": "main_v2.py",
+    "summary": "Second iteration pilot (the Typhlosion-deck generic engine) that proved strongest as an untuned generic pilot in the gauntlet.",
+    "tags": [
+      "generic-engine",
+      "agent-pilot",
+      "crustle-typhlosion",
+      "iteration"
+    ]
+  },
+  {
+    "id": "file:main_v2_baseline.py",
+    "type": "file",
+    "name": "main_v2_baseline.py",
+    "filePath": "main_v2_baseline.py",
+    "summary": "Frozen baseline copy of main_v2 used as the control for measuring whether later tuning overlays improve or regress the gauntlet.",
+    "tags": [
+      "generic-engine",
+      "agent-pilot",
+      "baseline",
+      "iteration"
+    ]
+  },
+  {
+    "id": "file:main_v2_rebel.py",
+    "type": "file",
+    "name": "main_v2_rebel.py",
+    "filePath": "main_v2_rebel.py",
+    "summary": "Experimental v2 overlay adding cheap-damage, energy-acceleration, and heal heuristics; an archetype-tuning branch off main_v2.",
+    "tags": [
+      "generic-engine",
+      "agent-pilot",
+      "experiment",
+      "iteration"
+    ]
+  },
+  {
+    "id": "file:main_v3.py",
+    "type": "file",
+    "name": "main_v3.py",
+    "filePath": "main_v3.py",
+    "summary": "Third iteration pilot with full combo modeling: detects Ethan's Pokemon in discard and models Buddy Blast damage scaling plus hand/field awareness.",
+    "tags": [
+      "generic-engine",
+      "agent-pilot",
+      "damage-correction",
+      "combo"
+    ]
+  },
+  {
+    "id": "file:main_v3_pure.py",
+    "type": "file",
+    "name": "main_v3_pure.py",
+    "filePath": "main_v3_pure.py",
+    "summary": "Strongest pilot: the v2 generic engine plus only the pure Buddy Blast real-damage correction, deliberately omitting all regressing archetype overlays.",
+    "tags": [
+      "generic-engine",
+      "agent-pilot",
+      "damage-correction",
+      "iteration"
+    ]
+  },
+  {
+    "id": "file:main_v4.py",
+    "type": "file",
+    "name": "main_v4.py",
+    "filePath": "main_v4.py",
+    "summary": "Fourth iteration pilot retaining the Ethan's-in-discard damage correction with a trimmed helper set compared to v3.",
+    "tags": [
+      "generic-engine",
+      "agent-pilot",
+      "damage-correction",
+      "iteration"
+    ]
+  },
+  {
+    "id": "file:main.py",
+    "type": "file",
+    "name": "main.py",
+    "filePath": "main.py",
+    "summary": "Primary entry-point pilot for the project, currently running the Crustle-family generic decision engine that the other variants are benchmarked against.",
+    "tags": [
+      "entry-point",
+      "agent-pilot",
+      "generic-engine",
+      "decision-engine"
+    ]
+  }
+]

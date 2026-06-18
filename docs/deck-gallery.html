@@ -1,0 +1,63 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>main* deck gallery</title>
+<style>
+:root{--bg:#0f1115;--panel:#171a21;--line:#262b35;--text:#e8eaed;--muted:#9aa0a6}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:40px 24px 80px}
+h1{margin:0 0 4px;font-size:32px;letter-spacing:-.02em}.sub{color:var(--muted);margin:0 0 26px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+.comp{cursor:pointer;background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:14px;padding:14px;transition:transform .12s,box-shadow .12s;display:flex;gap:13px;align-items:center}
+.comp:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.5)}
+.comp img{width:62px;border-radius:7px;flex:none;box-shadow:0 3px 8px rgba(0,0,0,.5)}
+.comp .nm{font-weight:700;font-size:15px;word-break:break-word}
+.comp .ar{color:var(--accent);font-size:12px;font-weight:600;margin-top:3px}
+.comp .ct{color:var(--muted);font-size:11.5px;margin-top:5px}
+.modal{position:fixed;inset:0;background:rgba(6,8,12,.85);display:none;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto;z-index:9}
+.modal.open{display:flex}
+.sheet{background:var(--bg);border:1px solid var(--line);border-radius:16px;max-width:1100px;width:100%;padding:26px}
+.mhead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:6px}
+.mhead h2{margin:0;font-size:22px}.mhead .a{color:var(--accent);font-weight:600}
+.x{cursor:pointer;border:1px solid var(--line);border-radius:8px;padding:5px 12px;color:var(--muted);background:transparent;font-size:18px;line-height:1}
+.sec h3{margin:20px 0 10px;font-size:15px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px}
+figure.card{margin:0;position:relative}
+figure.card img{width:100%;border-radius:9px;display:block;box-shadow:0 4px 12px rgba(0,0,0,.45)}
+figure.card .cnt{position:absolute;top:7px;right:7px;background:rgba(15,17,21,.9);border:1px solid var(--line);border-radius:999px;padding:1px 9px;font-weight:800;font-size:12.5px}
+figure.card figcaption{margin-top:5px;font-size:11.5px;color:var(--muted);text-align:center}
+.noimg{aspect-ratio:.72;border:1px dashed var(--line);border-radius:9px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px;color:var(--muted);padding:6px}
+</style></head><body><div class="wrap">
+<h1>main* deck gallery</h1>
+<p class="sub">Each component is a <code>main*</code> agent. Click one to see its full 60-card deck.</p>
+<div class="gallery" id="gallery"></div></div>
+<div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
+<script>
+const D={"decks": [{"label": "main.py \u00b7 root (submission)", "arch": "Crustle + Ethan's Typhlosion", "accent": "#3b5bdb", "hero": 354, "n": 60, "cards": {"1": 4, "2": 8, "18": 4, "344": 4, "345": 4, "352": 4, "353": 4, "354": 4, "1079": 2, "1121": 3, "1147": 2, "1152": 2, "1159": 1, "1182": 4, "1192": 2, "1215": 4, "1227": 4}}, {"label": "main_typh_base.py", "arch": "Crustle + Ethan's Typhlosion", "accent": "#3b5bdb", "hero": 354, "n": 60, "cards": {"1": 4, "2": 8, "18": 4, "344": 4, "345": 4, "352": 4, "353": 4, "354": 4, "1079": 2, "1121": 3, "1147": 2, "1152": 2, "1159": 1, "1182": 4, "1192": 2, "1215": 4, "1227": 4}}, {"label": "main_typhlosion.py", "arch": "Crustle + Ethan's Typhlosion", "accent": "#3b5bdb", "hero": 354, "n": 60, "cards": {"1": 4, "2": 8, "18": 4, "344": 4, "345": 4, "352": 4, "353": 4, "354": 4, "1079": 2, "1121": 3, "1147": 2, "1152": 2, "1159": 1, "1182": 4, "1192": 2, "1215": 4, "1227": 4}}, {"label": "main_v2.py", "arch": "Crustle + Ethan's Typhlosion", "accent": "#3b5bdb", "hero": 354, "n": 60, "cards": {"1": 4, "2": 8, "18": 4, "344": 4, "345": 4, "352": 4, "353": 4, "354": 4, "1079": 2, "1121": 3, "1147": 2, "1152": 2, "1159": 1, "1182": 4, "1192": 2, "1215": 4, "1227": 4}}, {"label": "main_v2_baseline.py", "arch": "Crustle + Ethan's Typhlosion", "accent": "#3b5bdb", "hero": 354, "n": 60, "cards": {"1": 4, "2": 8, "18": 4, "344": 4, "345": 4, "352": 4, "353": 4, "354": 4, "1079": 2, "1121": 3, "1147": 2, "1152": 2, "1159": 1, "1182": 4, "1192": 2, "1215": 4, "1227": 4}}, {"label": "main_v3.py", "arch": "Crustle + Ethan's Typhlosion", "accent": "#3b5bdb", "hero": 354, "n": 60, "cards": {"1": 4, "2": 8, "18": 4, "344": 4, "345": 4, "352": 4, "353": 4, "354": 4, "1079": 2, "1121": 3, "1147": 2, "1152": 2, "1159": 1, "1182": 4, "1192": 2, "1215": 4, "1227": 4}}, {"label": "main_v3_pure.py", "arch": "Crustle + Ethan's Typhlosion", "accent": "#3b5bdb", "hero": 354, "n": 60, "cards": {"1": 4, "2": 8, "18": 4, "344": 4, "345": 4, "352": 4, "353": 4, "354": 4, "1079": 2, "1121": 3, "1147": 2, "1152": 2, "1159": 1, "1182": 4, "1192": 2, "1215": 4, "1227": 4}}, {"label": "main_v4.py", "arch": "Crustle + Ethan's Typhlosion", "accent": "#3b5bdb", "hero": 354, "n": 60, "cards": {"1": 4, "2": 8, "18": 4, "344": 4, "345": 4, "352": 4, "353": 4, "354": 4, "1079": 2, "1121": 3, "1147": 2, "1152": 2, "1159": 1, "1182": 4, "1192": 2, "1215": 4, "1227": 4}}, {"label": "main_megalucario_backup.py", "arch": "Mega Lucario ex", "accent": "#868e96", "hero": 678, "n": 60, "cards": {"673": 2, "674": 2, "675": 2, "676": 3, "677": 3, "678": 4, "1102": 4, "1123": 2, "1141": 4, "1142": 4, "1152": 4, "1159": 1, "1182": 2, "1192": 4, "1227": 4, "1252": 2, "6": 13}}, {"label": "main.py \u00b7 agents", "arch": "Palace single-line Crustle", "accent": "#0c8599", "hero": 345, "n": 60, "cards": {"1": 19, "11": 4, "14": 4, "18": 4, "344": 4, "345": 4, "1086": 4, "1147": 4, "1212": 4, "1227": 4, "1235": 4, "1159": 1}}, {"label": "main_bench.py", "arch": "Palace single-line Crustle", "accent": "#0c8599", "hero": 345, "n": 60, "cards": {"1": 19, "11": 4, "14": 4, "18": 4, "344": 4, "345": 4, "1086": 4, "1147": 4, "1212": 4, "1227": 4, "1235": 4, "1159": 1}}, {"label": "main_crustle_base.py", "arch": "Palace single-line Crustle", "accent": "#0c8599", "hero": 345, "n": 60, "cards": {"1": 19, "11": 4, "14": 4, "18": 4, "344": 4, "345": 4, "1086": 4, "1147": 4, "1212": 4, "1227": 4, "1235": 4, "1159": 1}}, {"label": "main_cur.py", "arch": "Palace single-line Crustle", "accent": "#0c8599", "hero": 345, "n": 60, "cards": {"1": 19, "11": 4, "14": 4, "18": 4, "344": 4, "345": 4, "1086": 4, "1147": 4, "1212": 4, "1227": 4, "1235": 4, "1159": 1}}, {"label": "main_honch_base.py", "arch": "Palace single-line Crustle", "accent": "#0c8599", "hero": 345, "n": 60, "cards": {"1": 19, "11": 4, "14": 4, "18": 4, "344": 4, "345": 4, "1086": 4, "1147": 4, "1212": 4, "1227": 4, "1235": 4, "1159": 1}}, {"label": "main_v1.py", "arch": "Palace single-line Crustle", "accent": "#0c8599", "hero": 345, "n": 60, "cards": {"1": 19, "11": 4, "14": 4, "18": 4, "344": 4, "345": 4, "1086": 4, "1147": 4, "1212": 4, "1227": 4, "1235": 4, "1159": 1}}, {"label": "main_v2_rebel.py", "arch": "Rebel Fire (anti-Crustle)", "accent": "#e8590c", "hero": 318, "n": 60, "cards": {"318": 4, "663": 4, "358": 1, "2": 18, "1121": 4, "1152": 4, "1182": 4, "1147": 4, "1212": 4, "1235": 4, "1227": 4, "1119": 2, "1159": 1, "1123": 2}}], "cards": {"1152": {"n": "Pok\u00e9 Pad", "t": "ITEM", "e": 0, "s": 0, "img": true}, "1": {"n": "Basic {G} Energy", "t": "BASIC_ENERGY", "e": 1, "s": 0, "img": true}, "2": {"n": "Basic {R} Energy", "t": "BASIC_ENERGY", "e": 2, "s": 0, "img": true}, "6": {"n": "Basic {F} Energy", "t": "BASIC_ENERGY", "e": 6, "s": 0, "img": true}, "1159": {"n": "Hero\u2019s Cape", "t": "TOOL", "e": 0, "s": 0, "img": true}, "11": {"n": "Mist Energy", "t": "SPECIAL_ENERGY", "e": 0, "s": 0, "img": true}, "14": {"n": "Spiky Energy", "t": "SPECIAL_ENERGY", "e": 0, "s": 0, "img": true}, "18": {"n": "Grow Grass Energy", "t": "SPECIAL_ENERGY", "e": 1, "s": 0, "img": true}, "663": {"n": "Volcanion", "t": "POKEMON", "e": 2, "s": 0, "img": true}, "1182": {"n": "Boss\u2019s Orders", "t": "SUPPORTER", "e": 0, "s": 0, "img": true}, "673": {"n": "Makuhita", "t": "POKEMON", "e": 6, "s": 0, "img": true}, "674": {"n": "Hariyama", "t": "POKEMON", "e": 6, "s": 1, "img": true}, "675": {"n": "Lunatone", "t": "POKEMON", "e": 6, "s": 0, "img": true}, "676": {"n": "Solrock", "t": "POKEMON", "e": 6, "s": 0, "img": true}, "677": {"n": "Riolu", "t": "POKEMON", "e": 6, "s": 0, "img": true}, "678": {"n": "Mega Lucario ex", "t": "POKEMON", "e": 6, "s": 1, "img": true}, "1192": {"n": "Carmine", "t": "SUPPORTER", "e": 0, "s": 0, "img": true}, "1079": {"n": "Rare Candy", "t": "ITEM", "e": 0, "s": 0, "img": true}, "1212": {"n": "Cook", "t": "SUPPORTER", "e": 0, "s": 0, "img": true}, "1086": {"n": "Buddy-Buddy Poffin", "t": "ITEM", "e": 0, "s": 0, "img": true}, "1215": {"n": "Ethan's Adventure", "t": "SUPPORTER", "e": 0, "s": 0, "img": true}, "318": {"n": "Ho-Oh", "t": "POKEMON", "e": 2, "s": 0, "img": true}, "1227": {"n": "Lillie's Determination", "t": "SUPPORTER", "e": 0, "s": 0, "img": true}, "1102": {"n": "Dusk Ball", "t": "ITEM", "e": 0, "s": 0, "img": true}, "1235": {"n": "Waitress", "t": "SUPPORTER", "e": 0, "s": 0, "img": true}, "344": {"n": "Dwebble", "t": "POKEMON", "e": 1, "s": 0, "img": true}, "345": {"n": "Crustle", "t": "POKEMON", "e": 1, "s": 1, "img": true}, "1119": {"n": "Energy Search", "t": "ITEM", "e": 0, "s": 0, "img": true}, "352": {"n": "Ethan's Cyndaquil", "t": "POKEMON", "e": 2, "s": 0, "img": true}, "353": {"n": "Ethan's Quilava", "t": "POKEMON", "e": 2, "s": 1, "img": true}, "354": {"n": "Ethan's Typhlosion", "t": "POKEMON", "e": 2, "s": 2, "img": true}, "1123": {"n": "Switch", "t": "ITEM", "e": 0, "s": 0, "img": true}, "1252": {"n": "Gravity Mountain", "t": "STADIUM", "e": 0, "s": 0, "img": true}, "1121": {"n": "Ultra Ball", "t": "ITEM", "e": 0, "s": 0, "img": true}, "358": {"n": "Hearthflame Mask Ogerpon", "t": "POKEMON", "e": 2, "s": 0, "img": true}, "1141": {"n": "Premium Power Pro", "t": "ITEM", "e": 0, "s": 0, "img": true}, "1142": {"n": "Fighting Gong", "t": "ITEM", "e": 0, "s": 0, "img": true}, "1147": {"n": "Jumbo Ice Cream", "t": "ITEM", "e": 0, "s": 0, "img": true}}, "etype": {"0": "#9aa0a6", "1": "#3fa34d", "2": "#e8590c", "3": "#1c7ed6", "4": "#f1c40f", "5": "#9c36b5", "6": "#a9744f", "7": "#343a40", "8": "#868e96", "9": "#c9a227", "10": "#7048e8", "11": "#6a1b9a"}};
+const ec=D.etype, C=D.cards;
+function tile(id,n){const c=C[id]||{n:'#'+id};
+  const img=c.img?`<img loading="lazy" src="cards/${id}.png" alt="${c.n}">`:`<div class="noimg">${c.n}</div>`;
+  return `<figure class="card"><span class="cnt">×${n}</span>${img}<figcaption>${c.n}</figcaption></figure>`;}
+function group(cardsObj){const P=[],T=[],E=[];
+  for(const id in cardsObj){const c=C[id]||{t:'?'};const t=c.t;
+    if(t==='POKEMON')P.push(id);else if(t==='BASIC_ENERGY'||t==='SPECIAL_ENERGY')E.push(id);else T.push(id);}
+  P.sort((a,b)=>(C[a].e-C[b].e)||(C[a].s-C[b].s));
+  const ord={SUPPORTER:0,ITEM:1,TOOL:2,STADIUM:3};
+  T.sort((a,b)=>(ord[C[a].t]??9)-(ord[C[b].t]??9));
+  E.sort((a,b)=>(C[a].t==='SPECIAL_ENERGY')-(C[b].t==='SPECIAL_ENERGY'));
+  const sum=a=>a.reduce((s,id)=>s+cardsObj[id],0);
+  const sec=(t,a)=>a.length?`<div class="sec"><h3>${t} · ${sum(a)}</h3><div class="grid">${a.map(id=>tile(id,cardsObj[id])).join('')}</div></div>`:'';
+  return sec('Pokémon',P)+sec('Trainers',T)+sec('Energy',E);}
+function showDeck(i){const d=D.decks[i];const sh=document.getElementById('sheet');
+  sh.style.setProperty('--accent',d.accent);
+  sh.innerHTML=`<div class="mhead"><div><h2>${d.label}</h2><div class="a">${d.arch} · ${d.n} cards</div></div>
+    <button class="x" onclick="close_()">✕</button></div>${group(d.cards)}`;
+  document.getElementById('modal').classList.add('open');}
+function close_(){document.getElementById('modal').classList.remove('open');}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')close_();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')close_();});
+document.getElementById('gallery').innerHTML=D.decks.map((d,i)=>
+  `<div class="comp" data-i="${i}" style="--accent:${d.accent}">
+     <img src="cards/${d.hero}.png" alt="">
+     <div><div class="nm">${d.label}</div><div class="ar">${d.arch}</div><div class="ct">${d.n} cards · click to view</div></div>
+   </div>`).join('');
+document.querySelectorAll('.comp').forEach(el=>el.addEventListener('click',()=>showDeck(+el.dataset.i)));
+</script></body></html>

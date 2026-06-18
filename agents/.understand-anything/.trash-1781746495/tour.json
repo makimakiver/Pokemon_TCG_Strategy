@@ -1,0 +1,58 @@
+[
+  {
+    "order": 1,
+    "title": "The Production Pilot",
+    "description": "Start at main.py, the current production pilot and the root of the entire lineage. Every file in this folder follows the same contract it defines: a single agent(obs) function that takes the game observation and returns an action. main.py currently runs the strongest known strategy (Shun's Palace deck from the main_v3_pure lineage), so reading it first shows you both the shared scaffold and where the project's evolution has landed.",
+    "nodeIds": ["file:main.py"],
+    "languageLesson": "Every pilot exposes a single top-level agent(obs) function as its public interface. The simulator imports this function by name, so the function signature is the contract — the rest of each file is private strategy logic supporting that one entry point."
+  },
+  {
+    "order": 2,
+    "title": "The Generic Auto-Role Engine",
+    "description": "bare_agent.py is the archetype-agnostic engine underneath everything. Instead of hardcoding which Pokemon attacks, it auto-assigns attacker and support roles from whatever cards are in play, making it deck-independent. This is the conceptual foundation: most later pilots are this generic engine plus small, deck-aware overlays. The fire.py counter deck even branches directly from it.",
+    "nodeIds": ["file:bare_agent.py", "file:bare_agent2.py"]
+  },
+  {
+    "order": 3,
+    "title": "Lineage Origins: v1",
+    "description": "main_v1.py is the first named iteration in the lineage chain that flows from main.py. It is also a hub: both the main line and the Honchkrow combo line (via main_honch_base.py) trace back through it, which is why it ranks high in fan-in. Reading it shows the earliest codified strategy that every later branch refines or reacts against.",
+    "nodeIds": ["file:main_v1.py"]
+  },
+  {
+    "order": 4,
+    "title": "The v2 Branch Point",
+    "description": "main_v2.py is the busiest node in the graph by fan-out: it spawns five descendants (v3, v2_baseline, v2_rebel, the Typhlosion pilot, and feeds the v3-pure ablation). It introduces the Typhlosion-flavored generic engine. Critically, the untuned main_typhlosion.py from this line turned out to be the strongest base, teaching the recurring lesson that the generic engine beats over-tuning.",
+    "nodeIds": ["file:main_v2.py", "file:main_typhlosion.py"]
+  },
+  {
+    "order": 5,
+    "title": "The Crustle / Typhlosion Dual Line",
+    "description": "Building on the main line, main_crustle_base.py and main_typh_base.py form the dual-line deck branch. main_crustle_base.py is a high-fan-in hub feeding both the Typhlosion base and the fire counter deck, anchoring the two-Pokemon-line archetype. These pilots show how a base strategy gets specialized for a specific deck composition without abandoning the shared agent(obs) scaffold.",
+    "nodeIds": ["file:main_crustle_base.py", "file:main_typh_base.py"]
+  },
+  {
+    "order": 6,
+    "title": "The Key Ablation: v3 vs v3-pure",
+    "description": "This is the heart of the tour. main_v3.py is the full overlay pilot, layering many archetype heuristics on top of v2 and defining the _buddy_blast_damage helper. main_v3_pure.py keeps ONLY that one fix and discards every other overlay. The pure version wins 83.2% of the gauntlet while the full overlay regresses, proving the central project lesson: isolate the one correction the engine literally cannot read (real Buddy Blast damage), and never bundle speculative heuristics.",
+    "nodeIds": ["file:main_v3.py", "file:main_v3_pure.py", "main_v3.py:_buddy_blast_damage"],
+    "languageLesson": "_buddy_blast_damage encodes a game fact the generic engine cannot observe: an attack does 40 base, +60 more if Ethan's is in the discard pile. Both v3 and v3_pure call this same helper (note the shared call edge), so the only difference between them is what else got bundled around it — a clean ablation."
+  },
+  {
+    "order": 7,
+    "title": "The Hidden Win Condition: Honchkrow Combo",
+    "description": "honchkrow.py is a different philosophy: a combo pilot built around a hidden win condition rather than the generic engine. It derives from main_honch_base.py (which itself comes from v1) and centers on rocket_feathers_damage, the helper that computes the precise ammo-discard combo damage. Getting that discard accounting exactly right was the lever that pushed it to beat main.py around 56% of the time.",
+    "nodeIds": ["file:honchkrow.py", "file:main_honch_base.py", "honchkrow.py:rocket_feathers_damage"]
+  },
+  {
+    "order": 8,
+    "title": "The Hard Counter: Fire vs Grass",
+    "description": "fire.py demonstrates matchup-specific design rather than general strength. It branches from both main_crustle_base.py and the bare_agent.py generic engine, then specializes into Fire aggro that exploits main's all-Grass weakness, beating the production pilot 74% of the time. It is a reminder that strategy lives in the matchup: a deck need not be globally best to dominate one opponent.",
+    "nodeIds": ["file:fire.py"]
+  },
+  {
+    "order": 9,
+    "title": "The Replaced Legacy: Mega Lucario",
+    "description": "Close with main_megalucario_backup.py, the legacy meta-aware multi-attacker pilot that the v3 line replaced. It branches directly from main.py and represents the prior generation of strategy. Reading it last lets you contrast the heavily meta-tuned ancestor against the lesson the lineage ultimately learned — that the lean generic engine plus a single surgical fix outperforms elaborate meta-awareness.",
+    "nodeIds": ["file:main_megalucario_backup.py", "file:main_bench.py"]
+  }
+]

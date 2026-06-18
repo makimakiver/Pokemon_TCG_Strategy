@@ -1,0 +1,162 @@
+{
+  "name": "Pokemon TCG Agent Pilots",
+  "description": "A collection of Python \"pilot\" strategy agents for a Pokemon TCG bot project. Each file is an AI agent that plays a specific Pokemon TCG deck (e.g. Palace single-line evolution, Typhlosion, Crustle, Honchkrow, Fire counter) inside an external simulator engine, importing the game API from the sibling cg package.",
+  "languages": [
+    "python"
+  ],
+  "frameworks": [],
+  "files": [
+    {
+      "path": "__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "bare_agent.py",
+      "language": "python",
+      "sizeLines": 394,
+      "fileCategory": "code"
+    },
+    {
+      "path": "bare_agent2.py",
+      "language": "python",
+      "sizeLines": 394,
+      "fileCategory": "code"
+    },
+    {
+      "path": "fire.py",
+      "language": "python",
+      "sizeLines": 430,
+      "fileCategory": "code"
+    },
+    {
+      "path": "honchkrow.py",
+      "language": "python",
+      "sizeLines": 541,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main_bench.py",
+      "language": "python",
+      "sizeLines": 437,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main_crustle_base.py",
+      "language": "python",
+      "sizeLines": 447,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main_cur.py",
+      "language": "python",
+      "sizeLines": 446,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main_honch_base.py",
+      "language": "python",
+      "sizeLines": 432,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main_megalucario_backup.py",
+      "language": "python",
+      "sizeLines": 546,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main_typh_base.py",
+      "language": "python",
+      "sizeLines": 398,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main_typhlosion.py",
+      "language": "python",
+      "sizeLines": 398,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main_v1.py",
+      "language": "python",
+      "sizeLines": 432,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main_v2_baseline.py",
+      "language": "python",
+      "sizeLines": 398,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main_v2_rebel.py",
+      "language": "python",
+      "sizeLines": 471,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main_v2.py",
+      "language": "python",
+      "sizeLines": 398,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main_v3_pure.py",
+      "language": "python",
+      "sizeLines": 417,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main_v3.py",
+      "language": "python",
+      "sizeLines": 554,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main_v4.py",
+      "language": "python",
+      "sizeLines": 429,
+      "fileCategory": "code"
+    },
+    {
+      "path": "main.py",
+      "language": "python",
+      "sizeLines": 453,
+      "fileCategory": "code"
+    }
+  ],
+  "totalFiles": 21,
+  "filteredByIgnore": 0,
+  "estimatedComplexity": "small",
+  "importMap": {
+    "__init__.py": [],
+    ".understand-anything/.understandignore": [],
+    "bare_agent.py": [],
+    "bare_agent2.py": [],
+    "fire.py": [],
+    "honchkrow.py": [],
+    "main_bench.py": [],
+    "main_crustle_base.py": [],
+    "main_cur.py": [],
+    "main_honch_base.py": [],
+    "main_megalucario_backup.py": [],
+    "main_typh_base.py": [],
+    "main_typhlosion.py": [],
+    "main_v1.py": [],
+    "main_v2_baseline.py": [],
+    "main_v2_rebel.py": [],
+    "main_v2.py": [],
+    "main_v3_pure.py": [],
+    "main_v3.py": [],
+    "main_v4.py": [],
+    "main.py": []
+  }
+}

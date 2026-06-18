@@ -1,0 +1,11 @@
+# P4 LLM Conjecturer deps (GPU pod only) — installed ON TOP of rl/requirements.txt.
+# Not in the base image: keeps cabt-rl lean for net-RL (Solver) on CPU/host.
+# The conjecturer fine-tune uses CISPO (rl/conjecturer/cispo_train.py), implemented
+# directly on transformers+peft (no trl) so there is no GRPO/online-RL dependency.
+transformers>=4.44
+peft>=0.11
+accelerate>=0.33
+sentencepiece>=0.2
+safetensors>=0.4
+# optional: 4-bit base-model loading (RL_CONJ_4BIT=1) on small-VRAM pods
+bitsandbytes>=0.43 ; platform_system == "Linux"

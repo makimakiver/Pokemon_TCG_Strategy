@@ -1,0 +1,26 @@
+{
+  "projectRoot": "/Users/makimakiver/pokemon-tcg/agents",
+  "sourceFilePaths": [
+    "__init__.py",
+    "bare_agent.py",
+    "bare_agent2.py",
+    "fire.py",
+    "honchkrow.py",
+    "main_bench.py",
+    "main_crustle_base.py",
+    "main_cur.py",
+    "main_honch_base.py",
+    "main_megalucario_backup.py",
+    "main_typh_base.py",
+    "main_typhlosion.py",
+    "main_v1.py",
+    "main_v2_baseline.py",
+    "main_v2_rebel.py",
+    "main_v2.py",
+    "main_v3_pure.py",
+    "main_v3.py",
+    "main_v4.py",
+    "main.py"
+  ],
+  "gitCommitHash": ""
+}

@@ -1,0 +1,6 @@
+{
+  "enabledMcpjsonServers": [
+    "plan"
+  ],
+  "enableAllProjectMcpServers": true
+}

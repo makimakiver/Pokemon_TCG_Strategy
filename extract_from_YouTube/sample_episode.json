@@ -1,0 +1,602 @@
+{
+  "name": "ptcg-video",
+  "description": "Semantic log reconstructed from match video (logs only).",
+  "schema_version": 1,
+  "source_url": "https://www.youtube.com/watch?v=m8np08cT-TQ",
+  "info": {
+    "Agents": [
+      {
+        "Name": "Jack Pitcher",
+        "ThumbnailUrl": null
+      },
+      {
+        "Name": "Andrew Hedrick",
+        "ThumbnailUrl": null
+      }
+    ],
+    "TeamNames": [
+      "Jack Pitcher",
+      "Andrew Hedrick"
+    ]
+  },
+  "configuration": {
+    "episodeSteps": 4
+  },
+  "rewards": [
+    1,
+    -1
+  ],
+  "statuses": [
+    "DONE",
+    "DONE"
+  ],
+  "steps": [
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 0,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 0,
+                "player": 0,
+                "type": "coin_flip",
+                "coin": "heads",
+                "confidence": 0.9,
+                "source_text": "Pitcher wins the flip, elects to go first"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 0,
+              "player": 0,
+              "type": "coin_flip",
+              "coin": "heads",
+              "confidence": 0.9,
+              "source_text": "Pitcher wins the flip, elects to go first"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 0,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 0,
+                "player": 0,
+                "type": "coin_flip",
+                "coin": "heads",
+                "confidence": 0.9,
+                "source_text": "Pitcher wins the flip, elects to go first"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 0,
+              "player": 0,
+              "type": "coin_flip",
+              "coin": "heads",
+              "confidence": 0.9,
+              "source_text": "Pitcher wins the flip, elects to go first"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 1,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "play_basic",
+                "t_start": 42.0,
+                "card": "Charmander",
+                "to_zone": "active",
+                "confidence": 0.8
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 4
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "attach_energy",
+                "t_start": 58.0,
+                "card": "Charmander",
+                "energy_type": "Fire",
+                "confidence": 0.7
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "play_supporter",
+                "t_start": 70.0,
+                "card": "Iono",
+                "amount": 1,
+                "confidence": 0.6
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "play_basic",
+              "t_start": 42.0,
+              "card": "Charmander",
+              "to_zone": "active",
+              "confidence": 0.8
+            },
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "attach_energy",
+              "t_start": 58.0,
+              "card": "Charmander",
+              "energy_type": "Fire",
+              "confidence": 0.7
+            },
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "play_supporter",
+              "t_start": 70.0,
+              "card": "Iono",
+              "amount": 1,
+              "confidence": 0.6
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 1,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "play_basic",
+                "t_start": 42.0,
+                "card": "Charmander",
+                "to_zone": "active",
+                "confidence": 0.8
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 4
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "attach_energy",
+                "t_start": 58.0,
+                "card": "Charmander",
+                "energy_type": "Fire",
+                "confidence": 0.7
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "play_supporter",
+                "t_start": 70.0,
+                "card": "Iono",
+                "amount": 1,
+                "confidence": 0.6
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "play_basic",
+              "t_start": 42.0,
+              "card": "Charmander",
+              "to_zone": "active",
+              "confidence": 0.8
+            },
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "attach_energy",
+              "t_start": 58.0,
+              "card": "Charmander",
+              "energy_type": "Fire",
+              "confidence": 0.7
+            },
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "play_supporter",
+              "t_start": 70.0,
+              "card": "Iono",
+              "amount": 1,
+              "confidence": 0.6
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 3,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 3,
+                "player": 1,
+                "type": "evolve",
+                "card": "Charizard ex",
+                "from_zone": "hand",
+                "to_zone": "active",
+                "confidence": 0.8
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 4
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 3,
+                "player": 1,
+                "type": "attack",
+                "card": "Charizard ex",
+                "target": "Charmander",
+                "amount": 180,
+                "attack_name": "Burning Darkness",
+                "confidence": 0.9
+              },
+              "type": 15,
+              "attackId": null,
+              "cardId": null,
+              "serial": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 3,
+                "player": 1,
+                "type": "knockout",
+                "target": "Charmander",
+                "confidence": 0.9
+              },
+              "type": 16,
+              "cardId": null,
+              "serial": null,
+              "putDamageCounter": true,
+              "value": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 3,
+                "player": 1,
+                "type": "take_prize",
+                "amount": 2,
+                "confidence": 0.8
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 7,
+              "toArea": 2
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 3,
+              "player": 1,
+              "type": "evolve",
+              "card": "Charizard ex",
+              "from_zone": "hand",
+              "to_zone": "active",
+              "confidence": 0.8
+            },
+            {
+              "turn": 3,
+              "player": 1,
+              "type": "attack",
+              "card": "Charizard ex",
+              "target": "Charmander",
+              "amount": 180,
+              "attack_name": "Burning Darkness",
+              "confidence": 0.9
+            },
+            {
+              "turn": 3,
+              "player": 1,
+              "type": "knockout",
+              "target": "Charmander",
+              "confidence": 0.9
+            },
+            {
+              "turn": 3,
+              "player": 1,
+              "type": "take_prize",
+              "amount": 2,
+              "confidence": 0.8
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 3,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 3,
+                "player": 1,
+                "type": "evolve",
+                "card": "Charizard ex",
+                "from_zone": "hand",
+                "to_zone": "active",
+                "confidence": 0.8
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 4
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 3,
+                "player": 1,
+                "type": "attack",
+                "card": "Charizard ex",
+                "target": "Charmander",
+                "amount": 180,
+                "attack_name": "Burning Darkness",
+                "confidence": 0.9
+              },
+              "type": 15,
+              "attackId": null,
+              "cardId": null,
+              "serial": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 3,
+                "player": 1,
+                "type": "knockout",
+                "target": "Charmander",
+                "confidence": 0.9
+              },
+              "type": 16,
+              "cardId": null,
+              "serial": null,
+              "putDamageCounter": true,
+              "value": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 3,
+                "player": 1,
+                "type": "take_prize",
+                "amount": 2,
+                "confidence": 0.8
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 7,
+              "toArea": 2
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 3,
+              "player": 1,
+              "type": "evolve",
+              "card": "Charizard ex",
+              "from_zone": "hand",
+              "to_zone": "active",
+              "confidence": 0.8
+            },
+            {
+              "turn": 3,
+              "player": 1,
+              "type": "attack",
+              "card": "Charizard ex",
+              "target": "Charmander",
+              "amount": 180,
+              "attack_name": "Burning Darkness",
+              "confidence": 0.9
+            },
+            {
+              "turn": 3,
+              "player": 1,
+              "type": "knockout",
+              "target": "Charmander",
+              "confidence": 0.9
+            },
+            {
+              "turn": 3,
+              "player": 1,
+              "type": "take_prize",
+              "amount": 2,
+              "confidence": 0.8
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 10,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 10,
+                "player": 0,
+                "type": "game_result",
+                "winner": 0,
+                "confidence": 1.0
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 10,
+              "player": 0,
+              "type": "game_result",
+              "winner": 0,
+              "confidence": 1.0
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 10,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 10,
+                "player": 0,
+                "type": "game_result",
+                "winner": 0,
+                "confidence": 1.0
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 10,
+              "player": 0,
+              "type": "game_result",
+              "winner": 0,
+              "confidence": 1.0
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ]
+  ],
+  "_caveats": [
+    "logs-only: action/select/search_begin_input are not reconstructable from video",
+    "cabt numeric type/area codes are provisional (calibrate vs real replays)",
+    "this is Standard paper TCG, a different game from the cabt engine"
+  ]
+}

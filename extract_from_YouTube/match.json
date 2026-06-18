@@ -1,0 +1,4636 @@
+{
+  "name": "ptcg-video",
+  "description": "Semantic log reconstructed from match video (logs only).",
+  "schema_version": 1,
+  "source_url": "https://www.youtube.com/watch?v=m8np08cT-TQ",
+  "info": {
+    "Agents": [
+      {
+        "Name": "Jack Pitcher",
+        "ThumbnailUrl": null
+      },
+      {
+        "Name": "Andrew Hedrick",
+        "ThumbnailUrl": null
+      }
+    ],
+    "TeamNames": [
+      "Jack Pitcher",
+      "Andrew Hedrick"
+    ]
+  },
+  "configuration": {
+    "episodeSteps": 20
+  },
+  "rewards": [
+    -1,
+    1
+  ],
+  "statuses": [
+    "DONE",
+    "DONE"
+  ],
+  "steps": [
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 0,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 0,
+                "player": 0,
+                "type": "note",
+                "t_start": 186.0,
+                "confidence": 0.85,
+                "source_text": "does seem like Jack has chosen to go first"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 0,
+                "player": 0,
+                "type": "setup",
+                "t_start": 421.9,
+                "card": "Dunsparce",
+                "to_zone": "active",
+                "confidence": 0.8,
+                "source_text": "will be a Dunspar start"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 0,
+                "player": 1,
+                "type": "setup",
+                "t_start": 421.9,
+                "card": "Munkidori",
+                "to_zone": "active",
+                "confidence": 0.8,
+                "source_text": "up against the monkey dory of Andrew"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 0,
+              "player": 0,
+              "type": "note",
+              "t_start": 186.0,
+              "confidence": 0.85,
+              "source_text": "does seem like Jack has chosen to go first"
+            },
+            {
+              "turn": 0,
+              "player": 0,
+              "type": "setup",
+              "t_start": 421.9,
+              "card": "Dunsparce",
+              "to_zone": "active",
+              "confidence": 0.8,
+              "source_text": "will be a Dunspar start"
+            },
+            {
+              "turn": 0,
+              "player": 1,
+              "type": "setup",
+              "t_start": 421.9,
+              "card": "Munkidori",
+              "to_zone": "active",
+              "confidence": 0.8,
+              "source_text": "up against the monkey dory of Andrew"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 0,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 0,
+                "player": 0,
+                "type": "note",
+                "t_start": 186.0,
+                "confidence": 0.85,
+                "source_text": "does seem like Jack has chosen to go first"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 0,
+                "player": 0,
+                "type": "setup",
+                "t_start": 421.9,
+                "card": "Dunsparce",
+                "to_zone": "active",
+                "confidence": 0.8,
+                "source_text": "will be a Dunspar start"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 0,
+                "player": 1,
+                "type": "setup",
+                "t_start": 421.9,
+                "card": "Munkidori",
+                "to_zone": "active",
+                "confidence": 0.8,
+                "source_text": "up against the monkey dory of Andrew"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 0,
+              "player": 0,
+              "type": "note",
+              "t_start": 186.0,
+              "confidence": 0.85,
+              "source_text": "does seem like Jack has chosen to go first"
+            },
+            {
+              "turn": 0,
+              "player": 0,
+              "type": "setup",
+              "t_start": 421.9,
+              "card": "Dunsparce",
+              "to_zone": "active",
+              "confidence": 0.8,
+              "source_text": "will be a Dunspar start"
+            },
+            {
+              "turn": 0,
+              "player": 1,
+              "type": "setup",
+              "t_start": 421.9,
+              "card": "Munkidori",
+              "to_zone": "active",
+              "confidence": 0.8,
+              "source_text": "up against the monkey dory of Andrew"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 1,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "play_item",
+                "t_start": 421.9,
+                "card": "Ultra Ball",
+                "confidence": 0.85,
+                "source_text": "an opening ultra ball for Jack"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "discard",
+                "t_start": 426.4,
+                "card": "Lillie's Determination",
+                "from_zone": "hand",
+                "to_zone": "discard",
+                "confidence": 0.55,
+                "source_text": "The discord of the lilies determination gives a lot of information"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "play_basic",
+                "t_start": 459.9,
+                "card": "Dreepy",
+                "to_zone": "bench",
+                "confidence": 0.8,
+                "source_text": "dreepee will hit the field"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 5
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "attach_energy",
+                "t_start": 465.8,
+                "target": "Dreepy",
+                "confidence": 0.8,
+                "source_text": "does he put an energy on it? He surely does"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "end_turn",
+                "t_start": 465.8,
+                "confidence": 0.9,
+                "source_text": "now a pass to Andrew Hedrick"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "play_item",
+              "t_start": 421.9,
+              "card": "Ultra Ball",
+              "confidence": 0.85,
+              "source_text": "an opening ultra ball for Jack"
+            },
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "discard",
+              "t_start": 426.4,
+              "card": "Lillie's Determination",
+              "from_zone": "hand",
+              "to_zone": "discard",
+              "confidence": 0.55,
+              "source_text": "The discord of the lilies determination gives a lot of information"
+            },
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "play_basic",
+              "t_start": 459.9,
+              "card": "Dreepy",
+              "to_zone": "bench",
+              "confidence": 0.8,
+              "source_text": "dreepee will hit the field"
+            },
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "attach_energy",
+              "t_start": 465.8,
+              "target": "Dreepy",
+              "confidence": 0.8,
+              "source_text": "does he put an energy on it? He surely does"
+            },
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "end_turn",
+              "t_start": 465.8,
+              "confidence": 0.9,
+              "source_text": "now a pass to Andrew Hedrick"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 1,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "play_item",
+                "t_start": 421.9,
+                "card": "Ultra Ball",
+                "confidence": 0.85,
+                "source_text": "an opening ultra ball for Jack"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "discard",
+                "t_start": 426.4,
+                "card": "Lillie's Determination",
+                "from_zone": "hand",
+                "to_zone": "discard",
+                "confidence": 0.55,
+                "source_text": "The discord of the lilies determination gives a lot of information"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "play_basic",
+                "t_start": 459.9,
+                "card": "Dreepy",
+                "to_zone": "bench",
+                "confidence": 0.8,
+                "source_text": "dreepee will hit the field"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 5
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "attach_energy",
+                "t_start": 465.8,
+                "target": "Dreepy",
+                "confidence": 0.8,
+                "source_text": "does he put an energy on it? He surely does"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 1,
+                "player": 0,
+                "type": "end_turn",
+                "t_start": 465.8,
+                "confidence": 0.9,
+                "source_text": "now a pass to Andrew Hedrick"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "play_item",
+              "t_start": 421.9,
+              "card": "Ultra Ball",
+              "confidence": 0.85,
+              "source_text": "an opening ultra ball for Jack"
+            },
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "discard",
+              "t_start": 426.4,
+              "card": "Lillie's Determination",
+              "from_zone": "hand",
+              "to_zone": "discard",
+              "confidence": 0.55,
+              "source_text": "The discord of the lilies determination gives a lot of information"
+            },
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "play_basic",
+              "t_start": 459.9,
+              "card": "Dreepy",
+              "to_zone": "bench",
+              "confidence": 0.8,
+              "source_text": "dreepee will hit the field"
+            },
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "attach_energy",
+              "t_start": 465.8,
+              "target": "Dreepy",
+              "confidence": 0.8,
+              "source_text": "does he put an energy on it? He surely does"
+            },
+            {
+              "turn": 1,
+              "player": 0,
+              "type": "end_turn",
+              "t_start": 465.8,
+              "confidence": 0.9,
+              "source_text": "now a pass to Andrew Hedrick"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 2,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 2,
+                "player": 1,
+                "type": "play_stadium",
+                "t_start": 537.2,
+                "card": "Risky Ruins",
+                "to_zone": "stadium",
+                "confidence": 0.6,
+                "source_text": "the placement of the risky ruins before the buddy buddy poppin"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 8
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 2,
+                "player": 1,
+                "type": "attach_energy",
+                "t_start": 546.9,
+                "target": "Munkidori",
+                "energy_type": "darkness",
+                "confidence": 0.55,
+                "source_text": "Crispin putting a darkness energy on monkey dory"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 2,
+                "player": 1,
+                "type": "attack",
+                "t_start": 603.0,
+                "card": "Munkidori",
+                "target": "Dunsparce",
+                "amount": 70,
+                "attack_name": "Mind Bend",
+                "confidence": 0.5,
+                "source_text": "This is going to KO that done"
+              },
+              "type": 15,
+              "attackId": null,
+              "cardId": null,
+              "serial": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 2,
+                "player": 1,
+                "type": "knockout",
+                "t_start": 605.0,
+                "target": "Dunsparce",
+                "confidence": 0.6,
+                "source_text": "get Andrew ahead in the prize trade"
+              },
+              "type": 16,
+              "cardId": null,
+              "serial": null,
+              "putDamageCounter": true,
+              "value": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 2,
+                "player": 1,
+                "type": "take_prize",
+                "t_start": 605.0,
+                "from_zone": "prize",
+                "amount": 1,
+                "confidence": 0.6,
+                "source_text": "get Andrew ahead in the prize trade"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 7,
+              "toArea": 2
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 2,
+                "player": 1,
+                "type": "play_supporter",
+                "t_start": 826.6,
+                "card": "Crispin",
+                "confidence": 0.55,
+                "source_text": "chip he found lily's determination ... chrispin finds the energy"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 2,
+              "player": 1,
+              "type": "play_stadium",
+              "t_start": 537.2,
+              "card": "Risky Ruins",
+              "to_zone": "stadium",
+              "confidence": 0.6,
+              "source_text": "the placement of the risky ruins before the buddy buddy poppin"
+            },
+            {
+              "turn": 2,
+              "player": 1,
+              "type": "attach_energy",
+              "t_start": 546.9,
+              "target": "Munkidori",
+              "energy_type": "darkness",
+              "confidence": 0.55,
+              "source_text": "Crispin putting a darkness energy on monkey dory"
+            },
+            {
+              "turn": 2,
+              "player": 1,
+              "type": "attack",
+              "t_start": 603.0,
+              "card": "Munkidori",
+              "target": "Dunsparce",
+              "amount": 70,
+              "attack_name": "Mind Bend",
+              "confidence": 0.5,
+              "source_text": "This is going to KO that done"
+            },
+            {
+              "turn": 2,
+              "player": 1,
+              "type": "knockout",
+              "t_start": 605.0,
+              "target": "Dunsparce",
+              "confidence": 0.6,
+              "source_text": "get Andrew ahead in the prize trade"
+            },
+            {
+              "turn": 2,
+              "player": 1,
+              "type": "take_prize",
+              "t_start": 605.0,
+              "from_zone": "prize",
+              "amount": 1,
+              "confidence": 0.6,
+              "source_text": "get Andrew ahead in the prize trade"
+            },
+            {
+              "turn": 2,
+              "player": 1,
+              "type": "play_supporter",
+              "t_start": 826.6,
+              "card": "Crispin",
+              "confidence": 0.55,
+              "source_text": "chip he found lily's determination ... chrispin finds the energy"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 2,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 2,
+                "player": 1,
+                "type": "play_stadium",
+                "t_start": 537.2,
+                "card": "Risky Ruins",
+                "to_zone": "stadium",
+                "confidence": 0.6,
+                "source_text": "the placement of the risky ruins before the buddy buddy poppin"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 8
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 2,
+                "player": 1,
+                "type": "attach_energy",
+                "t_start": 546.9,
+                "target": "Munkidori",
+                "energy_type": "darkness",
+                "confidence": 0.55,
+                "source_text": "Crispin putting a darkness energy on monkey dory"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 2,
+                "player": 1,
+                "type": "attack",
+                "t_start": 603.0,
+                "card": "Munkidori",
+                "target": "Dunsparce",
+                "amount": 70,
+                "attack_name": "Mind Bend",
+                "confidence": 0.5,
+                "source_text": "This is going to KO that done"
+              },
+              "type": 15,
+              "attackId": null,
+              "cardId": null,
+              "serial": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 2,
+                "player": 1,
+                "type": "knockout",
+                "t_start": 605.0,
+                "target": "Dunsparce",
+                "confidence": 0.6,
+                "source_text": "get Andrew ahead in the prize trade"
+              },
+              "type": 16,
+              "cardId": null,
+              "serial": null,
+              "putDamageCounter": true,
+              "value": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 2,
+                "player": 1,
+                "type": "take_prize",
+                "t_start": 605.0,
+                "from_zone": "prize",
+                "amount": 1,
+                "confidence": 0.6,
+                "source_text": "get Andrew ahead in the prize trade"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 7,
+              "toArea": 2
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 2,
+                "player": 1,
+                "type": "play_supporter",
+                "t_start": 826.6,
+                "card": "Crispin",
+                "confidence": 0.55,
+                "source_text": "chip he found lily's determination ... chrispin finds the energy"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 2,
+              "player": 1,
+              "type": "play_stadium",
+              "t_start": 537.2,
+              "card": "Risky Ruins",
+              "to_zone": "stadium",
+              "confidence": 0.6,
+              "source_text": "the placement of the risky ruins before the buddy buddy poppin"
+            },
+            {
+              "turn": 2,
+              "player": 1,
+              "type": "attach_energy",
+              "t_start": 546.9,
+              "target": "Munkidori",
+              "energy_type": "darkness",
+              "confidence": 0.55,
+              "source_text": "Crispin putting a darkness energy on monkey dory"
+            },
+            {
+              "turn": 2,
+              "player": 1,
+              "type": "attack",
+              "t_start": 603.0,
+              "card": "Munkidori",
+              "target": "Dunsparce",
+              "amount": 70,
+              "attack_name": "Mind Bend",
+              "confidence": 0.5,
+              "source_text": "This is going to KO that done"
+            },
+            {
+              "turn": 2,
+              "player": 1,
+              "type": "knockout",
+              "t_start": 605.0,
+              "target": "Dunsparce",
+              "confidence": 0.6,
+              "source_text": "get Andrew ahead in the prize trade"
+            },
+            {
+              "turn": 2,
+              "player": 1,
+              "type": "take_prize",
+              "t_start": 605.0,
+              "from_zone": "prize",
+              "amount": 1,
+              "confidence": 0.6,
+              "source_text": "get Andrew ahead in the prize trade"
+            },
+            {
+              "turn": 2,
+              "player": 1,
+              "type": "play_supporter",
+              "t_start": 826.6,
+              "card": "Crispin",
+              "confidence": 0.55,
+              "source_text": "chip he found lily's determination ... chrispin finds the energy"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 3,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 3,
+                "player": 0,
+                "type": "end_turn",
+                "t_start": 807.4,
+                "confidence": 0.6,
+                "source_text": "just to pass now from jack"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 3,
+              "player": 0,
+              "type": "end_turn",
+              "t_start": 807.4,
+              "confidence": 0.6,
+              "source_text": "just to pass now from jack"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 3,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 3,
+                "player": 0,
+                "type": "end_turn",
+                "t_start": 807.4,
+                "confidence": 0.6,
+                "source_text": "just to pass now from jack"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 3,
+              "player": 0,
+              "type": "end_turn",
+              "t_start": 807.4,
+              "confidence": 0.6,
+              "source_text": "just to pass now from jack"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 4,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 4,
+                "player": 1,
+                "type": "ability",
+                "t_start": 874.0,
+                "card": "Munkidori",
+                "confidence": 0.55,
+                "source_text": "Adrena brain bouncing those two damage counters over to the jerk cloak"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 4,
+                "player": 1,
+                "type": "attack",
+                "t_start": 880.9,
+                "card": "Drakloak",
+                "target": "Drakloak",
+                "amount": 90,
+                "attack_name": "Dragon Headbutt",
+                "confidence": 0.5,
+                "source_text": "dragon headbutt 70 damage plus the 20 that's 90"
+              },
+              "type": 15,
+              "attackId": null,
+              "cardId": null,
+              "serial": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 4,
+                "player": 1,
+                "type": "knockout",
+                "t_start": 888.5,
+                "target": "Drakloak",
+                "confidence": 0.6,
+                "source_text": "that is a knockout"
+              },
+              "type": 16,
+              "cardId": null,
+              "serial": null,
+              "putDamageCounter": true,
+              "value": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 4,
+                "player": 1,
+                "type": "take_prize",
+                "t_start": 890.0,
+                "from_zone": "prize",
+                "amount": 2,
+                "confidence": 0.6,
+                "source_text": "andrew up a quick two prize cards"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 7,
+              "toArea": 2
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 4,
+              "player": 1,
+              "type": "ability",
+              "t_start": 874.0,
+              "card": "Munkidori",
+              "confidence": 0.55,
+              "source_text": "Adrena brain bouncing those two damage counters over to the jerk cloak"
+            },
+            {
+              "turn": 4,
+              "player": 1,
+              "type": "attack",
+              "t_start": 880.9,
+              "card": "Drakloak",
+              "target": "Drakloak",
+              "amount": 90,
+              "attack_name": "Dragon Headbutt",
+              "confidence": 0.5,
+              "source_text": "dragon headbutt 70 damage plus the 20 that's 90"
+            },
+            {
+              "turn": 4,
+              "player": 1,
+              "type": "knockout",
+              "t_start": 888.5,
+              "target": "Drakloak",
+              "confidence": 0.6,
+              "source_text": "that is a knockout"
+            },
+            {
+              "turn": 4,
+              "player": 1,
+              "type": "take_prize",
+              "t_start": 890.0,
+              "from_zone": "prize",
+              "amount": 2,
+              "confidence": 0.6,
+              "source_text": "andrew up a quick two prize cards"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 4,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 4,
+                "player": 1,
+                "type": "ability",
+                "t_start": 874.0,
+                "card": "Munkidori",
+                "confidence": 0.55,
+                "source_text": "Adrena brain bouncing those two damage counters over to the jerk cloak"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 4,
+                "player": 1,
+                "type": "attack",
+                "t_start": 880.9,
+                "card": "Drakloak",
+                "target": "Drakloak",
+                "amount": 90,
+                "attack_name": "Dragon Headbutt",
+                "confidence": 0.5,
+                "source_text": "dragon headbutt 70 damage plus the 20 that's 90"
+              },
+              "type": 15,
+              "attackId": null,
+              "cardId": null,
+              "serial": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 4,
+                "player": 1,
+                "type": "knockout",
+                "t_start": 888.5,
+                "target": "Drakloak",
+                "confidence": 0.6,
+                "source_text": "that is a knockout"
+              },
+              "type": 16,
+              "cardId": null,
+              "serial": null,
+              "putDamageCounter": true,
+              "value": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 4,
+                "player": 1,
+                "type": "take_prize",
+                "t_start": 890.0,
+                "from_zone": "prize",
+                "amount": 2,
+                "confidence": 0.6,
+                "source_text": "andrew up a quick two prize cards"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 7,
+              "toArea": 2
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 4,
+              "player": 1,
+              "type": "ability",
+              "t_start": 874.0,
+              "card": "Munkidori",
+              "confidence": 0.55,
+              "source_text": "Adrena brain bouncing those two damage counters over to the jerk cloak"
+            },
+            {
+              "turn": 4,
+              "player": 1,
+              "type": "attack",
+              "t_start": 880.9,
+              "card": "Drakloak",
+              "target": "Drakloak",
+              "amount": 90,
+              "attack_name": "Dragon Headbutt",
+              "confidence": 0.5,
+              "source_text": "dragon headbutt 70 damage plus the 20 that's 90"
+            },
+            {
+              "turn": 4,
+              "player": 1,
+              "type": "knockout",
+              "t_start": 888.5,
+              "target": "Drakloak",
+              "confidence": 0.6,
+              "source_text": "that is a knockout"
+            },
+            {
+              "turn": 4,
+              "player": 1,
+              "type": "take_prize",
+              "t_start": 890.0,
+              "from_zone": "prize",
+              "amount": 2,
+              "confidence": 0.6,
+              "source_text": "andrew up a quick two prize cards"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 5,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 5,
+                "player": 0,
+                "type": "play_basic",
+                "t_start": 897.7,
+                "card": "Dreepy",
+                "to_zone": "active",
+                "confidence": 0.6,
+                "source_text": "Jack pushing the dreepee"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 4
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 5,
+                "player": 0,
+                "type": "game_result",
+                "t_start": 920.0,
+                "winner": 1,
+                "confidence": 0.9,
+                "source_text": "and he's just going to concede"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 5,
+              "player": 0,
+              "type": "play_basic",
+              "t_start": 897.7,
+              "card": "Dreepy",
+              "to_zone": "active",
+              "confidence": 0.6,
+              "source_text": "Jack pushing the dreepee"
+            },
+            {
+              "turn": 5,
+              "player": 0,
+              "type": "game_result",
+              "t_start": 920.0,
+              "winner": 1,
+              "confidence": 0.9,
+              "source_text": "and he's just going to concede"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 5,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 5,
+                "player": 0,
+                "type": "play_basic",
+                "t_start": 897.7,
+                "card": "Dreepy",
+                "to_zone": "active",
+                "confidence": 0.6,
+                "source_text": "Jack pushing the dreepee"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 4
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 5,
+                "player": 0,
+                "type": "game_result",
+                "t_start": 920.0,
+                "winner": 1,
+                "confidence": 0.9,
+                "source_text": "and he's just going to concede"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 5,
+              "player": 0,
+              "type": "play_basic",
+              "t_start": 897.7,
+              "card": "Dreepy",
+              "to_zone": "active",
+              "confidence": 0.6,
+              "source_text": "Jack pushing the dreepee"
+            },
+            {
+              "turn": 5,
+              "player": 0,
+              "type": "game_result",
+              "t_start": 920.0,
+              "winner": 1,
+              "confidence": 0.9,
+              "source_text": "and he's just going to concede"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 6,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 6,
+                "player": 0,
+                "type": "note",
+                "t_start": 967.7,
+                "confidence": 0.85,
+                "source_text": "so jack will be choosing to go first (game two)"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 6,
+                "player": 0,
+                "type": "setup",
+                "t_start": 1037.6,
+                "card": "Dreepy",
+                "to_zone": "active",
+                "confidence": 0.75,
+                "source_text": "there is a dreepee"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 6,
+                "player": 1,
+                "type": "setup",
+                "t_start": 1067.2,
+                "card": "Budew",
+                "to_zone": "active",
+                "confidence": 0.7,
+                "source_text": "andrew's itchy pollen ... that pokemon being the starter"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 6,
+              "player": 0,
+              "type": "note",
+              "t_start": 967.7,
+              "confidence": 0.85,
+              "source_text": "so jack will be choosing to go first (game two)"
+            },
+            {
+              "turn": 6,
+              "player": 0,
+              "type": "setup",
+              "t_start": 1037.6,
+              "card": "Dreepy",
+              "to_zone": "active",
+              "confidence": 0.75,
+              "source_text": "there is a dreepee"
+            },
+            {
+              "turn": 6,
+              "player": 1,
+              "type": "setup",
+              "t_start": 1067.2,
+              "card": "Budew",
+              "to_zone": "active",
+              "confidence": 0.7,
+              "source_text": "andrew's itchy pollen ... that pokemon being the starter"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 6,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 6,
+                "player": 0,
+                "type": "note",
+                "t_start": 967.7,
+                "confidence": 0.85,
+                "source_text": "so jack will be choosing to go first (game two)"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 6,
+                "player": 0,
+                "type": "setup",
+                "t_start": 1037.6,
+                "card": "Dreepy",
+                "to_zone": "active",
+                "confidence": 0.75,
+                "source_text": "there is a dreepee"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 6,
+                "player": 1,
+                "type": "setup",
+                "t_start": 1067.2,
+                "card": "Budew",
+                "to_zone": "active",
+                "confidence": 0.7,
+                "source_text": "andrew's itchy pollen ... that pokemon being the starter"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 6,
+              "player": 0,
+              "type": "note",
+              "t_start": 967.7,
+              "confidence": 0.85,
+              "source_text": "so jack will be choosing to go first (game two)"
+            },
+            {
+              "turn": 6,
+              "player": 0,
+              "type": "setup",
+              "t_start": 1037.6,
+              "card": "Dreepy",
+              "to_zone": "active",
+              "confidence": 0.75,
+              "source_text": "there is a dreepee"
+            },
+            {
+              "turn": 6,
+              "player": 1,
+              "type": "setup",
+              "t_start": 1067.2,
+              "card": "Budew",
+              "to_zone": "active",
+              "confidence": 0.7,
+              "source_text": "andrew's itchy pollen ... that pokemon being the starter"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 7,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 7,
+                "player": 0,
+                "type": "play_item",
+                "t_start": 1093.9,
+                "card": "Poke Pad",
+                "confidence": 0.65,
+                "source_text": "going to grab joe cloak here from the poke pad"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 7,
+                "player": 0,
+                "type": "search",
+                "t_start": 1093.9,
+                "card": "Drakloak",
+                "from_zone": "deck",
+                "to_zone": "hand",
+                "confidence": 0.6,
+                "source_text": "grab joe cloak ... get himself some draw on the next turn"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 7,
+                "player": 0,
+                "type": "end_turn",
+                "t_start": 1108.5,
+                "confidence": 0.7,
+                "source_text": "no additional pokemon played down"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 7,
+              "player": 0,
+              "type": "play_item",
+              "t_start": 1093.9,
+              "card": "Poke Pad",
+              "confidence": 0.65,
+              "source_text": "going to grab joe cloak here from the poke pad"
+            },
+            {
+              "turn": 7,
+              "player": 0,
+              "type": "search",
+              "t_start": 1093.9,
+              "card": "Drakloak",
+              "from_zone": "deck",
+              "to_zone": "hand",
+              "confidence": 0.6,
+              "source_text": "grab joe cloak ... get himself some draw on the next turn"
+            },
+            {
+              "turn": 7,
+              "player": 0,
+              "type": "end_turn",
+              "t_start": 1108.5,
+              "confidence": 0.7,
+              "source_text": "no additional pokemon played down"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 7,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 7,
+                "player": 0,
+                "type": "play_item",
+                "t_start": 1093.9,
+                "card": "Poke Pad",
+                "confidence": 0.65,
+                "source_text": "going to grab joe cloak here from the poke pad"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 7,
+                "player": 0,
+                "type": "search",
+                "t_start": 1093.9,
+                "card": "Drakloak",
+                "from_zone": "deck",
+                "to_zone": "hand",
+                "confidence": 0.6,
+                "source_text": "grab joe cloak ... get himself some draw on the next turn"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 7,
+                "player": 0,
+                "type": "end_turn",
+                "t_start": 1108.5,
+                "confidence": 0.7,
+                "source_text": "no additional pokemon played down"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 7,
+              "player": 0,
+              "type": "play_item",
+              "t_start": 1093.9,
+              "card": "Poke Pad",
+              "confidence": 0.65,
+              "source_text": "going to grab joe cloak here from the poke pad"
+            },
+            {
+              "turn": 7,
+              "player": 0,
+              "type": "search",
+              "t_start": 1093.9,
+              "card": "Drakloak",
+              "from_zone": "deck",
+              "to_zone": "hand",
+              "confidence": 0.6,
+              "source_text": "grab joe cloak ... get himself some draw on the next turn"
+            },
+            {
+              "turn": 7,
+              "player": 0,
+              "type": "end_turn",
+              "t_start": 1108.5,
+              "confidence": 0.7,
+              "source_text": "no additional pokemon played down"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 8,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 8,
+                "player": 1,
+                "type": "ability",
+                "t_start": 1106.0,
+                "card": "Budew",
+                "attack_name": "Itchy Pollen",
+                "confidence": 0.7,
+                "source_text": "andrew's itchy pollen ... jack unable to play item cards"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 8,
+                "player": 1,
+                "type": "play_item",
+                "t_start": 1122.0,
+                "card": "Buddy Buddy Poffin",
+                "confidence": 0.8,
+                "source_text": "buddy buddy pauffin and lily's determination"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 8,
+                "player": 1,
+                "type": "attach_energy",
+                "t_start": 1213.0,
+                "target": "Dreepy",
+                "confidence": 0.6,
+                "source_text": "the fire for the drippy"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 8,
+                "player": 1,
+                "type": "play_basic",
+                "t_start": 1225.0,
+                "card": "Dreepy",
+                "to_zone": "bench",
+                "amount": 3,
+                "confidence": 0.7,
+                "source_text": "three drippy an energy already attached"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 5
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 8,
+                "player": 1,
+                "type": "play_supporter",
+                "t_start": 1225.0,
+                "card": "Lillie's Determination",
+                "amount": 8,
+                "confidence": 0.75,
+                "source_text": "a hand shuffled into the deck and still eight more cards to work with"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 8,
+              "player": 1,
+              "type": "ability",
+              "t_start": 1106.0,
+              "card": "Budew",
+              "attack_name": "Itchy Pollen",
+              "confidence": 0.7,
+              "source_text": "andrew's itchy pollen ... jack unable to play item cards"
+            },
+            {
+              "turn": 8,
+              "player": 1,
+              "type": "play_item",
+              "t_start": 1122.0,
+              "card": "Buddy Buddy Poffin",
+              "confidence": 0.8,
+              "source_text": "buddy buddy pauffin and lily's determination"
+            },
+            {
+              "turn": 8,
+              "player": 1,
+              "type": "attach_energy",
+              "t_start": 1213.0,
+              "target": "Dreepy",
+              "confidence": 0.6,
+              "source_text": "the fire for the drippy"
+            },
+            {
+              "turn": 8,
+              "player": 1,
+              "type": "play_basic",
+              "t_start": 1225.0,
+              "card": "Dreepy",
+              "to_zone": "bench",
+              "amount": 3,
+              "confidence": 0.7,
+              "source_text": "three drippy an energy already attached"
+            },
+            {
+              "turn": 8,
+              "player": 1,
+              "type": "play_supporter",
+              "t_start": 1225.0,
+              "card": "Lillie's Determination",
+              "amount": 8,
+              "confidence": 0.75,
+              "source_text": "a hand shuffled into the deck and still eight more cards to work with"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 8,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 8,
+                "player": 1,
+                "type": "ability",
+                "t_start": 1106.0,
+                "card": "Budew",
+                "attack_name": "Itchy Pollen",
+                "confidence": 0.7,
+                "source_text": "andrew's itchy pollen ... jack unable to play item cards"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 8,
+                "player": 1,
+                "type": "play_item",
+                "t_start": 1122.0,
+                "card": "Buddy Buddy Poffin",
+                "confidence": 0.8,
+                "source_text": "buddy buddy pauffin and lily's determination"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 8,
+                "player": 1,
+                "type": "attach_energy",
+                "t_start": 1213.0,
+                "target": "Dreepy",
+                "confidence": 0.6,
+                "source_text": "the fire for the drippy"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 8,
+                "player": 1,
+                "type": "play_basic",
+                "t_start": 1225.0,
+                "card": "Dreepy",
+                "to_zone": "bench",
+                "amount": 3,
+                "confidence": 0.7,
+                "source_text": "three drippy an energy already attached"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 5
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 8,
+                "player": 1,
+                "type": "play_supporter",
+                "t_start": 1225.0,
+                "card": "Lillie's Determination",
+                "amount": 8,
+                "confidence": 0.75,
+                "source_text": "a hand shuffled into the deck and still eight more cards to work with"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 8,
+              "player": 1,
+              "type": "ability",
+              "t_start": 1106.0,
+              "card": "Budew",
+              "attack_name": "Itchy Pollen",
+              "confidence": 0.7,
+              "source_text": "andrew's itchy pollen ... jack unable to play item cards"
+            },
+            {
+              "turn": 8,
+              "player": 1,
+              "type": "play_item",
+              "t_start": 1122.0,
+              "card": "Buddy Buddy Poffin",
+              "confidence": 0.8,
+              "source_text": "buddy buddy pauffin and lily's determination"
+            },
+            {
+              "turn": 8,
+              "player": 1,
+              "type": "attach_energy",
+              "t_start": 1213.0,
+              "target": "Dreepy",
+              "confidence": 0.6,
+              "source_text": "the fire for the drippy"
+            },
+            {
+              "turn": 8,
+              "player": 1,
+              "type": "play_basic",
+              "t_start": 1225.0,
+              "card": "Dreepy",
+              "to_zone": "bench",
+              "amount": 3,
+              "confidence": 0.7,
+              "source_text": "three drippy an energy already attached"
+            },
+            {
+              "turn": 8,
+              "player": 1,
+              "type": "play_supporter",
+              "t_start": 1225.0,
+              "card": "Lillie's Determination",
+              "amount": 8,
+              "confidence": 0.75,
+              "source_text": "a hand shuffled into the deck and still eight more cards to work with"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 9,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 9,
+                "player": 0,
+                "type": "ability",
+                "t_start": 1242.2,
+                "card": "Drakloak",
+                "amount": 2,
+                "attack_name": "Recon Directive",
+                "confidence": 0.65,
+                "source_text": "he'll at most see two cards with a recon directive"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 9,
+                "player": 0,
+                "type": "play_basic",
+                "t_start": 1282.5,
+                "card": "Munkidori",
+                "to_zone": "bench",
+                "confidence": 0.6,
+                "source_text": "just debating the bench of monkey dory looks like it will come down"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 5
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 9,
+                "player": 0,
+                "type": "play_supporter",
+                "t_start": 1286.6,
+                "card": "Lillie's Determination",
+                "confidence": 0.6,
+                "source_text": "Lily's determination does hold off on using risky ruins"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 9,
+              "player": 0,
+              "type": "ability",
+              "t_start": 1242.2,
+              "card": "Drakloak",
+              "amount": 2,
+              "attack_name": "Recon Directive",
+              "confidence": 0.65,
+              "source_text": "he'll at most see two cards with a recon directive"
+            },
+            {
+              "turn": 9,
+              "player": 0,
+              "type": "play_basic",
+              "t_start": 1282.5,
+              "card": "Munkidori",
+              "to_zone": "bench",
+              "confidence": 0.6,
+              "source_text": "just debating the bench of monkey dory looks like it will come down"
+            },
+            {
+              "turn": 9,
+              "player": 0,
+              "type": "play_supporter",
+              "t_start": 1286.6,
+              "card": "Lillie's Determination",
+              "confidence": 0.6,
+              "source_text": "Lily's determination does hold off on using risky ruins"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 9,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 9,
+                "player": 0,
+                "type": "ability",
+                "t_start": 1242.2,
+                "card": "Drakloak",
+                "amount": 2,
+                "attack_name": "Recon Directive",
+                "confidence": 0.65,
+                "source_text": "he'll at most see two cards with a recon directive"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 9,
+                "player": 0,
+                "type": "play_basic",
+                "t_start": 1282.5,
+                "card": "Munkidori",
+                "to_zone": "bench",
+                "confidence": 0.6,
+                "source_text": "just debating the bench of monkey dory looks like it will come down"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 5
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 9,
+                "player": 0,
+                "type": "play_supporter",
+                "t_start": 1286.6,
+                "card": "Lillie's Determination",
+                "confidence": 0.6,
+                "source_text": "Lily's determination does hold off on using risky ruins"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 9,
+              "player": 0,
+              "type": "ability",
+              "t_start": 1242.2,
+              "card": "Drakloak",
+              "amount": 2,
+              "attack_name": "Recon Directive",
+              "confidence": 0.65,
+              "source_text": "he'll at most see two cards with a recon directive"
+            },
+            {
+              "turn": 9,
+              "player": 0,
+              "type": "play_basic",
+              "t_start": 1282.5,
+              "card": "Munkidori",
+              "to_zone": "bench",
+              "confidence": 0.6,
+              "source_text": "just debating the bench of monkey dory looks like it will come down"
+            },
+            {
+              "turn": 9,
+              "player": 0,
+              "type": "play_supporter",
+              "t_start": 1286.6,
+              "card": "Lillie's Determination",
+              "confidence": 0.6,
+              "source_text": "Lily's determination does hold off on using risky ruins"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 10,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 10,
+                "player": 1,
+                "type": "attach_energy",
+                "t_start": 1363.3,
+                "target": "Munkidori",
+                "energy_type": "darkness",
+                "confidence": 0.6,
+                "source_text": "Andrew will get a darkness energy established on to monkey dory"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 10,
+                "player": 1,
+                "type": "play_supporter",
+                "t_start": 1373.8,
+                "card": "Judge",
+                "amount": 4,
+                "confidence": 0.75,
+                "source_text": "go with the judge having each player shuffle their hand into the deck and get four cards"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 10,
+                "player": 1,
+                "type": "ability",
+                "t_start": 1479.2,
+                "card": "Budew",
+                "attack_name": "Itchy Pollen",
+                "confidence": 0.65,
+                "source_text": "Itchy pollen once again jack unable to play item cards"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 10,
+              "player": 1,
+              "type": "attach_energy",
+              "t_start": 1363.3,
+              "target": "Munkidori",
+              "energy_type": "darkness",
+              "confidence": 0.6,
+              "source_text": "Andrew will get a darkness energy established on to monkey dory"
+            },
+            {
+              "turn": 10,
+              "player": 1,
+              "type": "play_supporter",
+              "t_start": 1373.8,
+              "card": "Judge",
+              "amount": 4,
+              "confidence": 0.75,
+              "source_text": "go with the judge having each player shuffle their hand into the deck and get four cards"
+            },
+            {
+              "turn": 10,
+              "player": 1,
+              "type": "ability",
+              "t_start": 1479.2,
+              "card": "Budew",
+              "attack_name": "Itchy Pollen",
+              "confidence": 0.65,
+              "source_text": "Itchy pollen once again jack unable to play item cards"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 10,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 10,
+                "player": 1,
+                "type": "attach_energy",
+                "t_start": 1363.3,
+                "target": "Munkidori",
+                "energy_type": "darkness",
+                "confidence": 0.6,
+                "source_text": "Andrew will get a darkness energy established on to monkey dory"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 10,
+                "player": 1,
+                "type": "play_supporter",
+                "t_start": 1373.8,
+                "card": "Judge",
+                "amount": 4,
+                "confidence": 0.75,
+                "source_text": "go with the judge having each player shuffle their hand into the deck and get four cards"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 10,
+                "player": 1,
+                "type": "ability",
+                "t_start": 1479.2,
+                "card": "Budew",
+                "attack_name": "Itchy Pollen",
+                "confidence": 0.65,
+                "source_text": "Itchy pollen once again jack unable to play item cards"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 10,
+              "player": 1,
+              "type": "attach_energy",
+              "t_start": 1363.3,
+              "target": "Munkidori",
+              "energy_type": "darkness",
+              "confidence": 0.6,
+              "source_text": "Andrew will get a darkness energy established on to monkey dory"
+            },
+            {
+              "turn": 10,
+              "player": 1,
+              "type": "play_supporter",
+              "t_start": 1373.8,
+              "card": "Judge",
+              "amount": 4,
+              "confidence": 0.75,
+              "source_text": "go with the judge having each player shuffle their hand into the deck and get four cards"
+            },
+            {
+              "turn": 10,
+              "player": 1,
+              "type": "ability",
+              "t_start": 1479.2,
+              "card": "Budew",
+              "attack_name": "Itchy Pollen",
+              "confidence": 0.65,
+              "source_text": "Itchy pollen once again jack unable to play item cards"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 11,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 11,
+                "player": 0,
+                "type": "play_supporter",
+                "t_start": 1518.2,
+                "card": "Lillie's Determination",
+                "amount": 8,
+                "confidence": 0.65,
+                "source_text": "eight cards off of lilies"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 11,
+                "player": 0,
+                "type": "ability",
+                "t_start": 1538.1,
+                "card": "Drakloak",
+                "attack_name": "Recon Directive",
+                "confidence": 0.6,
+                "source_text": "Recon directive does find him a basic dark"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 11,
+                "player": 0,
+                "type": "attach_energy",
+                "t_start": 1542.9,
+                "target": "Munkidori",
+                "energy_type": "darkness",
+                "confidence": 0.55,
+                "source_text": "find him a basic dark ... immediate answer to this third itchy pollen"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 11,
+              "player": 0,
+              "type": "play_supporter",
+              "t_start": 1518.2,
+              "card": "Lillie's Determination",
+              "amount": 8,
+              "confidence": 0.65,
+              "source_text": "eight cards off of lilies"
+            },
+            {
+              "turn": 11,
+              "player": 0,
+              "type": "ability",
+              "t_start": 1538.1,
+              "card": "Drakloak",
+              "attack_name": "Recon Directive",
+              "confidence": 0.6,
+              "source_text": "Recon directive does find him a basic dark"
+            },
+            {
+              "turn": 11,
+              "player": 0,
+              "type": "attach_energy",
+              "t_start": 1542.9,
+              "target": "Munkidori",
+              "energy_type": "darkness",
+              "confidence": 0.55,
+              "source_text": "find him a basic dark ... immediate answer to this third itchy pollen"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 11,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 11,
+                "player": 0,
+                "type": "play_supporter",
+                "t_start": 1518.2,
+                "card": "Lillie's Determination",
+                "amount": 8,
+                "confidence": 0.65,
+                "source_text": "eight cards off of lilies"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 11,
+                "player": 0,
+                "type": "ability",
+                "t_start": 1538.1,
+                "card": "Drakloak",
+                "attack_name": "Recon Directive",
+                "confidence": 0.6,
+                "source_text": "Recon directive does find him a basic dark"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 11,
+                "player": 0,
+                "type": "attach_energy",
+                "t_start": 1542.9,
+                "target": "Munkidori",
+                "energy_type": "darkness",
+                "confidence": 0.55,
+                "source_text": "find him a basic dark ... immediate answer to this third itchy pollen"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 11,
+              "player": 0,
+              "type": "play_supporter",
+              "t_start": 1518.2,
+              "card": "Lillie's Determination",
+              "amount": 8,
+              "confidence": 0.65,
+              "source_text": "eight cards off of lilies"
+            },
+            {
+              "turn": 11,
+              "player": 0,
+              "type": "ability",
+              "t_start": 1538.1,
+              "card": "Drakloak",
+              "attack_name": "Recon Directive",
+              "confidence": 0.6,
+              "source_text": "Recon directive does find him a basic dark"
+            },
+            {
+              "turn": 11,
+              "player": 0,
+              "type": "attach_energy",
+              "t_start": 1542.9,
+              "target": "Munkidori",
+              "energy_type": "darkness",
+              "confidence": 0.55,
+              "source_text": "find him a basic dark ... immediate answer to this third itchy pollen"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 12,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 12,
+                "player": 1,
+                "type": "evolve",
+                "t_start": 1682.4,
+                "card": "Dragapult ex",
+                "target": "Drakloak",
+                "confidence": 0.7,
+                "source_text": "we do see the dragapult EX evolving"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 4
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 12,
+                "player": 1,
+                "type": "play_basic",
+                "t_start": 1685.5,
+                "card": "Munkidori",
+                "to_zone": "bench",
+                "confidence": 0.6,
+                "source_text": "he's got second monkey Dory"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 5
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 12,
+                "player": 1,
+                "type": "attach_energy",
+                "t_start": 1733.9,
+                "target": "Munkidori",
+                "energy_type": "darkness",
+                "confidence": 0.55,
+                "source_text": "there's that attachment of the basic dark"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 12,
+                "player": 1,
+                "type": "retreat",
+                "t_start": 1745.9,
+                "card": "Budew",
+                "confidence": 0.55,
+                "source_text": "retreat into dragapult EX"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 4,
+              "toArea": 5
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 12,
+                "player": 1,
+                "type": "attack",
+                "t_start": 1751.3,
+                "card": "Dragapult ex",
+                "amount": 70,
+                "attack_name": "Jet Headbutt",
+                "confidence": 0.55,
+                "source_text": "the jet headbutt here avoiding putting damage on jack side"
+              },
+              "type": 15,
+              "attackId": null,
+              "cardId": null,
+              "serial": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 12,
+              "player": 1,
+              "type": "evolve",
+              "t_start": 1682.4,
+              "card": "Dragapult ex",
+              "target": "Drakloak",
+              "confidence": 0.7,
+              "source_text": "we do see the dragapult EX evolving"
+            },
+            {
+              "turn": 12,
+              "player": 1,
+              "type": "play_basic",
+              "t_start": 1685.5,
+              "card": "Munkidori",
+              "to_zone": "bench",
+              "confidence": 0.6,
+              "source_text": "he's got second monkey Dory"
+            },
+            {
+              "turn": 12,
+              "player": 1,
+              "type": "attach_energy",
+              "t_start": 1733.9,
+              "target": "Munkidori",
+              "energy_type": "darkness",
+              "confidence": 0.55,
+              "source_text": "there's that attachment of the basic dark"
+            },
+            {
+              "turn": 12,
+              "player": 1,
+              "type": "retreat",
+              "t_start": 1745.9,
+              "card": "Budew",
+              "confidence": 0.55,
+              "source_text": "retreat into dragapult EX"
+            },
+            {
+              "turn": 12,
+              "player": 1,
+              "type": "attack",
+              "t_start": 1751.3,
+              "card": "Dragapult ex",
+              "amount": 70,
+              "attack_name": "Jet Headbutt",
+              "confidence": 0.55,
+              "source_text": "the jet headbutt here avoiding putting damage on jack side"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 12,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 12,
+                "player": 1,
+                "type": "evolve",
+                "t_start": 1682.4,
+                "card": "Dragapult ex",
+                "target": "Drakloak",
+                "confidence": 0.7,
+                "source_text": "we do see the dragapult EX evolving"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 4
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 12,
+                "player": 1,
+                "type": "play_basic",
+                "t_start": 1685.5,
+                "card": "Munkidori",
+                "to_zone": "bench",
+                "confidence": 0.6,
+                "source_text": "he's got second monkey Dory"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 5
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 12,
+                "player": 1,
+                "type": "attach_energy",
+                "t_start": 1733.9,
+                "target": "Munkidori",
+                "energy_type": "darkness",
+                "confidence": 0.55,
+                "source_text": "there's that attachment of the basic dark"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 12,
+                "player": 1,
+                "type": "retreat",
+                "t_start": 1745.9,
+                "card": "Budew",
+                "confidence": 0.55,
+                "source_text": "retreat into dragapult EX"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 4,
+              "toArea": 5
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 12,
+                "player": 1,
+                "type": "attack",
+                "t_start": 1751.3,
+                "card": "Dragapult ex",
+                "amount": 70,
+                "attack_name": "Jet Headbutt",
+                "confidence": 0.55,
+                "source_text": "the jet headbutt here avoiding putting damage on jack side"
+              },
+              "type": 15,
+              "attackId": null,
+              "cardId": null,
+              "serial": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 12,
+              "player": 1,
+              "type": "evolve",
+              "t_start": 1682.4,
+              "card": "Dragapult ex",
+              "target": "Drakloak",
+              "confidence": 0.7,
+              "source_text": "we do see the dragapult EX evolving"
+            },
+            {
+              "turn": 12,
+              "player": 1,
+              "type": "play_basic",
+              "t_start": 1685.5,
+              "card": "Munkidori",
+              "to_zone": "bench",
+              "confidence": 0.6,
+              "source_text": "he's got second monkey Dory"
+            },
+            {
+              "turn": 12,
+              "player": 1,
+              "type": "attach_energy",
+              "t_start": 1733.9,
+              "target": "Munkidori",
+              "energy_type": "darkness",
+              "confidence": 0.55,
+              "source_text": "there's that attachment of the basic dark"
+            },
+            {
+              "turn": 12,
+              "player": 1,
+              "type": "retreat",
+              "t_start": 1745.9,
+              "card": "Budew",
+              "confidence": 0.55,
+              "source_text": "retreat into dragapult EX"
+            },
+            {
+              "turn": 12,
+              "player": 1,
+              "type": "attack",
+              "t_start": 1751.3,
+              "card": "Dragapult ex",
+              "amount": 70,
+              "attack_name": "Jet Headbutt",
+              "confidence": 0.55,
+              "source_text": "the jet headbutt here avoiding putting damage on jack side"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 13,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 13,
+                "player": 0,
+                "type": "play_item",
+                "t_start": 1791.8,
+                "card": "Poke Pad",
+                "confidence": 0.6,
+                "source_text": "Andrew has unlocked all of jack's items ... pokepad finding a replacement done sparse"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 13,
+                "player": 0,
+                "type": "play_basic",
+                "t_start": 1797.6,
+                "card": "Dunsparce",
+                "to_zone": "bench",
+                "confidence": 0.6,
+                "source_text": "finding a replacement done sparse getting that into play"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 5
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 13,
+                "player": 0,
+                "type": "play_supporter",
+                "t_start": 1805.4,
+                "card": "Unfair Stamp",
+                "confidence": 0.55,
+                "source_text": "he does have his ace spec unfair stamp waiting in the hand"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 13,
+              "player": 0,
+              "type": "play_item",
+              "t_start": 1791.8,
+              "card": "Poke Pad",
+              "confidence": 0.6,
+              "source_text": "Andrew has unlocked all of jack's items ... pokepad finding a replacement done sparse"
+            },
+            {
+              "turn": 13,
+              "player": 0,
+              "type": "play_basic",
+              "t_start": 1797.6,
+              "card": "Dunsparce",
+              "to_zone": "bench",
+              "confidence": 0.6,
+              "source_text": "finding a replacement done sparse getting that into play"
+            },
+            {
+              "turn": 13,
+              "player": 0,
+              "type": "play_supporter",
+              "t_start": 1805.4,
+              "card": "Unfair Stamp",
+              "confidence": 0.55,
+              "source_text": "he does have his ace spec unfair stamp waiting in the hand"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 13,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 13,
+                "player": 0,
+                "type": "play_item",
+                "t_start": 1791.8,
+                "card": "Poke Pad",
+                "confidence": 0.6,
+                "source_text": "Andrew has unlocked all of jack's items ... pokepad finding a replacement done sparse"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 13,
+                "player": 0,
+                "type": "play_basic",
+                "t_start": 1797.6,
+                "card": "Dunsparce",
+                "to_zone": "bench",
+                "confidence": 0.6,
+                "source_text": "finding a replacement done sparse getting that into play"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 5
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 13,
+                "player": 0,
+                "type": "play_supporter",
+                "t_start": 1805.4,
+                "card": "Unfair Stamp",
+                "confidence": 0.55,
+                "source_text": "he does have his ace spec unfair stamp waiting in the hand"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 13,
+              "player": 0,
+              "type": "play_item",
+              "t_start": 1791.8,
+              "card": "Poke Pad",
+              "confidence": 0.6,
+              "source_text": "Andrew has unlocked all of jack's items ... pokepad finding a replacement done sparse"
+            },
+            {
+              "turn": 13,
+              "player": 0,
+              "type": "play_basic",
+              "t_start": 1797.6,
+              "card": "Dunsparce",
+              "to_zone": "bench",
+              "confidence": 0.6,
+              "source_text": "finding a replacement done sparse getting that into play"
+            },
+            {
+              "turn": 13,
+              "player": 0,
+              "type": "play_supporter",
+              "t_start": 1805.4,
+              "card": "Unfair Stamp",
+              "confidence": 0.55,
+              "source_text": "he does have his ace spec unfair stamp waiting in the hand"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 14,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 14,
+                "player": 1,
+                "type": "ability",
+                "t_start": 1959.9,
+                "card": "Dragapult ex",
+                "amount": 200,
+                "attack_name": "Phantom Dive",
+                "confidence": 0.55,
+                "source_text": "that'll be 200 damage onto his active dragon poulton 30 onto each of the dracloch"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 14,
+              "player": 1,
+              "type": "ability",
+              "t_start": 1959.9,
+              "card": "Dragapult ex",
+              "amount": 200,
+              "attack_name": "Phantom Dive",
+              "confidence": 0.55,
+              "source_text": "that'll be 200 damage onto his active dragon poulton 30 onto each of the dracloch"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 14,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 14,
+                "player": 1,
+                "type": "ability",
+                "t_start": 1959.9,
+                "card": "Dragapult ex",
+                "amount": 200,
+                "attack_name": "Phantom Dive",
+                "confidence": 0.55,
+                "source_text": "that'll be 200 damage onto his active dragon poulton 30 onto each of the dracloch"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 14,
+              "player": 1,
+              "type": "ability",
+              "t_start": 1959.9,
+              "card": "Dragapult ex",
+              "amount": 200,
+              "attack_name": "Phantom Dive",
+              "confidence": 0.55,
+              "source_text": "that'll be 200 damage onto his active dragon poulton 30 onto each of the dracloch"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 15,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 15,
+                "player": 1,
+                "type": "note",
+                "t_start": 2348.7,
+                "confidence": 0.7,
+                "source_text": "extension issued ... jack now needing to take two less prize cards (pace-of-play penalty on Andrew)"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 15,
+              "player": 1,
+              "type": "note",
+              "t_start": 2348.7,
+              "confidence": 0.7,
+              "source_text": "extension issued ... jack now needing to take two less prize cards (pace-of-play penalty on Andrew)"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 15,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 15,
+                "player": 1,
+                "type": "note",
+                "t_start": 2348.7,
+                "confidence": 0.7,
+                "source_text": "extension issued ... jack now needing to take two less prize cards (pace-of-play penalty on Andrew)"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 15,
+              "player": 1,
+              "type": "note",
+              "t_start": 2348.7,
+              "confidence": 0.7,
+              "source_text": "extension issued ... jack now needing to take two less prize cards (pace-of-play penalty on Andrew)"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 16,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 16,
+                "player": 0,
+                "type": "take_prize",
+                "t_start": 2515.4,
+                "from_zone": "prize",
+                "amount": 3,
+                "confidence": 0.6,
+                "source_text": "a three prize card turn now needing to just take one prize card"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 7,
+              "toArea": 2
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 16,
+                "player": 0,
+                "type": "ability",
+                "t_start": 2531.9,
+                "card": "Munkidori",
+                "amount": 20,
+                "attack_name": "Adrena-Brain",
+                "confidence": 0.5,
+                "source_text": "with the monkey dories you push 20 damage counters over twice"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 16,
+                "player": 0,
+                "type": "attack",
+                "t_start": 2531.9,
+                "card": "Munkidori",
+                "target": "Drakloak",
+                "amount": 60,
+                "attack_name": "Mind Bend",
+                "confidence": 0.5,
+                "source_text": "three prize card turn now needing to just take one prize card to win"
+              },
+              "type": 15,
+              "attackId": null,
+              "cardId": null,
+              "serial": null
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 16,
+                "player": 0,
+                "type": "play_supporter",
+                "t_start": 2705.0,
+                "card": "Crispin",
+                "confidence": 0.5,
+                "source_text": "Crispin is found"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 16,
+              "player": 0,
+              "type": "take_prize",
+              "t_start": 2515.4,
+              "from_zone": "prize",
+              "amount": 3,
+              "confidence": 0.6,
+              "source_text": "a three prize card turn now needing to just take one prize card"
+            },
+            {
+              "turn": 16,
+              "player": 0,
+              "type": "ability",
+              "t_start": 2531.9,
+              "card": "Munkidori",
+              "amount": 20,
+              "attack_name": "Adrena-Brain",
+              "confidence": 0.5,
+              "source_text": "with the monkey dories you push 20 damage counters over twice"
+            },
+            {
+              "turn": 16,
+              "player": 0,
+              "type": "attack",
+              "t_start": 2531.9,
+              "card": "Munkidori",
+              "target": "Drakloak",
+              "amount": 60,
+              "attack_name": "Mind Bend",
+              "confidence": 0.5,
+              "source_text": "three prize card turn now needing to just take one prize card to win"
+            },
+            {
+              "turn": 16,
+              "player": 0,
+              "type": "play_supporter",
+              "t_start": 2705.0,
+              "card": "Crispin",
+              "confidence": 0.5,
+              "source_text": "Crispin is found"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 16,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 16,
+                "player": 0,
+                "type": "take_prize",
+                "t_start": 2515.4,
+                "from_zone": "prize",
+                "amount": 3,
+                "confidence": 0.6,
+                "source_text": "a three prize card turn now needing to just take one prize card"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 7,
+              "toArea": 2
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 16,
+                "player": 0,
+                "type": "ability",
+                "t_start": 2531.9,
+                "card": "Munkidori",
+                "amount": 20,
+                "attack_name": "Adrena-Brain",
+                "confidence": 0.5,
+                "source_text": "with the monkey dories you push 20 damage counters over twice"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 16,
+                "player": 0,
+                "type": "attack",
+                "t_start": 2531.9,
+                "card": "Munkidori",
+                "target": "Drakloak",
+                "amount": 60,
+                "attack_name": "Mind Bend",
+                "confidence": 0.5,
+                "source_text": "three prize card turn now needing to just take one prize card to win"
+              },
+              "type": 15,
+              "attackId": null,
+              "cardId": null,
+              "serial": null
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 16,
+                "player": 0,
+                "type": "play_supporter",
+                "t_start": 2705.0,
+                "card": "Crispin",
+                "confidence": 0.5,
+                "source_text": "Crispin is found"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 16,
+              "player": 0,
+              "type": "take_prize",
+              "t_start": 2515.4,
+              "from_zone": "prize",
+              "amount": 3,
+              "confidence": 0.6,
+              "source_text": "a three prize card turn now needing to just take one prize card"
+            },
+            {
+              "turn": 16,
+              "player": 0,
+              "type": "ability",
+              "t_start": 2531.9,
+              "card": "Munkidori",
+              "amount": 20,
+              "attack_name": "Adrena-Brain",
+              "confidence": 0.5,
+              "source_text": "with the monkey dories you push 20 damage counters over twice"
+            },
+            {
+              "turn": 16,
+              "player": 0,
+              "type": "attack",
+              "t_start": 2531.9,
+              "card": "Munkidori",
+              "target": "Drakloak",
+              "amount": 60,
+              "attack_name": "Mind Bend",
+              "confidence": 0.5,
+              "source_text": "three prize card turn now needing to just take one prize card to win"
+            },
+            {
+              "turn": 16,
+              "player": 0,
+              "type": "play_supporter",
+              "t_start": 2705.0,
+              "card": "Crispin",
+              "confidence": 0.5,
+              "source_text": "Crispin is found"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 17,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "play_item",
+                "t_start": 2557.6,
+                "card": "Crushing Hammer",
+                "confidence": 0.7,
+                "source_text": "Does find a crushing hammer which could remove a darkness energy from monkey dory"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "coin_flip",
+                "t_start": 2565.8,
+                "coin": "heads",
+                "confidence": 0.8,
+                "source_text": "There's the flip ... it's a heads"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "discard",
+                "t_start": 2580.9,
+                "card": "Darkness Energy",
+                "target": "Munkidori",
+                "from_zone": "attached",
+                "to_zone": "discard",
+                "confidence": 0.65,
+                "source_text": "you just have to remove this dark energy and he is going to go for it"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 10,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "play_item",
+                "t_start": 2695.3,
+                "card": "Crushing Hammer",
+                "confidence": 0.7,
+                "source_text": "crushing hammer this is another huge flippin"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "coin_flip",
+                "t_start": 2698.6,
+                "coin": "heads",
+                "confidence": 0.8,
+                "source_text": "It is another heads and that is going to remove the fire energy"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "discard",
+                "t_start": 2698.6,
+                "card": "Fire Energy",
+                "from_zone": "attached",
+                "to_zone": "discard",
+                "confidence": 0.65,
+                "source_text": "that is going to remove the fire energy"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 10,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "play_supporter",
+                "t_start": 2728.7,
+                "card": "Crispin",
+                "confidence": 0.65,
+                "source_text": "out comes chrisvin finding two basic energy of differing types one fire one psychic"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "evolve",
+                "t_start": 2741.9,
+                "card": "Dragapult ex",
+                "target": "Drakloak",
+                "confidence": 0.65,
+                "source_text": "down will go this dragapult EX"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 4
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "ability",
+                "t_start": 2746.9,
+                "card": "Dragapult ex",
+                "amount": 20,
+                "attack_name": "Phantom Dive",
+                "confidence": 0.55,
+                "source_text": "20 damage bounced over from andrew side"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "take_prize",
+                "t_start": 2790.9,
+                "from_zone": "prize",
+                "amount": 1,
+                "confidence": 0.6,
+                "source_text": "down to just one prize card is andrew headrick"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 7,
+              "toArea": 2
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "knockout",
+                "t_start": 2825.0,
+                "target": "Dunsparce",
+                "confidence": 0.6,
+                "source_text": "down goes dunce bars down to just one prize card"
+              },
+              "type": 16,
+              "cardId": null,
+              "serial": null,
+              "putDamageCounter": true,
+              "value": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "play_item",
+              "t_start": 2557.6,
+              "card": "Crushing Hammer",
+              "confidence": 0.7,
+              "source_text": "Does find a crushing hammer which could remove a darkness energy from monkey dory"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "coin_flip",
+              "t_start": 2565.8,
+              "coin": "heads",
+              "confidence": 0.8,
+              "source_text": "There's the flip ... it's a heads"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "discard",
+              "t_start": 2580.9,
+              "card": "Darkness Energy",
+              "target": "Munkidori",
+              "from_zone": "attached",
+              "to_zone": "discard",
+              "confidence": 0.65,
+              "source_text": "you just have to remove this dark energy and he is going to go for it"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "play_item",
+              "t_start": 2695.3,
+              "card": "Crushing Hammer",
+              "confidence": 0.7,
+              "source_text": "crushing hammer this is another huge flippin"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "coin_flip",
+              "t_start": 2698.6,
+              "coin": "heads",
+              "confidence": 0.8,
+              "source_text": "It is another heads and that is going to remove the fire energy"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "discard",
+              "t_start": 2698.6,
+              "card": "Fire Energy",
+              "from_zone": "attached",
+              "to_zone": "discard",
+              "confidence": 0.65,
+              "source_text": "that is going to remove the fire energy"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "play_supporter",
+              "t_start": 2728.7,
+              "card": "Crispin",
+              "confidence": 0.65,
+              "source_text": "out comes chrisvin finding two basic energy of differing types one fire one psychic"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "evolve",
+              "t_start": 2741.9,
+              "card": "Dragapult ex",
+              "target": "Drakloak",
+              "confidence": 0.65,
+              "source_text": "down will go this dragapult EX"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "ability",
+              "t_start": 2746.9,
+              "card": "Dragapult ex",
+              "amount": 20,
+              "attack_name": "Phantom Dive",
+              "confidence": 0.55,
+              "source_text": "20 damage bounced over from andrew side"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "take_prize",
+              "t_start": 2790.9,
+              "from_zone": "prize",
+              "amount": 1,
+              "confidence": 0.6,
+              "source_text": "down to just one prize card is andrew headrick"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "knockout",
+              "t_start": 2825.0,
+              "target": "Dunsparce",
+              "confidence": 0.6,
+              "source_text": "down goes dunce bars down to just one prize card"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 17,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "play_item",
+                "t_start": 2557.6,
+                "card": "Crushing Hammer",
+                "confidence": 0.7,
+                "source_text": "Does find a crushing hammer which could remove a darkness energy from monkey dory"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "coin_flip",
+                "t_start": 2565.8,
+                "coin": "heads",
+                "confidence": 0.8,
+                "source_text": "There's the flip ... it's a heads"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "discard",
+                "t_start": 2580.9,
+                "card": "Darkness Energy",
+                "target": "Munkidori",
+                "from_zone": "attached",
+                "to_zone": "discard",
+                "confidence": 0.65,
+                "source_text": "you just have to remove this dark energy and he is going to go for it"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 10,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "play_item",
+                "t_start": 2695.3,
+                "card": "Crushing Hammer",
+                "confidence": 0.7,
+                "source_text": "crushing hammer this is another huge flippin"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "coin_flip",
+                "t_start": 2698.6,
+                "coin": "heads",
+                "confidence": 0.8,
+                "source_text": "It is another heads and that is going to remove the fire energy"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "discard",
+                "t_start": 2698.6,
+                "card": "Fire Energy",
+                "from_zone": "attached",
+                "to_zone": "discard",
+                "confidence": 0.65,
+                "source_text": "that is going to remove the fire energy"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 10,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "play_supporter",
+                "t_start": 2728.7,
+                "card": "Crispin",
+                "confidence": 0.65,
+                "source_text": "out comes chrisvin finding two basic energy of differing types one fire one psychic"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "evolve",
+                "t_start": 2741.9,
+                "card": "Dragapult ex",
+                "target": "Drakloak",
+                "confidence": 0.65,
+                "source_text": "down will go this dragapult EX"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 4
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "ability",
+                "t_start": 2746.9,
+                "card": "Dragapult ex",
+                "amount": 20,
+                "attack_name": "Phantom Dive",
+                "confidence": 0.55,
+                "source_text": "20 damage bounced over from andrew side"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "take_prize",
+                "t_start": 2790.9,
+                "from_zone": "prize",
+                "amount": 1,
+                "confidence": 0.6,
+                "source_text": "down to just one prize card is andrew headrick"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 7,
+              "toArea": 2
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 17,
+                "player": 1,
+                "type": "knockout",
+                "t_start": 2825.0,
+                "target": "Dunsparce",
+                "confidence": 0.6,
+                "source_text": "down goes dunce bars down to just one prize card"
+              },
+              "type": 16,
+              "cardId": null,
+              "serial": null,
+              "putDamageCounter": true,
+              "value": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "play_item",
+              "t_start": 2557.6,
+              "card": "Crushing Hammer",
+              "confidence": 0.7,
+              "source_text": "Does find a crushing hammer which could remove a darkness energy from monkey dory"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "coin_flip",
+              "t_start": 2565.8,
+              "coin": "heads",
+              "confidence": 0.8,
+              "source_text": "There's the flip ... it's a heads"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "discard",
+              "t_start": 2580.9,
+              "card": "Darkness Energy",
+              "target": "Munkidori",
+              "from_zone": "attached",
+              "to_zone": "discard",
+              "confidence": 0.65,
+              "source_text": "you just have to remove this dark energy and he is going to go for it"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "play_item",
+              "t_start": 2695.3,
+              "card": "Crushing Hammer",
+              "confidence": 0.7,
+              "source_text": "crushing hammer this is another huge flippin"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "coin_flip",
+              "t_start": 2698.6,
+              "coin": "heads",
+              "confidence": 0.8,
+              "source_text": "It is another heads and that is going to remove the fire energy"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "discard",
+              "t_start": 2698.6,
+              "card": "Fire Energy",
+              "from_zone": "attached",
+              "to_zone": "discard",
+              "confidence": 0.65,
+              "source_text": "that is going to remove the fire energy"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "play_supporter",
+              "t_start": 2728.7,
+              "card": "Crispin",
+              "confidence": 0.65,
+              "source_text": "out comes chrisvin finding two basic energy of differing types one fire one psychic"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "evolve",
+              "t_start": 2741.9,
+              "card": "Dragapult ex",
+              "target": "Drakloak",
+              "confidence": 0.65,
+              "source_text": "down will go this dragapult EX"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "ability",
+              "t_start": 2746.9,
+              "card": "Dragapult ex",
+              "amount": 20,
+              "attack_name": "Phantom Dive",
+              "confidence": 0.55,
+              "source_text": "20 damage bounced over from andrew side"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "take_prize",
+              "t_start": 2790.9,
+              "from_zone": "prize",
+              "amount": 1,
+              "confidence": 0.6,
+              "source_text": "down to just one prize card is andrew headrick"
+            },
+            {
+              "turn": 17,
+              "player": 1,
+              "type": "knockout",
+              "t_start": 2825.0,
+              "target": "Dunsparce",
+              "confidence": 0.6,
+              "source_text": "down goes dunce bars down to just one prize card"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 18,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 18,
+                "player": 0,
+                "type": "play_supporter",
+                "t_start": 2905.7,
+                "card": "Crispin",
+                "confidence": 0.5,
+                "source_text": "two different energies to grab from the crisp in"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 18,
+                "player": 0,
+                "type": "attach_energy",
+                "t_start": 2911.1,
+                "target": "Munkidori",
+                "confidence": 0.55,
+                "source_text": "He will attach to this active monkey dory"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 18,
+                "player": 0,
+                "type": "attack",
+                "t_start": 2927.7,
+                "card": "Munkidori",
+                "amount": 60,
+                "attack_name": "Mind Bend",
+                "confidence": 0.55,
+                "source_text": "he is going for it mind bend that's 60 damage"
+              },
+              "type": 15,
+              "attackId": null,
+              "cardId": null,
+              "serial": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 18,
+              "player": 0,
+              "type": "play_supporter",
+              "t_start": 2905.7,
+              "card": "Crispin",
+              "confidence": 0.5,
+              "source_text": "two different energies to grab from the crisp in"
+            },
+            {
+              "turn": 18,
+              "player": 0,
+              "type": "attach_energy",
+              "t_start": 2911.1,
+              "target": "Munkidori",
+              "confidence": 0.55,
+              "source_text": "He will attach to this active monkey dory"
+            },
+            {
+              "turn": 18,
+              "player": 0,
+              "type": "attack",
+              "t_start": 2927.7,
+              "card": "Munkidori",
+              "amount": 60,
+              "attack_name": "Mind Bend",
+              "confidence": 0.55,
+              "source_text": "he is going for it mind bend that's 60 damage"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 18,
+          "actingPlayer": 0,
+          "logs": [
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 18,
+                "player": 0,
+                "type": "play_supporter",
+                "t_start": 2905.7,
+                "card": "Crispin",
+                "confidence": 0.5,
+                "source_text": "two different energies to grab from the crisp in"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 6
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 18,
+                "player": 0,
+                "type": "attach_energy",
+                "t_start": 2911.1,
+                "target": "Munkidori",
+                "confidence": 0.55,
+                "source_text": "He will attach to this active monkey dory"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 2,
+              "toArea": 10
+            },
+            {
+              "playerIndex": 0,
+              "_semantic": {
+                "turn": 18,
+                "player": 0,
+                "type": "attack",
+                "t_start": 2927.7,
+                "card": "Munkidori",
+                "amount": 60,
+                "attack_name": "Mind Bend",
+                "confidence": 0.55,
+                "source_text": "he is going for it mind bend that's 60 damage"
+              },
+              "type": 15,
+              "attackId": null,
+              "cardId": null,
+              "serial": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 18,
+              "player": 0,
+              "type": "play_supporter",
+              "t_start": 2905.7,
+              "card": "Crispin",
+              "confidence": 0.5,
+              "source_text": "two different energies to grab from the crisp in"
+            },
+            {
+              "turn": 18,
+              "player": 0,
+              "type": "attach_energy",
+              "t_start": 2911.1,
+              "target": "Munkidori",
+              "confidence": 0.55,
+              "source_text": "He will attach to this active monkey dory"
+            },
+            {
+              "turn": 18,
+              "player": 0,
+              "type": "attack",
+              "t_start": 2927.7,
+              "card": "Munkidori",
+              "amount": 60,
+              "attack_name": "Mind Bend",
+              "confidence": 0.55,
+              "source_text": "he is going for it mind bend that's 60 damage"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ],
+    [
+      {
+        "action": [],
+        "observation": {
+          "step": 19,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 19,
+                "player": 1,
+                "type": "ability",
+                "t_start": 2930.7,
+                "card": "Munkidori",
+                "attack_name": "Adrena-Brain",
+                "confidence": 0.6,
+                "source_text": "adrenaline brain available will bounce them both over to the active"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 19,
+                "player": 1,
+                "type": "retreat",
+                "t_start": 2939.3,
+                "card": "Dragapult ex",
+                "confidence": 0.6,
+                "source_text": "retreat his dragapult into monkey dory"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 4,
+              "toArea": 5
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 19,
+                "player": 1,
+                "type": "attack",
+                "t_start": 2939.6,
+                "card": "Munkidori",
+                "amount": 60,
+                "attack_name": "Mind Bend",
+                "confidence": 0.6,
+                "source_text": "mind bend takes the KO"
+              },
+              "type": 15,
+              "attackId": null,
+              "cardId": null,
+              "serial": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 19,
+                "player": 1,
+                "type": "knockout",
+                "t_start": 2939.6,
+                "confidence": 0.7,
+                "source_text": "takes the KO"
+              },
+              "type": 16,
+              "cardId": null,
+              "serial": null,
+              "putDamageCounter": true,
+              "value": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 19,
+                "player": 1,
+                "type": "take_prize",
+                "t_start": 2943.2,
+                "from_zone": "prize",
+                "amount": 1,
+                "confidence": 0.7,
+                "source_text": "andrew headrick a five-time regional champion"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 7,
+              "toArea": 2
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 19,
+                "player": 1,
+                "type": "game_result",
+                "t_start": 2943.2,
+                "winner": 1,
+                "confidence": 0.95,
+                "source_text": "andrew headrick a five-time regional champion (wins match 2-0)"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 19,
+              "player": 1,
+              "type": "ability",
+              "t_start": 2930.7,
+              "card": "Munkidori",
+              "attack_name": "Adrena-Brain",
+              "confidence": 0.6,
+              "source_text": "adrenaline brain available will bounce them both over to the active"
+            },
+            {
+              "turn": 19,
+              "player": 1,
+              "type": "retreat",
+              "t_start": 2939.3,
+              "card": "Dragapult ex",
+              "confidence": 0.6,
+              "source_text": "retreat his dragapult into monkey dory"
+            },
+            {
+              "turn": 19,
+              "player": 1,
+              "type": "attack",
+              "t_start": 2939.6,
+              "card": "Munkidori",
+              "amount": 60,
+              "attack_name": "Mind Bend",
+              "confidence": 0.6,
+              "source_text": "mind bend takes the KO"
+            },
+            {
+              "turn": 19,
+              "player": 1,
+              "type": "knockout",
+              "t_start": 2939.6,
+              "confidence": 0.7,
+              "source_text": "takes the KO"
+            },
+            {
+              "turn": 19,
+              "player": 1,
+              "type": "take_prize",
+              "t_start": 2943.2,
+              "from_zone": "prize",
+              "amount": 1,
+              "confidence": 0.7,
+              "source_text": "andrew headrick a five-time regional champion"
+            },
+            {
+              "turn": 19,
+              "player": 1,
+              "type": "game_result",
+              "t_start": 2943.2,
+              "winner": 1,
+              "confidence": 0.95,
+              "source_text": "andrew headrick a five-time regional champion (wins match 2-0)"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      },
+      {
+        "action": [],
+        "observation": {
+          "step": 19,
+          "actingPlayer": 1,
+          "logs": [
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 19,
+                "player": 1,
+                "type": "ability",
+                "t_start": 2930.7,
+                "card": "Munkidori",
+                "attack_name": "Adrena-Brain",
+                "confidence": 0.6,
+                "source_text": "adrenaline brain available will bounce them both over to the active"
+              },
+              "type": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 19,
+                "player": 1,
+                "type": "retreat",
+                "t_start": 2939.3,
+                "card": "Dragapult ex",
+                "confidence": 0.6,
+                "source_text": "retreat his dragapult into monkey dory"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 4,
+              "toArea": 5
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 19,
+                "player": 1,
+                "type": "attack",
+                "t_start": 2939.6,
+                "card": "Munkidori",
+                "amount": 60,
+                "attack_name": "Mind Bend",
+                "confidence": 0.6,
+                "source_text": "mind bend takes the KO"
+              },
+              "type": 15,
+              "attackId": null,
+              "cardId": null,
+              "serial": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 19,
+                "player": 1,
+                "type": "knockout",
+                "t_start": 2939.6,
+                "confidence": 0.7,
+                "source_text": "takes the KO"
+              },
+              "type": 16,
+              "cardId": null,
+              "serial": null,
+              "putDamageCounter": true,
+              "value": null
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 19,
+                "player": 1,
+                "type": "take_prize",
+                "t_start": 2943.2,
+                "from_zone": "prize",
+                "amount": 1,
+                "confidence": 0.7,
+                "source_text": "andrew headrick a five-time regional champion"
+              },
+              "type": 6,
+              "cardId": null,
+              "serial": null,
+              "fromArea": 7,
+              "toArea": 2
+            },
+            {
+              "playerIndex": 1,
+              "_semantic": {
+                "turn": 19,
+                "player": 1,
+                "type": "game_result",
+                "t_start": 2943.2,
+                "winner": 1,
+                "confidence": 0.95,
+                "source_text": "andrew headrick a five-time regional champion (wins match 2-0)"
+              },
+              "type": null
+            }
+          ],
+          "semanticLogs": [
+            {
+              "turn": 19,
+              "player": 1,
+              "type": "ability",
+              "t_start": 2930.7,
+              "card": "Munkidori",
+              "attack_name": "Adrena-Brain",
+              "confidence": 0.6,
+              "source_text": "adrenaline brain available will bounce them both over to the active"
+            },
+            {
+              "turn": 19,
+              "player": 1,
+              "type": "retreat",
+              "t_start": 2939.3,
+              "card": "Dragapult ex",
+              "confidence": 0.6,
+              "source_text": "retreat his dragapult into monkey dory"
+            },
+            {
+              "turn": 19,
+              "player": 1,
+              "type": "attack",
+              "t_start": 2939.6,
+              "card": "Munkidori",
+              "amount": 60,
+              "attack_name": "Mind Bend",
+              "confidence": 0.6,
+              "source_text": "mind bend takes the KO"
+            },
+            {
+              "turn": 19,
+              "player": 1,
+              "type": "knockout",
+              "t_start": 2939.6,
+              "confidence": 0.7,
+              "source_text": "takes the KO"
+            },
+            {
+              "turn": 19,
+              "player": 1,
+              "type": "take_prize",
+              "t_start": 2943.2,
+              "from_zone": "prize",
+              "amount": 1,
+              "confidence": 0.7,
+              "source_text": "andrew headrick a five-time regional champion"
+            },
+            {
+              "turn": 19,
+              "player": 1,
+              "type": "game_result",
+              "t_start": 2943.2,
+              "winner": 1,
+              "confidence": 0.95,
+              "source_text": "andrew headrick a five-time regional champion (wins match 2-0)"
+            }
+          ],
+          "select": null,
+          "search_begin_input": null,
+          "current": null
+        },
+        "reward": 0,
+        "status": "ACTIVE"
+      }
+    ]
+  ],
+  "_caveats": [
+    "logs-only: action/select/search_begin_input are not reconstructable from video",
+    "cabt numeric type/area codes are provisional (calibrate vs real replays)",
+    "this is Standard paper TCG, a different game from the cabt engine"
+  ]
+}

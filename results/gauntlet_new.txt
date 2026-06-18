@@ -1,0 +1,61 @@
+### alakazam
+  A (main): 37  (92.5%)
+  B (bare_agent): 3  (7.5%)
+  win conditions: {'no-active': 16, 'all-prizes': 21, 'deck-out': 3}
+  winner:reason  : {'A:no-active': 13, 'A:all-prizes': 21, 'B:no-active': 3, 'A:deck-out': 3}
+
+### crustle
+  A (main): 35  (87.5%)
+  B (bare_agent): 4  (10.0%)
+  win conditions: {'deck-out': 26, 'no-active': 5, 'all-prizes': 9}
+  winner:reason  : {'A:deck-out': 26, 'B:no-active': 4, 'A:all-prizes': 9, 'draw:no-active': 1}
+
+### dragapult_ex
+  A (main): 40  (100.0%)
+  B (bare_agent): 0  (0.0%)
+  win conditions: {'all-prizes': 25, 'deck-out': 11, 'no-active': 4}
+  winner:reason  : {'A:all-prizes': 25, 'A:deck-out': 11, 'A:no-active': 4}
+
+### hydrapple_ex
+  A (main): 39  (97.5%)
+  B (bare_agent): 1  (2.5%)
+  win conditions: {'all-prizes': 24, 'deck-out': 4, 'no-active': 12}
+  winner:reason  : {'A:all-prizes': 24, 'A:deck-out': 4, 'A:no-active': 11, 'B:no-active': 1}
+
+### lillie_s_clefairy_ex
+  A (main): 40  (100.0%)
+  B (bare_agent): 0  (0.0%)
+  win conditions: {'all-prizes': 39, 'deck-out': 1}
+  winner:reason  : {'A:all-prizes': 39, 'A:deck-out': 1}
+
+### n_s_zoroark_ex
+  A (main): 40  (100.0%)
+  B (bare_agent): 0  (0.0%)
+  win conditions: {'all-prizes': 21, 'deck-out': 19}
+  winner:reason  : {'A:all-prizes': 21, 'A:deck-out': 19}
+
+### ogerpon_box
+  A (main): 40  (100.0%)
+  B (bare_agent): 0  (0.0%)
+  win conditions: {'all-prizes': 39, 'deck-out': 1}
+  winner:reason  : {'A:all-prizes': 39, 'A:deck-out': 1}
+
+### raging_bolt_ex
+  A (main): 40  (100.0%)
+  B (bare_agent): 0  (0.0%)
+  win conditions: {'all-prizes': 38, 'deck-out': 2}
+  winner:reason  : {'A:all-prizes': 38, 'A:deck-out': 2}
+
+### rocket_s_honchkrow
+  A (main): 27  (67.5%)
+  B (bare_agent): 13  (32.5%)
+  win conditions: {'no-active': 13, 'all-prizes': 15, 'deck-out': 12}
+  winner:reason  : {'B:no-active': 13, 'A:all-prizes': 15, 'A:deck-out': 12}
+
+### slowking
+  A (main): 38  (95.0%)
+  B (bare_agent): 1  (2.5%)
+  win conditions: {'all-prizes': 32, 'no-active': 7, 9: 1}
+  winner:reason  : {'A:all-prizes': 32, 'B:no-active': 1, 'A:no-active': 6, 'draw:9': 1}
+
+GAUNTLET_DONE

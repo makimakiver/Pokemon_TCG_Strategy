@@ -1,0 +1,2765 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "",
+  "generatedAt": "2026-06-18T01:34:45.710Z",
+  "files": {
+    "__init__.py": {
+      "filePath": "__init__.py",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    "bare_agent.py": {
+      "filePath": "bare_agent.py",
+      "contentHash": "25672a11563b6af411b838b99b13806a139b9e7c37de137bd9577246532d5092",
+      "functions": [
+        {
+          "name": "_stage",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_best_dmg",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "exported": true,
+          "lineCount": 232
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "_stage",
+        "_best_dmg",
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 395,
+      "hasStructuralAnalysis": true
+    },
+    "bare_agent2.py": {
+      "filePath": "bare_agent2.py",
+      "contentHash": "32fb11bd573fb0a0e1acaafdf2b71b6b06a8f08a2bc390936188fb41d3827e36",
+      "functions": [
+        {
+          "name": "_stage",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_best_dmg",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "exported": true,
+          "lineCount": 232
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "_stage",
+        "_best_dmg",
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 395,
+      "hasStructuralAnalysis": true
+    },
+    "fire.py": {
+      "filePath": "fire.py",
+      "contentHash": "fa8d46425fa25a1133d0d45a8da4dacc91c226d5a18a5f79d1d15b01ee351840",
+      "functions": [
+        {
+          "name": "_stage",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_best_dmg",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "_heals",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "exported": true,
+          "lineCount": 256
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "_stage",
+        "_best_dmg",
+        "_heals",
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 431,
+      "hasStructuralAnalysis": true
+    },
+    "honchkrow.py": {
+      "filePath": "honchkrow.py",
+      "contentHash": "2718045336d81cb76f5b1bf735b79ea18e9a33b9419d0fd3709422f96045b757",
+      "functions": [
+        {
+          "name": "_stage",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_best_dmg",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "_card_named",
+          "params": [
+            "name"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "_attack_named",
+          "params": [
+            "card_id",
+            "atk_name"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "_apply_weakness",
+          "params": [
+            "attacker",
+            "base",
+            "target"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "rocket_feathers_damage",
+          "params": [
+            "attacker",
+            "target",
+            "ammo"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "exported": true,
+          "lineCount": 314
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "_stage",
+        "_best_dmg",
+        "_card_named",
+        "_attack_named",
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "_apply_weakness",
+        "rocket_feathers_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 542,
+      "hasStructuralAnalysis": true
+    },
+    "main_bench.py": {
+      "filePath": "main_bench.py",
+      "contentHash": "f83c2ee5a860e6e4e3c7cb1a220aff89cf98b7a70dd375bcd5f56848bbe8155f",
+      "functions": [
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "returnType": "list[int]",
+          "exported": true,
+          "lineCount": 274
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 438,
+      "hasStructuralAnalysis": true
+    },
+    "main_crustle_base.py": {
+      "filePath": "main_crustle_base.py",
+      "contentHash": "91e1a781872c58961e46725ce17b0c56ac3f35905601dc2550650c637b5af3ca",
+      "functions": [
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "returnType": "list[int]",
+          "exported": true,
+          "lineCount": 282
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 448,
+      "hasStructuralAnalysis": true
+    },
+    "main_cur.py": {
+      "filePath": "main_cur.py",
+      "contentHash": "888471b5438082ffa3bc606ed19471eb8cf158ec86d977572373d0e2eb9c20e3",
+      "functions": [
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "returnType": "list[int]",
+          "exported": true,
+          "lineCount": 282
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 447,
+      "hasStructuralAnalysis": true
+    },
+    "main_honch_base.py": {
+      "filePath": "main_honch_base.py",
+      "contentHash": "5e6c9fb64fbf5d3172e73f329c9e781533c962d4438c0e2acbe0a2580ed454c4",
+      "functions": [
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "returnType": "list[int]",
+          "exported": true,
+          "lineCount": 269
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 433,
+      "hasStructuralAnalysis": true
+    },
+    "main_megalucario_backup.py": {
+      "filePath": "main_megalucario_backup.py",
+      "contentHash": "9aea2550765b7d6b2e9b35fe6e9e826175d4db43f7af1f078ae66995a460b89a",
+      "functions": [
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "returnType": "Pokemon | Card | None",
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "returnType": "list[int]",
+          "exported": true,
+          "lineCount": 416
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "AttackPlan",
+        "get_card",
+        "prize_count",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 547,
+      "hasStructuralAnalysis": true
+    },
+    "main_typh_base.py": {
+      "filePath": "main_typh_base.py",
+      "contentHash": "561f22ee574e98e893dfbeb9920901e07b51a19dc4eb3f009500d72b37d35b66",
+      "functions": [
+        {
+          "name": "_stage",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_best_dmg",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "exported": true,
+          "lineCount": 232
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "_stage",
+        "_best_dmg",
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 399,
+      "hasStructuralAnalysis": true
+    },
+    "main_typhlosion.py": {
+      "filePath": "main_typhlosion.py",
+      "contentHash": "561f22ee574e98e893dfbeb9920901e07b51a19dc4eb3f009500d72b37d35b66",
+      "functions": [
+        {
+          "name": "_stage",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_best_dmg",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "exported": true,
+          "lineCount": 232
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "_stage",
+        "_best_dmg",
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 399,
+      "hasStructuralAnalysis": true
+    },
+    "main_v1.py": {
+      "filePath": "main_v1.py",
+      "contentHash": "5e6c9fb64fbf5d3172e73f329c9e781533c962d4438c0e2acbe0a2580ed454c4",
+      "functions": [
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "returnType": "list[int]",
+          "exported": true,
+          "lineCount": 269
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 433,
+      "hasStructuralAnalysis": true
+    },
+    "main_v2_baseline.py": {
+      "filePath": "main_v2_baseline.py",
+      "contentHash": "561f22ee574e98e893dfbeb9920901e07b51a19dc4eb3f009500d72b37d35b66",
+      "functions": [
+        {
+          "name": "_stage",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_best_dmg",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "exported": true,
+          "lineCount": 232
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "_stage",
+        "_best_dmg",
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 399,
+      "hasStructuralAnalysis": true
+    },
+    "main_v2_rebel.py": {
+      "filePath": "main_v2_rebel.py",
+      "contentHash": "26b38bbb33c598ad87039065a0113ecee707704f334c9dcce10bfcb5accd5c1e",
+      "functions": [
+        {
+          "name": "_stage",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_best_dmg",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "_heals",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "_cheap_dmg",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "_accels",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "exported": true,
+          "lineCount": 270
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "_stage",
+        "_best_dmg",
+        "_heals",
+        "_cheap_dmg",
+        "_accels",
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 476,
+      "hasStructuralAnalysis": true
+    },
+    "main_v2.py": {
+      "filePath": "main_v2.py",
+      "contentHash": "561f22ee574e98e893dfbeb9920901e07b51a19dc4eb3f009500d72b37d35b66",
+      "functions": [
+        {
+          "name": "_stage",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_best_dmg",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "exported": true,
+          "lineCount": 232
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "_stage",
+        "_best_dmg",
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 399,
+      "hasStructuralAnalysis": true
+    },
+    "main_v3_pure.py": {
+      "filePath": "main_v3_pure.py",
+      "contentHash": "c969b5a79f3c69f8fcd001d8b82138ea88349611f0d6a715f3e26ab3c688cfa0",
+      "functions": [
+        {
+          "name": "_stage",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_best_dmg",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target",
+            "ethan_fuel"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "exported": true,
+          "lineCount": 233
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "_stage",
+        "_best_dmg",
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 418,
+      "hasStructuralAnalysis": true
+    },
+    "main_v3.py": {
+      "filePath": "main_v3.py",
+      "contentHash": "c8a11678a1a1e4b4b8ab7197af73b3826d8908f63b9f7278d42b5dfd7b106a36",
+      "functions": [
+        {
+          "name": "_stage",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_best_dmg",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "_ethan_in_discard",
+          "params": [
+            "my_state"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "_buddy_blast_damage",
+          "params": [
+            "fuel"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "_is_buddy_blast",
+          "params": [
+            "atk"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "_hand_has",
+          "params": [
+            "my_state",
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "_field_has",
+          "params": [
+            "my_state",
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target",
+            "ethan_fuel"
+          ],
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "exported": true,
+          "lineCount": 303
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "_stage",
+        "_best_dmg",
+        "_ethan_in_discard",
+        "_buddy_blast_damage",
+        "_is_buddy_blast",
+        "_hand_has",
+        "_field_has",
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 555,
+      "hasStructuralAnalysis": true
+    },
+    "main_v4.py": {
+      "filePath": "main_v4.py",
+      "contentHash": "3168e2f7e4b0324402d8ee9936722557b771889d346b82218ee65d1d65dc131c",
+      "functions": [
+        {
+          "name": "_stage",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "_best_dmg",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "_ethan_in_discard",
+          "params": [
+            "my_state"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target",
+            "ethan_fuel"
+          ],
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "exported": true,
+          "lineCount": 234
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "_stage",
+        "_best_dmg",
+        "_ethan_in_discard",
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 430,
+      "hasStructuralAnalysis": true
+    },
+    "main.py": {
+      "filePath": "main.py",
+      "contentHash": "91e1a781872c58961e46725ce17b0c56ac3f35905601dc2550650c637b5af3ca",
+      "functions": [
+        {
+          "name": "get_card",
+          "params": [
+            "obs",
+            "area",
+            "index",
+            "player_index"
+          ],
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "card_type",
+          "params": [
+            "cid"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "prize_count",
+          "params": [
+            "pokemon"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "can_pay",
+          "params": [
+            "attached",
+            "cost"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "attack_damage",
+          "params": [
+            "attacker",
+            "atk",
+            "target"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "pokemon_score",
+          "params": [
+            "pokemon"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "agent",
+          "params": [
+            "obs_dict"
+          ],
+          "returnType": "list[int]",
+          "exported": true,
+          "lineCount": 282
+        }
+      ],
+      "classes": [
+        {
+          "name": "AttackPlan",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "cg.api",
+          "specifiers": [
+            "AreaType",
+            "Card",
+            "CardType",
+            "EnergyType",
+            "Observation",
+            "OptionType",
+            "Pokemon",
+            "SelectContext",
+            "all_attack",
+            "all_card_data",
+            "to_observation_class"
+          ]
+        }
+      ],
+      "exports": [
+        "AttackPlan",
+        "get_card",
+        "card_type",
+        "prize_count",
+        "can_pay",
+        "attack_damage",
+        "pokemon_score",
+        "agent"
+      ],
+      "totalLines": 448,
+      "hasStructuralAnalysis": true
+    }
+  }
+}

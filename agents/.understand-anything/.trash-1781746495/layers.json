@@ -1,0 +1,72 @@
+[
+  {
+    "id": "layer:generic-engine",
+    "name": "Generic Engine & Baselines",
+    "description": "Archetype-agnostic auto-role pilots that form the lineage backbone, including the main.py decision engine (fan-in 4) and its v1/v2 iterations plus bare and bench baselines that every other pilot descends from.",
+    "nodeIds": [
+      "file:main.py",
+      "file:main_cur.py",
+      "file:main_v1.py",
+      "file:main_v2.py",
+      "file:main_v2_baseline.py",
+      "file:main_bench.py",
+      "file:bare_agent.py",
+      "file:bare_agent2.py"
+    ]
+  },
+  {
+    "id": "layer:crustle-typhlosion",
+    "name": "Crustle / Typhlosion Line",
+    "description": "Dual-line Crustle/Typhlosion deck pilots derived from main and main_v2, representing the strongest gauntlet engine in the lineage.",
+    "nodeIds": [
+      "file:main_crustle_base.py",
+      "file:main_typh_base.py",
+      "file:main_typhlosion.py"
+    ]
+  },
+  {
+    "id": "layer:buddy-blast-series",
+    "name": "Buddy Blast Damage-Correction Series (v3-v4)",
+    "description": "The ablation series branching off main_v2 that layers in the Buddy Blast real-damage correction, including the v3 base, v4 extension, and the mirror-neutral v3_pure isolate.",
+    "nodeIds": [
+      "file:main_v3.py",
+      "file:main_v3_pure.py",
+      "file:main_v4.py"
+    ]
+  },
+  {
+    "id": "layer:honchkrow-combo",
+    "name": "Honchkrow Combo",
+    "description": "Combo-aware Honchkrow pilots with precise ammo-discard logic; main_honch_base feeds back into the v1 lineage via the related chain.",
+    "nodeIds": [
+      "file:honchkrow.py",
+      "file:main_honch_base.py"
+    ]
+  },
+  {
+    "id": "layer:fire-counter",
+    "name": "Fire Counter Deck",
+    "description": "Anti-Crustle Fire aggro counter pilots that combine the crustle base and bare baseline lineages to exploit the all-Grass Fire weakness.",
+    "nodeIds": [
+      "file:fire.py",
+      "file:main_v2_rebel.py"
+    ]
+  },
+  {
+    "id": "layer:mega-lucario-legacy",
+    "name": "Mega Lucario (Legacy)",
+    "description": "Legacy Mega Lucario backup pilot retained as a historical baseline branch off main.py.",
+    "nodeIds": [
+      "file:main_megalucario_backup.py"
+    ]
+  },
+  {
+    "id": "layer:package-tooling",
+    "name": "Package & Tooling",
+    "description": "Package marker and tooling configuration that scaffold the agents package without participating in pilot strategy.",
+    "nodeIds": [
+      "file:__init__.py",
+      "file:.understand-anything/.understandignore"
+    ]
+  }
+]

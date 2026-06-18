@@ -1,0 +1,22 @@
+A = agents.bare_agent   vs   B = agents.main_bench   (6 games, sides swapped each game)
+
+  game   1: winner = B      (A 0 / B 1 / draw 0)
+  game   2: winner = B      (A 0 / B 2 / draw 0)
+  game   3: winner = B      (A 0 / B 3 / draw 0)
+  game   4: winner = B      (A 0 / B 4 / draw 0)
+  game   5: winner = B      (A 0 / B 5 / draw 0)
+  game   6: winner = B      (A 0 / B 6 / draw 0)
+
+==== RESULT over 6 games ====
+  A (agents.bare_agent): 0  (0.0%)
+  B (agents.main_bench): 6  (100.0%)
+  draws: 0
+  win conditions: {'all-prizes': 6}
+  winner:reason  : {'B:all-prizes': 6}
+  --- A's 6 losses (board state at loss) ---
+    turn=22 reason=all-prizes A_pokemon_on_board=8 A_deck=7 A_hand=1
+    turn=21 reason=all-prizes A_pokemon_on_board=5 A_deck=17 A_hand=6
+    turn=18 reason=all-prizes A_pokemon_on_board=5 A_deck=24 A_hand=7
+    turn=21 reason=all-prizes A_pokemon_on_board=5 A_deck=19 A_hand=9
+    turn=18 reason=all-prizes A_pokemon_on_board=8 A_deck=21 A_hand=4
+    turn=25 reason=all-prizes A_pokemon_on_board=8 A_deck=25 A_hand=2

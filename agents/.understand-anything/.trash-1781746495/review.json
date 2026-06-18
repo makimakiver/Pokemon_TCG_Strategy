@@ -1,0 +1,23 @@
+{
+  "issues": [],
+  "warnings": [
+    "Node 'file:__init__.py' has no edges (orphan)",
+    "Node 'file:.understand-anything/.understandignore' has no edges (orphan)"
+  ],
+  "stats": {
+    "totalNodes": 42,
+    "totalEdges": 63,
+    "totalLayers": 7,
+    "tourSteps": 9,
+    "nodeTypes": {
+      "file": 21,
+      "function": 21
+    },
+    "edgeTypes": {
+      "contains": 21,
+      "exports": 19,
+      "calls": 2,
+      "related": 21
+    }
+  }
+}

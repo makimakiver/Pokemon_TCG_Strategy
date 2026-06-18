@@ -1,0 +1,12 @@
+alakazam                35  (87.5%)
+crustle                 29  (72.5%)
+dragapult_ex            35  (87.5%)
+fire                    24  (60.0%)
+hydrapple_ex            29  (72.5%)
+lillie_s_clefairy_ex    36  (90.0%)
+n_s_zoroark_ex          40  (100.0%)
+ogerpon_box             37  (92.5%)
+raging_bolt_ex          40  (100.0%)
+rocket_s_honchkrow      34  (85.0%)
+slowking                27  (67.5%)
+DONE

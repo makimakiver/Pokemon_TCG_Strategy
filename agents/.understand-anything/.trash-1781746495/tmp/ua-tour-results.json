@@ -1,0 +1,479 @@
+{
+  "scriptCompleted": true,
+  "entryPointCandidates": [
+    {
+      "id": "file:main.py",
+      "score": 6,
+      "name": "main.py",
+      "summary": "Current production pilot. Defines the shared agent(obs) scaffold every file follows. Runs Shun's Palace deck (main_v3_pure lineage)."
+    },
+    {
+      "id": "file:bare_agent2.py",
+      "score": 2,
+      "name": "bare_agent2.py",
+      "summary": "Variant of the bare generic engine."
+    },
+    {
+      "id": "file:fire.py",
+      "score": 2,
+      "name": "fire.py",
+      "summary": "Anti-Grass Fire aggro counter deck pilot. Exploits main's all-Grass weakness; beats main 74%."
+    },
+    {
+      "id": "file:honchkrow.py",
+      "score": 2,
+      "name": "honchkrow.py",
+      "summary": "Hidden-win-condition combo pilot. Uses rocket_feathers_damage for precise ammo-discard combo. Beats main ~56%."
+    },
+    {
+      "id": "file:main_cur.py",
+      "score": 2,
+      "name": "main_cur.py",
+      "summary": "Current working snapshot pilot."
+    }
+  ],
+  "fanInRanking": [
+    {
+      "id": "main_v3.py:_buddy_blast_damage",
+      "fanIn": 3,
+      "name": "_buddy_blast_damage"
+    },
+    {
+      "id": "file:main_crustle_base.py",
+      "fanIn": 2,
+      "name": "main_crustle_base.py"
+    },
+    {
+      "id": "file:main_v1.py",
+      "fanIn": 2,
+      "name": "main_v1.py"
+    },
+    {
+      "id": "honchkrow.py:rocket_feathers_damage",
+      "fanIn": 2,
+      "name": "rocket_feathers_damage"
+    },
+    {
+      "id": "file:bare_agent.py",
+      "fanIn": 1,
+      "name": "bare_agent.py"
+    },
+    {
+      "id": "file:main_bench.py",
+      "fanIn": 1,
+      "name": "main_bench.py"
+    },
+    {
+      "id": "file:main_honch_base.py",
+      "fanIn": 1,
+      "name": "main_honch_base.py"
+    },
+    {
+      "id": "file:main_megalucario_backup.py",
+      "fanIn": 1,
+      "name": "main_megalucario_backup.py"
+    },
+    {
+      "id": "file:main_typh_base.py",
+      "fanIn": 1,
+      "name": "main_typh_base.py"
+    },
+    {
+      "id": "file:main_typhlosion.py",
+      "fanIn": 1,
+      "name": "main_typhlosion.py"
+    },
+    {
+      "id": "file:main_v2.py",
+      "fanIn": 1,
+      "name": "main_v2.py"
+    },
+    {
+      "id": "file:main_v2_baseline.py",
+      "fanIn": 1,
+      "name": "main_v2_baseline.py"
+    },
+    {
+      "id": "file:main_v2_rebel.py",
+      "fanIn": 1,
+      "name": "main_v2_rebel.py"
+    },
+    {
+      "id": "file:main_v3.py",
+      "fanIn": 1,
+      "name": "main_v3.py"
+    },
+    {
+      "id": "file:main_v3_pure.py",
+      "fanIn": 1,
+      "name": "main_v3_pure.py"
+    },
+    {
+      "id": "file:main_v4.py",
+      "fanIn": 1,
+      "name": "main_v4.py"
+    },
+    {
+      "id": "file:main.py",
+      "fanIn": 0,
+      "name": "main.py"
+    },
+    {
+      "id": "file:bare_agent2.py",
+      "fanIn": 0,
+      "name": "bare_agent2.py"
+    },
+    {
+      "id": "file:fire.py",
+      "fanIn": 0,
+      "name": "fire.py"
+    },
+    {
+      "id": "file:honchkrow.py",
+      "fanIn": 0,
+      "name": "honchkrow.py"
+    }
+  ],
+  "fanOutRanking": [
+    {
+      "id": "file:main_v2.py",
+      "fanOut": 5,
+      "name": "main_v2.py"
+    },
+    {
+      "id": "file:main.py",
+      "fanOut": 4,
+      "name": "main.py"
+    },
+    {
+      "id": "file:honchkrow.py",
+      "fanOut": 3,
+      "name": "honchkrow.py"
+    },
+    {
+      "id": "file:main_v3.py",
+      "fanOut": 3,
+      "name": "main_v3.py"
+    },
+    {
+      "id": "file:fire.py",
+      "fanOut": 2,
+      "name": "fire.py"
+    },
+    {
+      "id": "file:main_crustle_base.py",
+      "fanOut": 1,
+      "name": "main_crustle_base.py"
+    },
+    {
+      "id": "file:main_honch_base.py",
+      "fanOut": 1,
+      "name": "main_honch_base.py"
+    },
+    {
+      "id": "file:main_v1.py",
+      "fanOut": 1,
+      "name": "main_v1.py"
+    },
+    {
+      "id": "file:main_v3_pure.py",
+      "fanOut": 1,
+      "name": "main_v3_pure.py"
+    },
+    {
+      "id": "file:bare_agent.py",
+      "fanOut": 0,
+      "name": "bare_agent.py"
+    },
+    {
+      "id": "file:bare_agent2.py",
+      "fanOut": 0,
+      "name": "bare_agent2.py"
+    },
+    {
+      "id": "file:main_bench.py",
+      "fanOut": 0,
+      "name": "main_bench.py"
+    },
+    {
+      "id": "file:main_cur.py",
+      "fanOut": 0,
+      "name": "main_cur.py"
+    },
+    {
+      "id": "file:main_megalucario_backup.py",
+      "fanOut": 0,
+      "name": "main_megalucario_backup.py"
+    },
+    {
+      "id": "file:main_typh_base.py",
+      "fanOut": 0,
+      "name": "main_typh_base.py"
+    },
+    {
+      "id": "file:main_typhlosion.py",
+      "fanOut": 0,
+      "name": "main_typhlosion.py"
+    },
+    {
+      "id": "file:main_v2_baseline.py",
+      "fanOut": 0,
+      "name": "main_v2_baseline.py"
+    },
+    {
+      "id": "file:main_v2_rebel.py",
+      "fanOut": 0,
+      "name": "main_v2_rebel.py"
+    },
+    {
+      "id": "file:main_v4.py",
+      "fanOut": 0,
+      "name": "main_v4.py"
+    },
+    {
+      "id": "file:__init__.py",
+      "fanOut": 0,
+      "name": "__init__.py"
+    }
+  ],
+  "bfsTraversal": {
+    "startNode": "file:main.py",
+    "order": [
+      "file:main.py",
+      "file:main_v1.py",
+      "file:main_crustle_base.py",
+      "file:main_megalucario_backup.py",
+      "file:main_bench.py",
+      "file:main_v2.py",
+      "file:main_typh_base.py",
+      "file:main_v3.py",
+      "file:main_v3_pure.py",
+      "file:main_v2_baseline.py",
+      "file:main_v2_rebel.py",
+      "file:main_typhlosion.py",
+      "file:main_v4.py",
+      "main_v3.py:_buddy_blast_damage"
+    ],
+    "depthMap": {
+      "file:main.py": 0,
+      "file:main_v1.py": 1,
+      "file:main_crustle_base.py": 1,
+      "file:main_megalucario_backup.py": 1,
+      "file:main_bench.py": 1,
+      "file:main_v2.py": 2,
+      "file:main_typh_base.py": 2,
+      "file:main_v3.py": 3,
+      "file:main_v3_pure.py": 3,
+      "file:main_v2_baseline.py": 3,
+      "file:main_v2_rebel.py": 3,
+      "file:main_typhlosion.py": 3,
+      "file:main_v4.py": 4,
+      "main_v3.py:_buddy_blast_damage": 4
+    },
+    "byDepth": {
+      "0": [
+        "file:main.py"
+      ],
+      "1": [
+        "file:main_v1.py",
+        "file:main_crustle_base.py",
+        "file:main_megalucario_backup.py",
+        "file:main_bench.py"
+      ],
+      "2": [
+        "file:main_v2.py",
+        "file:main_typh_base.py"
+      ],
+      "3": [
+        "file:main_v3.py",
+        "file:main_v3_pure.py",
+        "file:main_v2_baseline.py",
+        "file:main_v2_rebel.py",
+        "file:main_typhlosion.py"
+      ],
+      "4": [
+        "file:main_v4.py",
+        "main_v3.py:_buddy_blast_damage"
+      ]
+    }
+  },
+  "nonCodeFiles": {
+    "documentation": [],
+    "infrastructure": [],
+    "data": [],
+    "config": [
+      {
+        "id": "file:__init__.py",
+        "name": "__init__.py",
+        "type": "config",
+        "summary": "Python package marker making the agents directory importable."
+      },
+      {
+        "id": "file:.understand-anything/.understandignore",
+        "name": ".understandignore",
+        "type": "config",
+        "summary": "Tooling ignore config for the understand-anything analyzer."
+      }
+    ]
+  },
+  "clusters": [],
+  "layers": {
+    "count": 7,
+    "list": [
+      {
+        "id": "layer:generic-engine-baselines",
+        "name": "Generic Engine & Baselines",
+        "description": "Archetype-agnostic auto-role engines and their iterations"
+      },
+      {
+        "id": "layer:crustle-typhlosion-line",
+        "name": "Crustle / Typhlosion Line",
+        "description": "Dual-line deck pilots"
+      },
+      {
+        "id": "layer:buddy-blast-damage-correction-series-v3-v4",
+        "name": "Buddy Blast Damage-Correction Series (v3-v4)",
+        "description": "Ablation series adding the Buddy Blast damage fix"
+      },
+      {
+        "id": "layer:honchkrow-combo",
+        "name": "Honchkrow Combo",
+        "description": "Hidden-win-condition discard combo pilots"
+      },
+      {
+        "id": "layer:fire-counter-deck",
+        "name": "Fire Counter Deck",
+        "description": "Anti-Grass fire aggro counter"
+      },
+      {
+        "id": "layer:mega-lucario-legacy",
+        "name": "Mega Lucario (Legacy)",
+        "description": "Meta-aware multi-attacker pilot, since replaced"
+      },
+      {
+        "id": "layer:package-tooling",
+        "name": "Package & Tooling",
+        "description": "Package marker and tooling config"
+      }
+    ]
+  },
+  "nodeSummaryIndex": {
+    "file:main.py": {
+      "name": "main.py",
+      "type": "file",
+      "summary": "Current production pilot. Defines the shared agent(obs) scaffold every file follows. Runs Shun's Palace deck (main_v3_pure lineage)."
+    },
+    "file:bare_agent.py": {
+      "name": "bare_agent.py",
+      "type": "file",
+      "summary": "Generic archetype-agnostic auto-role engine underpinning all pilots. Auto-assigns attacker/support roles without deck-specific knowledge."
+    },
+    "file:bare_agent2.py": {
+      "name": "bare_agent2.py",
+      "type": "file",
+      "summary": "Variant of the bare generic engine."
+    },
+    "file:fire.py": {
+      "name": "fire.py",
+      "type": "file",
+      "summary": "Anti-Grass Fire aggro counter deck pilot. Exploits main's all-Grass weakness; beats main 74%."
+    },
+    "file:honchkrow.py": {
+      "name": "honchkrow.py",
+      "type": "file",
+      "summary": "Hidden-win-condition combo pilot. Uses rocket_feathers_damage for precise ammo-discard combo. Beats main ~56%."
+    },
+    "file:main_bench.py": {
+      "name": "main_bench.py",
+      "type": "file",
+      "summary": "Bench-management variant branched from main."
+    },
+    "file:main_crustle_base.py": {
+      "name": "main_crustle_base.py",
+      "type": "file",
+      "summary": "Crustle dual-line base pilot, branched from main."
+    },
+    "file:main_cur.py": {
+      "name": "main_cur.py",
+      "type": "file",
+      "summary": "Current working snapshot pilot."
+    },
+    "file:main_honch_base.py": {
+      "name": "main_honch_base.py",
+      "type": "file",
+      "summary": "Honchkrow base pilot derived from v1, feeding the honchkrow combo line."
+    },
+    "file:main_megalucario_backup.py": {
+      "name": "main_megalucario_backup.py",
+      "type": "file",
+      "summary": "Legacy meta-aware multi-attacker Mega Lucario pilot, since replaced by the v3 line."
+    },
+    "file:main_typh_base.py": {
+      "name": "main_typh_base.py",
+      "type": "file",
+      "summary": "Typhlosion base pilot derived from crustle_base."
+    },
+    "file:main_typhlosion.py": {
+      "name": "main_typhlosion.py",
+      "type": "file",
+      "summary": "Crustle/Typhlosion 2-line deck pilot (main_v2 line); strongest untuned generic pilot."
+    },
+    "file:main_v1.py": {
+      "name": "main_v1.py",
+      "type": "file",
+      "summary": "First iteration in the main lineage chain."
+    },
+    "file:main_v2.py": {
+      "name": "main_v2.py",
+      "type": "file",
+      "summary": "Second iteration; Typhlosion generic engine. Branches to v3, v2_baseline, v2_rebel, typhlosion."
+    },
+    "file:main_v2_baseline.py": {
+      "name": "main_v2_baseline.py",
+      "type": "file",
+      "summary": "Baseline reference branch of v2."
+    },
+    "file:main_v2_rebel.py": {
+      "name": "main_v2_rebel.py",
+      "type": "file",
+      "summary": "Experimental rebel branch of v2."
+    },
+    "file:main_v3.py": {
+      "name": "main_v3.py",
+      "type": "file",
+      "summary": "Full overlay pilot building on v2; defines _buddy_blast_damage helper. Archetype overlays regress the gauntlet."
+    },
+    "file:main_v3_pure.py": {
+      "name": "main_v3_pure.py",
+      "type": "file",
+      "summary": "v2 generic engine plus ONLY the Buddy Blast damage-correction fix. Strongest pilot, 83.2% gauntlet."
+    },
+    "file:main_v4.py": {
+      "name": "main_v4.py",
+      "type": "file",
+      "summary": "Fourth iteration in the buddy-blast damage-correction series, building on v3."
+    },
+    "file:__init__.py": {
+      "name": "__init__.py",
+      "type": "config",
+      "summary": "Python package marker making the agents directory importable."
+    },
+    "file:.understand-anything/.understandignore": {
+      "name": ".understandignore",
+      "type": "config",
+      "summary": "Tooling ignore config for the understand-anything analyzer."
+    },
+    "honchkrow.py:rocket_feathers_damage": {
+      "name": "rocket_feathers_damage",
+      "type": "file",
+      "summary": "Helper computing the precise ammo-discard combo damage for the Honchkrow hidden win condition."
+    },
+    "main_v3.py:_buddy_blast_damage": {
+      "name": "_buddy_blast_damage",
+      "type": "file",
+      "summary": "Helper computing real Buddy Blast damage (40+60 if Ethan's in discard); a fact the engine cannot read otherwise."
+    }
+  },
+  "totalNodes": 23,
+  "totalEdges": 21
+}

@@ -1,0 +1,12 @@
+alakazam               cook=92.5%   base=90.0%  
+crustle                cook=90.0%   base=92.5%  
+dragapult_ex           cook=100.0%  base=100.0% 
+fire                   cook=20.0%   base=30.0%  
+hydrapple_ex           cook=90.0%   base=100.0% 
+lillie_s_clefairy_ex   cook=100.0%  base=100.0% 
+n_s_zoroark_ex         cook=100.0%  base=100.0% 
+ogerpon_box            cook=97.5%   base=97.5%  
+raging_bolt_ex         cook=97.5%   base=100.0% 
+rocket_s_honchkrow     cook=70.0%   base=82.5%  
+slowking               cook=100.0%  base=97.5%  
+DONE

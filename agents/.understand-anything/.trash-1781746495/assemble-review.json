@@ -1,0 +1,17 @@
+{
+  "fixedSectionOk": true,
+  "nodesRecovered": 0,
+  "edgesRestored": 0,
+  "crossBatchEdgesAdded": 0,
+  "typesRemapped": 0,
+  "complexityRemapped": 0,
+  "notes": [
+    "Single-batch analysis (batch-1.json): 42 nodes / 63 edges in, 42 / 63 out. No nodes or edges dropped, so the merge had no 'could not fix' items to action.",
+    "All 20 .py source files plus __init__.py and .understand-anything/.understandignore are represented as file nodes (21 total); __init__.py and .understandignore correctly have no function children.",
+    "All node types are valid (file, function) and all complexity values are valid (simple, complex). No unknown types or complexity values, and no nodes missing an id field.",
+    "Zero dangling edges; every edge source/target resolves to an existing node.",
+    "Strategy lineage via 'related' edges is sensibly captured and consistent with project history: main_v1->v2->v3->v4 iteration chain; main_v3_pure branches from both main_v3 and main_v2 (matches the 'v2 engine + only the Buddy Blast fix' design); Crustle/Typhlosion family (main_typhlosion->main_typh_base->main_crustle_base->main.py); Honchkrow lineage (honchkrow->main_honch_base->main_v1); fire->{main_crustle_base, bare_agent}; main_megalucario_backup and main_bench->main.py as legacy/variant.",
+    "No imports edges expected or added: per the dispatch, all 21 pilots import only from the external cg.api package, so absence of intra-folder import edges is correct.",
+    "Fixed section sanity: not separately reported by the merge run (output equalled input), so no systemic ID-correction or complexity-skew concerns to flag."
+  ]
+}

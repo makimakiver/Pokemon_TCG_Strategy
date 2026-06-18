@@ -1,0 +1,45 @@
+### alakazam
+  A (main_typhlosion): 33  (82.5%)
+  B (bare_agent): 7  (17.5%)
+
+### crustle
+  A (main_typhlosion): 31  (77.5%)
+  B (bare_agent): 9  (22.5%)
+
+### dragapult_ex
+  A (main_typhlosion): 35  (87.5%)
+  B (bare_agent): 5  (12.5%)
+
+### fire
+  A (main_typhlosion): 24  (60.0%)
+  B (bare_agent): 16  (40.0%)
+
+### hydrapple_ex
+  A (main_typhlosion): 27  (67.5%)
+  B (bare_agent): 13  (32.5%)
+
+### lillie_s_clefairy_ex
+  A (main_typhlosion): 33  (82.5%)
+  B (bare_agent): 7  (17.5%)
+
+### n_s_zoroark_ex
+  A (main_typhlosion): 39  (97.5%)
+  B (bare_agent): 1  (2.5%)
+
+### ogerpon_box
+  A (main_typhlosion): 36  (90.0%)
+  B (bare_agent): 4  (10.0%)
+
+### raging_bolt_ex
+  A (main_typhlosion): 37  (92.5%)
+  B (bare_agent): 3  (7.5%)
+
+### rocket_s_honchkrow
+  A (main_typhlosion): 31  (77.5%)
+  B (bare_agent): 9  (22.5%)
+
+### slowking
+  A (main_typhlosion): 29  (72.5%)
+  B (bare_agent): 2  (5.0%)
+
+GAUNTLET_DONE

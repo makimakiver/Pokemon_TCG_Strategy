@@ -1,0 +1,443 @@
+[
+  {
+    "source": "file:bare_agent.py",
+    "target": "function:bare_agent.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:bare_agent.py",
+    "target": "function:bare_agent.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:bare_agent2.py",
+    "target": "function:bare_agent2.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:bare_agent2.py",
+    "target": "function:bare_agent2.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:fire.py",
+    "target": "function:fire.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:fire.py",
+    "target": "function:fire.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:honchkrow.py",
+    "target": "function:honchkrow.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:honchkrow.py",
+    "target": "function:honchkrow.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:honchkrow.py",
+    "target": "function:honchkrow.py:rocket_feathers_damage",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "function:honchkrow.py:agent",
+    "target": "function:honchkrow.py:rocket_feathers_damage",
+    "type": "calls",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main_bench.py",
+    "target": "function:main_bench.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:main_bench.py",
+    "target": "function:main_bench.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main_crustle_base.py",
+    "target": "function:main_crustle_base.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:main_crustle_base.py",
+    "target": "function:main_crustle_base.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main_cur.py",
+    "target": "function:main_cur.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:main_cur.py",
+    "target": "function:main_cur.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main_honch_base.py",
+    "target": "function:main_honch_base.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:main_honch_base.py",
+    "target": "function:main_honch_base.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main_megalucario_backup.py",
+    "target": "function:main_megalucario_backup.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:main_megalucario_backup.py",
+    "target": "function:main_megalucario_backup.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main_typh_base.py",
+    "target": "function:main_typh_base.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:main_typh_base.py",
+    "target": "function:main_typh_base.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main_typhlosion.py",
+    "target": "function:main_typhlosion.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:main_typhlosion.py",
+    "target": "function:main_typhlosion.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main_v1.py",
+    "target": "function:main_v1.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:main_v1.py",
+    "target": "function:main_v1.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main_v2.py",
+    "target": "function:main_v2.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:main_v2.py",
+    "target": "function:main_v2.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main_v2_baseline.py",
+    "target": "function:main_v2_baseline.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:main_v2_baseline.py",
+    "target": "function:main_v2_baseline.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main_v2_rebel.py",
+    "target": "function:main_v2_rebel.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:main_v2_rebel.py",
+    "target": "function:main_v2_rebel.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main_v3.py",
+    "target": "function:main_v3.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:main_v3.py",
+    "target": "function:main_v3.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main_v3.py",
+    "target": "function:main_v3.py:_buddy_blast_damage",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "function:main_v3.py:agent",
+    "target": "function:main_v3.py:_buddy_blast_damage",
+    "type": "calls",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main_v3_pure.py",
+    "target": "function:main_v3_pure.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:main_v3_pure.py",
+    "target": "function:main_v3_pure.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main_v4.py",
+    "target": "function:main_v4.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:main_v4.py",
+    "target": "function:main_v4.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:main.py",
+    "target": "function:main.py:agent",
+    "type": "contains",
+    "direction": "forward",
+    "weight": 1
+  },
+  {
+    "source": "file:main.py",
+    "target": "function:main.py:agent",
+    "type": "exports",
+    "direction": "forward",
+    "weight": 0.8
+  },
+  {
+    "source": "file:bare_agent2.py",
+    "target": "file:bare_agent.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_v1.py",
+    "target": "file:main.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_v2.py",
+    "target": "file:main_v1.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_v3.py",
+    "target": "file:main_v2.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_v4.py",
+    "target": "file:main_v3.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_v3_pure.py",
+    "target": "file:main_v3.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_v3_pure.py",
+    "target": "file:main_v2.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_v2_baseline.py",
+    "target": "file:main_v2.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_v2_rebel.py",
+    "target": "file:main_v2.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_cur.py",
+    "target": "file:main.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_typhlosion.py",
+    "target": "file:main_typh_base.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_typhlosion.py",
+    "target": "file:main_v2.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_typh_base.py",
+    "target": "file:main_crustle_base.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_crustle_base.py",
+    "target": "file:main.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:honchkrow.py",
+    "target": "file:main_honch_base.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_honch_base.py",
+    "target": "file:main_v1.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:fire.py",
+    "target": "file:main_crustle_base.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:fire.py",
+    "target": "file:bare_agent.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:bare_agent.py",
+    "target": "file:main_v1.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_megalucario_backup.py",
+    "target": "file:main.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  },
+  {
+    "source": "file:main_bench.py",
+    "target": "file:main.py",
+    "type": "related",
+    "direction": "forward",
+    "weight": 0.5
+  }
+]

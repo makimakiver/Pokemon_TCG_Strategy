@@ -1,0 +1,6 @@
+pydantic>=2.0
+anthropic>=0.40
+# transcript acquisition (system binary):
+#   yt-dlp        -> pip install yt-dlp   (or brew/apt)
+# optional ASR path:
+#   faster-whisper>=1.0

@@ -1,0 +1,27 @@
+{
+  "projectRoot": "/Users/makimakiver/pokemon-tcg/agents",
+  "batchFiles": [
+    {"path": "__init__.py", "language": "python", "sizeLines": 0, "fileCategory": "code"},
+    {"path": ".understand-anything/.understandignore", "language": "unknown", "sizeLines": 8, "fileCategory": "code"},
+    {"path": "bare_agent.py", "language": "python", "sizeLines": 394, "fileCategory": "code"},
+    {"path": "bare_agent2.py", "language": "python", "sizeLines": 394, "fileCategory": "code"},
+    {"path": "fire.py", "language": "python", "sizeLines": 430, "fileCategory": "code"},
+    {"path": "honchkrow.py", "language": "python", "sizeLines": 541, "fileCategory": "code"},
+    {"path": "main_bench.py", "language": "python", "sizeLines": 437, "fileCategory": "code"},
+    {"path": "main_crustle_base.py", "language": "python", "sizeLines": 447, "fileCategory": "code"},
+    {"path": "main_cur.py", "language": "python", "sizeLines": 446, "fileCategory": "code"},
+    {"path": "main_honch_base.py", "language": "python", "sizeLines": 432, "fileCategory": "code"},
+    {"path": "main_megalucario_backup.py", "language": "python", "sizeLines": 546, "fileCategory": "code"},
+    {"path": "main_typh_base.py", "language": "python", "sizeLines": 447, "fileCategory": "code"},
+    {"path": "main_typhlosion.py", "language": "python", "sizeLines": 447, "fileCategory": "code"},
+    {"path": "main_v1.py", "language": "python", "sizeLines": 446, "fileCategory": "code"},
+    {"path": "main_v2.py", "language": "python", "sizeLines": 447, "fileCategory": "code"},
+    {"path": "main_v2_baseline.py", "language": "python", "sizeLines": 447, "fileCategory": "code"},
+    {"path": "main_v2_rebel.py", "language": "python", "sizeLines": 447, "fileCategory": "code"},
+    {"path": "main_v3.py", "language": "python", "sizeLines": 447, "fileCategory": "code"},
+    {"path": "main_v3_pure.py", "language": "python", "sizeLines": 447, "fileCategory": "code"},
+    {"path": "main_v4.py", "language": "python", "sizeLines": 447, "fileCategory": "code"},
+    {"path": "main.py", "language": "python", "sizeLines": 447, "fileCategory": "code"}
+  ],
+  "batchImportData": {}
+}
