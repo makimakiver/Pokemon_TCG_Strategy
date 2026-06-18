@@ -10,3 +10,6 @@ rl/runs/
 out/
 *.pth
 *.log
+
+# Oversized reference PDFs (use Git LFS or keep local; >100MB, GitHub-blocked)
+data/card_reference/*.pdf
