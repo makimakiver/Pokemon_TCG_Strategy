@@ -20,8 +20,6 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from cg.api import search_step, search_release
-from . import encode
 from .config import CONFIG
 
 
@@ -45,6 +43,23 @@ def _result_value(obs, solver_seat) -> float | None:
     return 1.0 if st.result == solver_seat else -1.0 if st.result == 1 - solver_seat else 0.0
 
 
+def visit_policy(N: dict, n_options: int, temperature: float = 1.0) -> np.ndarray:
+    """Normalized MCTS visit distribution over the root OPTION edges (length
+    ``n_options``). Edges >= n_options (e.g. a STOP edge) are ignored. Returns an
+    all-zero vector when there are no visits (caller treats that as forced-STOP).
+    ``temperature`` < 1 sharpens toward the most-visited edge (counts ** 1/τ)."""
+    pi = np.zeros(int(n_options), dtype=np.float64)
+    for e, c in N.items():
+        if 0 <= e < n_options:
+            pi[e] = c
+    if temperature != 1.0:
+        pi = np.power(pi, 1.0 / max(1e-6, temperature))
+    s = pi.sum()
+    if s > 0:
+        pi /= s
+    return pi
+
+
 class MCTS:
     def __init__(self, policy, opponent_agent, solver_seat=0, cfg=CONFIG):
         self.policy = policy
@@ -64,6 +79,28 @@ class MCTS:
         if not root.N:
             return 0
         return max(root.N, key=root.N.get)
+
+    def search_policy(self, root_state, temperature: float = 1.0,
+                      greedy: bool = False):
+        """Training-facing search: return (action, pi, root_value).
+
+        ``pi`` is the normalized visit distribution over the root option edges
+        (CISPO's behavior policy). ``action`` is sampled from ``pi`` (or argmax
+        when ``greedy``); ``None`` when the root has no option edges/visits
+        (the caller then closes the select with STOP). ``root_value`` is the
+        net's value-head estimate at the root (diagnostics)."""
+        root = _Node(root_state.searchId, root_state.observation)
+        self._expand(root)
+        for _ in range(self.cfg.mcts_simulations):
+            self._simulate(root)
+        sel = root.obs.select
+        n = len(sel.option) if sel else 0
+        _, root_value = self._priors(root.obs) if n else (None, 0.0)
+        pi = visit_policy(root.N, n, temperature)
+        if n == 0 or pi.sum() <= 0.0:
+            return None, pi, float(root_value)
+        action = int(pi.argmax()) if greedy else int(np.random.choice(n, p=pi))
+        return action, pi, float(root_value)
 
     # --- internals ----------------------------------------------------------
     def _priors(self, obs):

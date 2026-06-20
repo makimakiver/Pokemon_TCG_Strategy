@@ -99,6 +99,14 @@ class TCGEnv:
         self._advance_to_solver()
         return self._encode()
 
+    def search_state(self):
+        """The env's current engine search node, for an MCTS actor to root at.
+        Valid only in search mode (mid-game scenarios loaded via search_begin)."""
+        if self.mode != "search" or self._search_id is None:
+            raise RuntimeError("search_state() is only valid in search mode")
+        from types import SimpleNamespace
+        return SimpleNamespace(searchId=self._search_id, observation=self._obs)
+
     def close(self):
         self._safe_finish()
 
