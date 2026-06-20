@@ -11,8 +11,8 @@ import json
 import os
 
 from rl.config import DECKS_DIR, EVAL_GAUNTLET, solver_deck_path
-from rl.core.env import TCGEnv, STOP   # reuse the env for play; STOP imported for parity
-from rl.agents import dsl_agent
+from rl.engine.env import TCGEnv, STOP   # reuse the env for play; STOP imported for parity
+from rl.inference.agents import dsl_agent
 
 
 def _bare_for(deck_path):

@@ -7,7 +7,7 @@ import json
 from cg.api import (
     AreaType, CardType, OptionType, Pokemon, SelectContext, to_observation_class,
 )
-from rl.core import encode
+from rl.engine import encode
 from rl.dsl.grammar import validate
 from rl.dsl.predicates import (
     CardInfo, AttackInfo, OptInfo, RuleContext, score_options, pick_from_scores,

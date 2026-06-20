@@ -1,39 +1,41 @@
 """Self-Guided Self-Play (SGS) RL stack for the cabt Pokémon TCG engine.
 
-Implements the design in ``docs/SGS_RL_PLAN.md``. Organised into subpackages by
-responsibility (all intra-package imports are absolute, e.g. ``rl.solver.policy``):
+Implements the design in ``docs/SGS_RL_PLAN.md``. Organised folders-of-folders by
+domain; all intra-package imports are absolute (e.g. ``rl.training.solver.policy``):
 
-    config.py            central config (knobs via RL_* env vars); imports anywhere
+    config.py                 central config (knobs via RL_* env vars); imports anywhere
 
-    core/                engine-facing primitives + scenario/problem types
-      env                TCGEnv: micro-step, action masking, opponent-in-env, scenario loading
-      scenario           ScenarioSpec + EditScript -> search_begin kwargs (legality-checked)
-      encode             observation + per-option featurizer (runtime card stats)
-      targets            build the target set D from data/loser/*.json
-      problem_set        persisted conjecturer problem set (target_id + edit-script)
-      vec                subprocess vec-env (1 battle per process)
+    engine/                   interface to the game engine
+      env                     TCGEnv: micro-step, action masking, opponent-in-env, scenarios
+      scenario                ScenarioSpec + EditScript -> search_begin kwargs (legality-checked)
+      encode                  observation + per-option featurizer
+      vec                     subprocess vec-env (1 battle per process)
 
-    solver/              the solver net + RL training
-      policy             pointer net + value head + option_prior residual
-      solver_objectives  reinforce_half | ppo | cispo | alphazero behind one interface
-      mcts               search_begin/search_step MCTS (prior+value, search-node release)
-      train_solver       inner net-RL loop + actor factories (policy / MCTS)
-      outer_loop         SGS Algorithm 1 driver (+ seed-first curriculum, live games)
-      guide              rule-based Guide v1 (R_guide)
-      league             OPTIONAL PSRO archive
+    training/                 everything about TRAINING the solver
+      solver/                 the learner
+        policy                pointer net + value head + option_prior residual
+        mcts                  search_begin/search_step MCTS (prior+value, node release)
+        solver_objectives     reinforce_half | ppo | cispo | alphazero behind one interface
+        train_solver          inner net-RL loop + actor factories
+        outer_loop            SGS Algorithm 1 driver (seed-first curriculum, live games)
+        guide                 rule-based Guide v1 (R_guide); league = OPTIONAL PSRO archive
+      curriculum/             WHAT the solver trains on
+        targets               build the target set D from data/loser/*.json
+        problem_set           persisted conjecturer problem set (target_id + edit-script)
+        conjecturer/          quiz generators (parametric default; SmolLM LoRA optional)
+      bootstrap/              warm-starts (bootstrap_solver, distill_claude, sft)
 
-    conjecturer/         scenario edit-script policy (parametric default; LLM optional)
-    dsl/                 DSL rule-engine for scripted-rule synthesis
+    inference/                USING a trained model
+      agents/                 shippable wrappers (net_agent, llm_agent, dsl_agent)
+      eval/                   SGS eval harnesses (eval gauntlet, eval_mcts_vs_agent, eval_sgs_mcts)
 
-    agents/              shippable agent wrappers (net_agent, llm_agent, dsl_agent)
-    eval/                evaluation harnesses (eval, kaggle_eval, eval_mcts_vs_agent, eval_sgs_mcts)
-    bootstrap/           warm-starts (bootstrap_solver, distill_claude, sft)
-    kaggle/              kaggle_mcts self-play trainer + train_multi
-    smoke/               smoke_test (P0) + smoke_test_mcts_sgs
+    selfplay/                 the SEPARATE kaggle_mcts lineage (kaggle_mcts, train_multi, kaggle_eval)
+    dsl/                      rule-synthesis engine (standalone)
+    smoke/                    smoke tests (P0 + MCTS-SGS)
 
 The native engine (``cg/libcg.so``) is Linux x86-64 only, so everything that imports
-``cg`` must run inside the Docker linux/amd64 image (see rl/Dockerfile). Pure-Python
-modules (config, core.scenario, core.targets, problem_set) import on any host.
+``cg`` runs only inside the Docker linux/amd64 image (rl/Dockerfile). Pure-Python modules
+(config, engine.scenario, training.curriculum.targets/problem_set) import on any host.
 """
 
 __all__ = ["config"]

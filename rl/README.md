@@ -49,15 +49,15 @@ docker run --rm --platform=linux/amd64 -v "$PWD":/app -w /app cabt-rl \
 
 # P1 — train the Solver vs a fixed anchor (bare_agent on the same deck)
 docker run --rm --platform=linux/amd64 -v "$PWD":/app -w /app cabt-rl \
-  python -m rl.solver.train_solver
+  python -m rl.training.solver.train_solver
 
 # P2 — SGS loop (fixed D + parametric conjecturer + rule guide)
 docker run --rm --platform=linux/amd64 -v "$PWD":/app -w /app cabt-rl \
-  python -m rl.solver.outer_loop
+  python -m rl.training.solver.outer_loop
 
 # Eval a checkpoint on the held-out gauntlet
 docker run --rm --platform=linux/amd64 -v "$PWD":/app -w /app cabt-rl \
-  python -m rl.eval.eval rl/runs/p1/solver_final.pt
+  python -m rl.inference.eval.eval rl/runs/p1/solver_final.pt
 ```
 
 ### LLM-driven policy (Claude picks moves live)
@@ -75,7 +75,7 @@ docker run --rm --platform=linux/amd64 -v "$PWD":/app -w /app \
   runner.py --a rl.llm_agent --b agents.bare_agent -n 10
 
 # Distill Claude into the shippable net (SFT teacher)
-#   sft.collect_traces(deck, opp_deck, "rl.agents.llm_agent", "agents.bare_agent", n_games=...)
+#   sft.collect_traces(deck, opp_deck, "rl.inference.agents.llm_agent", "agents.bare_agent", n_games=...)
 ```
 
 `RL_LLM_ALL=1` consults the LLM on every selection (default: only MAIN decisions,
@@ -87,7 +87,7 @@ Key env overrides (see `config.py`): `RL_SOLVER_DECK` (`honchkrow`|`crustle`|…
 ## Status & next steps
 
 - **Validated by reasoning against the engine API** (`cg/api.py`, `cg/game.py`),
-  not yet executed — the native lib needs the linux/amd64 image. Run `rl.smoke_test`
+  not yet executed — the native lib needs the linux/amd64 image. Run `rl.smoke.smoke_test`
   first; it de-risks the `search_begin` scenario primitive (plan §5 P0).
 - The biggest engine-contract item to confirm in Docker: search-mode opponent
   observations are reconstructed to a dict via `env._to_dict`; verify a scripted
