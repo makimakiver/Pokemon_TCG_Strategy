@@ -17,7 +17,10 @@ import numpy as np
 import torch
 
 from .config import CONFIG, RUNS_DIR, solver_deck_path
-from .env import TCGEnv
+try:
+    from .env import TCGEnv          # engine-only; used only as a type annotation
+except Exception:                    # non-engine host: annotation is a string (PEP 563)
+    TCGEnv = None
 from .policy import PointerPolicy, prior_weight_at, save as save_policy
 from .solver_objectives import get_objective, Rollout
 
@@ -26,8 +29,37 @@ def _load_deck(path) -> list[int]:
     return json.load(open(path))
 
 
-def collect_rollouts(policy, env: TCGEnv, scenarios, k: int, prior_weight: float):
-    """k rollouts per scenario (None == a live turn-0 game). Returns list[Rollout]."""
+def make_policy_actor(policy):
+    """Default actor: sample directly from the net (no search)."""
+    def actor(env, obs, prior_weight):
+        return policy.act(obs, prior_weight)
+    return actor
+
+
+def make_mcts_actor(mcts, policy):
+    """MCTS actor: pick via MCTS in search mode; record log(pi_mcts[action]) as the
+    behavior log-prob CISPO consumes. Falls back to the net in live (turn-0) mode."""
+    def actor(env, obs, prior_weight):
+        if getattr(env, "mode", None) != "search":
+            return policy.act(obs, prior_weight)
+        action, pi, value = mcts.search_policy(env.search_state())
+        n = obs["n_options"]
+        if action is None:                      # no option edge -> close with STOP
+            return n, 0.0, float(value)
+        logp = float(np.log(pi[action] + 1e-12))
+        return int(action), logp, float(value)
+    return actor
+
+
+def collect_rollouts(policy, env: TCGEnv, scenarios, k: int, prior_weight: float,
+                     actor=None):
+    """k rollouts per scenario (None == a live turn-0 game). Returns list[Rollout].
+
+    ``actor(env, obs, prior_weight) -> (action, logp, value)`` selects each move;
+    defaults to sampling from ``policy`` directly. An MCTS actor records the
+    MCTS visit-distribution log-prob as ``logp`` (CISPO's behavior policy)."""
+    if actor is None:
+        actor = make_policy_actor(policy)
     rollouts: list[Rollout] = []
     for sc in scenarios:
         sid = sc.target_id if sc is not None else "live"
@@ -37,7 +69,7 @@ def collect_rollouts(policy, env: TCGEnv, scenarios, k: int, prior_weight: float
             guard = 0
             while not env.done and guard < CONFIG.max_steps:
                 guard += 1
-                action, logp, value = policy.act(obs, prior_weight)
+                action, logp, value = actor(env, obs, prior_weight)
                 steps.append({"obs": obs, "action": action, "logp": float(logp),
                               "value": float(value)})
                 obs, _, done, _ = env.step(action)
