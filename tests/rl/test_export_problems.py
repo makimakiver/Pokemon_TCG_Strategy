@@ -1,7 +1,7 @@
 import random
 
-from rl.engine.scenario import ScenarioSpec, EditScript, EditOp
-from rl.training.curriculum.conjecturer.export_problems import export_problems
+from rl.shared.engine.scenario import ScenarioSpec, EditScript, EditOp
+from rl.sgs.conjecturer.export_problems import export_problems
 
 
 class _StubConj:

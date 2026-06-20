@@ -1,7 +1,7 @@
 import json
 
-from rl.engine.scenario import ScenarioSpec, EditScript, EditOp
-from rl.training.curriculum.problem_set import (
+from rl.shared.engine.scenario import ScenarioSpec, EditScript, EditOp
+from rl.sgs.problem_set import (
     problem_row, write_problem_set, load_problem_set, seed_scenarios,
 )
 

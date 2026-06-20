@@ -1,6 +1,6 @@
 import numpy as np
 
-from rl.training.solver.train_solver import collect_rollouts, make_mcts_actor
+from rl.sgs.train_solver import collect_rollouts, make_mcts_actor
 
 
 class _FakeEnv:

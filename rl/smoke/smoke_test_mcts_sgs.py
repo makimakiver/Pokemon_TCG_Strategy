@@ -20,11 +20,11 @@ os.environ.setdefault("RL_MCTS_SIMS", "8")
 os.environ.setdefault("RL_K", "2")
 os.environ.setdefault("RL_OBJECTIVE", "alphazero")
 
-from rl.training.curriculum.targets import build_target_set
-from rl.training.curriculum.problem_set import load_problem_set, seed_scenarios, write_problem_set
-from rl.training.curriculum.conjecturer import get_conjecturer
-from rl.training.curriculum.conjecturer.export_problems import export_problems
-from rl.training.solver.outer_loop import run_sgs
+from rl.sgs.targets import build_target_set
+from rl.sgs.problem_set import load_problem_set, seed_scenarios, write_problem_set
+from rl.sgs.conjecturer import get_conjecturer
+from rl.sgs.conjecturer.export_problems import export_problems
+from rl.sgs.outer_loop import run_sgs
 
 
 def main() -> int:

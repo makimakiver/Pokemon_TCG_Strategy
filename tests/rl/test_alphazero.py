@@ -3,8 +3,8 @@ groups (unlike REINFORCE-half / CISPO). Pure-Python (real PointerPolicy, no engi
 import numpy as np
 import torch
 
-from rl.training.solver.policy import PointerPolicy
-from rl.training.solver.solver_objectives import get_objective, Rollout
+from rl.shared.policy import PointerPolicy
+from rl.sgs.solver_objectives import get_objective, Rollout
 
 
 def _obs(n=3):

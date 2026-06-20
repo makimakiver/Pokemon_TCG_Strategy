@@ -8,14 +8,14 @@
 # Run on the pod (needs an NVIDIA GPU + nvidia-container-toolkit):
 #   # 1. collect a CISPO buffer (model-backed conjecturer drives outer_loop)
 #   docker run --rm --gpus all -v "$PWD":/app -w /app \
-#     -e RL_CONJ=llm -e RL_CONJ_DEVICE=cuda cabt-rl-llm -m rl.training.solver.outer_loop
+#     -e RL_CONJ=llm -e RL_CONJ_DEVICE=cuda cabt-rl-llm -m rl.sgs.outer_loop
 #   # 2. offline CISPO LoRA fine-tune on the buffer -> rl/runs/conjecturer_lora
 #   docker run --rm --gpus all -v "$PWD":/app -w /app cabt-rl-llm \
-#     -m rl.training.curriculum.conjecturer.cispo_train --epochs 2
+#     -m rl.sgs.conjecturer.cispo_train --epochs 2
 FROM cabt-rl:latest
 
 COPY rl/requirements-llm.txt /app/rl/requirements-llm.txt
 RUN pip install --no-cache-dir -r /app/rl/requirements-llm.txt
 
 ENTRYPOINT ["python"]
-CMD ["-m", "rl.training.curriculum.conjecturer.cispo_train", "--dry-run"]
+CMD ["-m", "rl.sgs.conjecturer.cispo_train", "--dry-run"]

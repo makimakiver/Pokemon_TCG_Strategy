@@ -18,9 +18,9 @@ import numpy as np
 import torch
 
 from rl.config import solver_deck_path
-from rl.engine.env import TCGEnv, STOP
-from rl.training.solver.policy import PointerPolicy
-from rl.training.curriculum.targets import build_target_set
+from rl.shared.engine.env import TCGEnv, STOP
+from rl.shared.policy import PointerPolicy
+from rl.sgs.targets import build_target_set
 import json
 import importlib
 
