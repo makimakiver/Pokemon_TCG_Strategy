@@ -31,15 +31,19 @@ from .solver_objectives import get_objective, Rollout
 from .targets import build_target_set
 from .conjecturer import get_conjecturer
 from .guide import guide_score
-from .train_solver import collect_rollouts, _load_deck
+from .train_solver import collect_rollouts, _load_deck, make_mcts_actor
+from .mcts import MCTS
+from .problem_set import load_problem_set, seed_scenarios
+from .scenario import ScenarioSpec
 
 
-def _winrate(policy, env, scenario, k, pw):
-    rs = collect_rollouts(policy, env, [scenario], k, pw)
+def _winrate(policy, env, scenario, k, pw, actor=None):
+    rs = collect_rollouts(policy, env, [scenario], k, pw, actor=actor)
     return np.mean([r.win for r in rs]), rs
 
 
-def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs"):
+def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs",
+            use_mcts: bool = False, problem_set=None, objective: str | None = None):
     random.seed(CONFIG.seed); np.random.seed(CONFIG.seed); torch.manual_seed(CONFIG.seed)
     rng = random.Random(CONFIG.seed)
 
@@ -48,6 +52,14 @@ def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs"
         raise RuntimeError("empty target set D; check data/loser/*.json")
     print(f"[sgs] target set |D| = {len(D)}")
 
+    # Warm-start each target's current lemma from the conjecturer's problem set.
+    seeded: dict[str, ScenarioSpec] = {}
+    if problem_set:
+        ps = load_problem_set(problem_set)
+        for s in seed_scenarios(D, ps):
+            seeded[s.target_id] = s
+        print(f"[sgs] seeded {len(ps)} lemmas from {problem_set}")
+
     solver_deck = _load_deck(solver_deck_path())
     import importlib
     opponent = importlib.import_module(CONFIG.opponent_module)
@@ -55,11 +67,17 @@ def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs"
     env = TCGEnv(solver_deck, opp_deck, opponent)
 
     policy = PointerPolicy()
-    objective = get_objective()
+    objective = get_objective(objective or ("cispo" if use_mcts else None))
     conjecturer = get_conjecturer()
     opt = torch.optim.Adam(policy.parameters(), lr=CONFIG.lr)
 
-    solve_rate = defaultdict(float)      # target_id -> latest win-rate (for solved test)
+    actor = None
+    if use_mcts:
+        mcts = MCTS(policy, opponent, solver_seat=CONFIG.seat)
+        actor = make_mcts_actor(mcts, policy)
+        print(f"[sgs] MCTS actor ON ({CONFIG.mcts_simulations} sims/decision)")
+
+    solve_rate = defaultdict(float)
     out = Path(RUNS_DIR) / run_name
     out.mkdir(parents=True, exist_ok=True)
     history = []
@@ -72,15 +90,15 @@ def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs"
 
         for target in batch:
             solved = solve_rate[target.target_id] >= CONFIG.tau
-            scenario = target
+            scenario = seeded.get(target.target_id, target)   # warm-started lemma
             edits = None
             conj_idx = None
             if not solved:
-                # Conjecture an easier lemma for an unsolved target.
+                # Conjecture an easier lemma for an unsolved target (parametric in-loop).
                 edited, edits, conj_idx = conjecturer.propose(target, rng)
                 scenario = edited
             try:
-                wr, rs = _winrate(policy, env, scenario, CONFIG.k_rollouts, pw)
+                wr, rs = _winrate(policy, env, scenario, CONFIG.k_rollouts, pw, actor=actor)
                 legal = True
             except Exception:
                 wr, rs, legal = 0.0, [], False
