@@ -15,8 +15,8 @@ Train the SmolLM conjecturer's **chain-of-thought reasoning** (not just its edit
 2. **Reference model:** **GLM-5.2 via the z.ai/Zhipu API** generates the reference CoT + answer per target (cached).
 3. **Per-sample judge:** a **local 7–14B model on the mini (MPS)** scores each SmolLM completion 1–5 against the cached reference — no API call in the RL hot loop.
 4. **Reward:** `R = (s̃ − 1)/4 ∈ [0,1]`, `s̃ ∈ {1..5}` (ExpRL normalization), scoring both the answer and the reasoning toward it.
-5. **Optimization:** **CISPO + KL-to-base** — ExpRL's reward/advantage with the project's CISPO objective (the project rule forbids GRPO; CISPO is the group-normalized clipped-IS equivalent). Reuses `rl/conjecturer/cispo_train.py`.
-6. **Baseline:** **K completions per target (group)**, group-normalized advantage — a single isolated score has no baseline. Degenerate groups fall back to REINFORCE½ (existing behavior).
+5. **Optimization:** **GRPO + KL-to-base** — faithful to ExpRL (user override 2026-06-20, scoped to THIS path only). GRPO = group-normalized advantage `(r−mean)/std` + PPO-style clipped ratio `min(ρ·A, clip(ρ,1±ε)·A)` + `β·KL(π_θ‖π_0)`. The group-advantage computation is **shared with CISPO** (`cispo_train.group_advantages`); only the update wrapper differs (clipped ratio vs CISPO's clipped stop-grad IS weight). **CISPO remains the objective for the solver and the existing R_synth conjecturer path** — this GRPO override applies only to ExpRL reasoning-training.
+6. **Baseline:** **K completions per target (group)**, group-normalized advantage (GRPO's "group relative") — a single isolated score has no baseline. Degenerate groups (all K scores equal) fall back to REINFORCE½ (existing `group_advantages` behavior).
 7. **Concurrency:** runs on the mini's MPS, concurrent with the engine/solver training (Docker/CPU) — no resource contention.
 
 ## 2. Non-goals
@@ -40,8 +40,8 @@ target position (from D)
                           buffer rows {target_id, prompt, completion_k,
                                        old_logp_k, reward_k=(s̃_k−1)/4}
                                    │
-                                   ▼  group by target → CISPO advantage + KL-to-base
-                          SmolLM LoRA update (cispo_train.py)
+                                   ▼  group by target → group advantage → GRPO + KL-to-base
+                          SmolLM LoRA update (reason_train.py / grpo_train.py)
 ```
 
 ExpRL fidelity: the reference `y*` is shown **only to the judge**, never to SmolLM (on-policy exploration preserved; reference is a reward scaffold, not an imitation target). The judge is instructed to **verify, not solve** ("Do not solve the problem yourself; do not fill in omitted steps").
@@ -61,21 +61,22 @@ Local rubric judge (the per-sample scorer).
 - `reward(s̃) = (s̃ − 1)/4`. Robust parse of the integer (default to 1 = lowest on unparseable output, logged).
 - Optional **ExpRL-Process**: split `smollm_trace` on `###`, score each prefix, return per-step `s̃_t`; advantage `A_t = s̃_t − s̃_{t−1}` (`A_1 = s̃_1 − s̃_T`). v1 ships outcome scoring; process is a flagged extension.
 
-### 4.3 `rl/conjecturer/reason_train.py` (new, thin driver)
-Stage-1 ExpRL loop, reusing existing machinery.
-- For each target in a batch: SmolLM (`author.LLMConjecturer`, reused) generates **K** completions, each already logging `{prompt, completion, old_logp}` (CISPO's behavior log-prob).
+### 4.3 `rl/conjecturer/reason_train.py` (new, thin driver) + GRPO update
+Stage-1 ExpRL loop with a **GRPO** update (scoped here only).
+- For each target in a batch: SmolLM (`author.LLMConjecturer`, reused) generates **K** completions, each already logging `{prompt, completion, old_logp}` (the behavior sequence log-prob both GRPO and CISPO need).
 - For each completion: `reward_k = reason_judge.reward(score(x, trace_k, reference[target]))`; write into the buffer row's `reward`.
-- Hand rows to `cispo_train.group_advantages` + the existing CISPO LoRA update, **adding a KL-to-base term** (`β·KL(π_θ‖π_0)`, ExpRL's regularizer; `RL_EXPRL_KL_BETA`). If `cispo_train` lacks a KL term, add it there behind a flag (off by default to preserve current behavior).
+- **Group advantages:** reuse `cispo_train.group_advantages` (identical for GRPO — group-normalized `(r−mean)/std`, degenerate→REINFORCE½).
+- **GRPO update** (the only new objective code): per row, ratio `ρ = exp(lp − old_logp)`; loss `−min(ρ·A, clip(ρ, 1±ε)·A) + β·KL(π_θ‖π_0)`, length-normalized; `ε = RL_GRPO_CLIP` (reuse `ppo_clip` default 0.2), `β = RL_EXPRL_KL_BETA`. Lives in `reason_train.py` (or flesh out the existing `rl/conjecturer/grpo_train.py` stub) — **does NOT touch `cispo_train.py`'s objective**, so the CISPO conjecturer/solver paths are untouched.
 - Saves a LoRA adapter to `rl/runs/conjecturer_lora_exprl/`.
 
 ### 4.4 Reuse (no rewrite)
 - `author.LLMConjecturer` — SmolLM generation + `old_logp` logging + buffer rows (already exists; may need a `k`/format knob to emit `###`-delimited CoT).
-- `cispo_train.py` — `group_advantages` (groups = target prompt, `(r−mean)/std`, degenerate→REINFORCE½) + CISPO LoRA update (reward-agnostic; we just supply a different `reward`).
+- `cispo_train.py` — **only** `group_advantages` is reused (groups = target prompt, `(r−mean)/std`, degenerate→REINFORCE½; identical for GRPO). Its CISPO update is NOT used by this path (ExpRL uses the GRPO update in §4.3); `cispo_train.py` is left unmodified.
 
 ## 5. Data flow (end to end)
 
 1. **(mini, once)** `reason_reference.build_references(D)` → GLM-5.2 → `rl/runs/exprl_references.jsonl`. ~|D| API calls, cached.
-2. **(mini, RL loop, concurrent with solver Docker)** per generation: sample K SmolLM completions/target → local judge scores each vs cached reference → reward → CISPO+KL LoRA step.
+2. **(mini, RL loop, concurrent with solver Docker)** per generation: sample K SmolLM completions/target → local judge scores each vs cached reference → reward → group-normalize → GRPO+KL LoRA step.
 3. Output: `conjecturer_lora_exprl/` adapter; eval = valid-edit-rate (existing) + judge-score trend.
 
 ## 6. Error handling
