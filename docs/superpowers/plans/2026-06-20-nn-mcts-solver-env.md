@@ -887,9 +887,13 @@ def main() -> int:
     print(f"[smoke] exported+loaded {len(ps)} problems")
 
     # 2) Run 2 SGS generations with the MCTS actor under CISPO.
+    #    conjecture_after=0 forces the parametric conjecturer to propose a variation
+    #    every unsolved gen, so this smoke also exercises the propose/guide/synth path
+    #    (with the default conjecture_after=2 it would never fire inside 2 gens).
     policy, history = run_sgs(generations=2, batch_size=min(4, len(D)),
                               run_name="smoke_mcts_sgs", use_mcts=True,
-                              problem_set=str(tmp), objective="cispo")
+                              problem_set=str(tmp), objective="cispo",
+                              conjecture_after=0)
     assert len(history) == 2, history
     for rec in history:
         assert rec["loss"] == rec["loss"], "loss is NaN"   # NaN != NaN
