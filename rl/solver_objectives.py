@@ -19,6 +19,7 @@ from __future__ import annotations
 from collections import defaultdict
 from dataclasses import dataclass, field
 
+import numpy as np
 import torch
 
 from .config import CONFIG
@@ -176,7 +177,54 @@ class CISPO(SolverObjective):
         return loss, metrics
 
 
-_REGISTRY = {o.name: o for o in [ReinforceHalf(), PPO(), CISPO()]}
+class AlphaZero(SolverObjective):
+    """AlphaZero-style distillation: a DENSE per-step signal that does not depend
+    on wins (so it never starves like REINFORCE½/CISPO on low-variance groups).
+
+      L = (1/N) Σ_steps [ CE(π_mcts, π_net)  +  value_coef·(v_net − z)²  −  ent_coef·H ]
+
+    π_mcts is the MCTS visit distribution stored on each step (``step["pi"]``,
+    length n_options+1, aligned to the policy logits incl. STOP). z is the game
+    outcome (the rollout's terminal reward) applied to every step. The policy
+    cross-entropy is summed ONLY over legal slots — masked logits are −inf and the
+    target is 0 there, so restricting to legal avoids 0·(−inf)=NaN. Steps with no
+    π target (non-MCTS) contribute only the value term."""
+    name = "alphazero"
+
+    def compute_loss(self, policy, rollouts, prior_weight):
+        vc, ec = CONFIG.value_coef, CONFIG.entropy_coef
+        pol_loss, val_loss, ent_sum, n = (torch.zeros(()), torch.zeros(()),
+                                          torch.zeros(()), 0)
+        for r in rollouts:
+            z = float(r.reward)                       # outcome target for every step
+            for s in r.steps:
+                g = torch.as_tensor(s["obs"]["global"], dtype=torch.float32)
+                o = torch.as_tensor(s["obs"]["options"], dtype=torch.float32)
+                m = torch.as_tensor(s["obs"]["mask"], dtype=torch.float32)
+                logits, value = policy.forward(g, o, m, prior_weight)
+                legal = m > 0.5
+                logp = torch.log_softmax(logits, dim=0)
+                val_loss = val_loss + (value - z) ** 2
+                pi = s.get("pi")
+                if pi is not None:
+                    t = torch.as_tensor(np.asarray(pi), dtype=torch.float32)
+                    if t.shape[0] == logits.shape[0]:
+                        pol_loss = pol_loss - (t[legal] * logp[legal]).sum()
+                        p = torch.softmax(logits, dim=0)
+                        ent_sum = ent_sum - (p[legal] * logp[legal]).sum()
+                n += 1
+        if n == 0:
+            return torch.zeros(()), {"used": 0}
+        loss = (pol_loss + vc * val_loss - ec * ent_sum) / n
+        wr = _group_winrates(rollouts)
+        return loss, {"used": n,
+                      "policy_loss": float((pol_loss / n).detach()),
+                      "value_loss": float((vc * val_loss / n).detach()),
+                      "entropy": float((ent_sum / n).detach()),
+                      "winrate_hist": _winrate_histogram(wr)}
+
+
+_REGISTRY = {o.name: o for o in [ReinforceHalf(), PPO(), CISPO(), AlphaZero()]}
 
 
 def get_objective(name: str | None = None) -> SolverObjective:

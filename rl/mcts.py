@@ -72,19 +72,37 @@ class MCTS:
         self.opponent_agent = opponent_agent
         self.solver_seat = solver_seat
         self.cfg = cfg
+        self._created: list = []     # engine search-node ids created this search
+
+    def _step(self, parent_id, picks):
+        """search_step wrapper that records every engine node id created, so the
+        whole exploration subtree can be freed after the search (else each
+        simulation leaks an engine node -> OOM on long runs)."""
+        state = search_step(parent_id, picks)
+        self._created.append(state.searchId)
+        return state
+
+    def _release_created(self, keep):
+        for sid in self._created:
+            if sid != keep:
+                try:
+                    search_release(sid)
+                except Exception:
+                    pass
+        self._created = []
 
     # --- public: choose an action at the env's current solver decision ------
     def search(self, root_state) -> int:
         """Run N simulations from ``root_state`` (a SearchState) and return the
         most-visited legal option index at the root."""
+        self._created = []
         root = _Node(root_state.searchId, root_state.observation)
         self._expand(root)
         for _ in range(self.cfg.mcts_simulations):
             self._simulate(root)
-        # Greedy by visit count over root edges.
-        if not root.N:
-            return 0
-        return max(root.N, key=root.N.get)
+        action = max(root.N, key=root.N.get) if root.N else 0
+        self._release_created(keep=root_state.searchId)
+        return action
 
     def search_policy(self, root_state, temperature: float = 1.0,
                       greedy: bool = False):
@@ -95,6 +113,7 @@ class MCTS:
         when ``greedy``); ``None`` when the root has no option edges/visits
         (the caller then closes the select with STOP). ``root_value`` is the
         net's value-head estimate at the root (diagnostics)."""
+        self._created = []
         root = _Node(root_state.searchId, root_state.observation)
         self._expand(root)
         for _ in range(self.cfg.mcts_simulations):
@@ -103,6 +122,7 @@ class MCTS:
         n = len(sel.option) if sel else 0
         _, root_value = self._priors(root.obs) if n else (None, 0.0)
         pi = visit_policy(root.N, n, temperature)
+        self._release_created(keep=root_state.searchId)
         if n == 0 or pi.sum() <= 0.0:
             return None, pi, float(root_value)
         action = int(pi.argmax()) if greedy else int(np.random.choice(n, p=pi))
@@ -156,7 +176,7 @@ class MCTS:
             picks = list(node.pending) + [best_edge]
             # Commit when the select is satisfied; else keep buffering on a child.
             if len(picks) >= sel.minCount and len(picks) >= 1:
-                next_state = search_step(node.search_id, picks)
+                next_state = self._step(node.search_id, picks)
                 child_obs = next_state.observation
                 child = _Node(next_state.searchId, child_obs)
                 child = self._advance_opponent(child)
@@ -203,7 +223,7 @@ class MCTS:
                 picks = [0] if len(sel.option) else []
                 if sel.minCount >= len(sel.option):
                     picks = list(range(len(sel.option)))[:max(sel.minCount, 1)]
-                state = search_step(node.search_id, picks)
+                state = self._step(node.search_id, picks)
                 node = _Node(state.searchId, state.observation)
                 continue
             if node.obs.current.yourIndex == self.solver_seat:
@@ -214,6 +234,6 @@ class MCTS:
             except Exception:
                 action = list(range(sel.minCount or 1))
             action = [a for a in action if 0 <= a < len(sel.option)][: sel.maxCount or 1]
-            state = search_step(node.search_id, action or [0])
+            state = self._step(node.search_id, action or [0])
             node = _Node(state.searchId, state.observation)
         return node

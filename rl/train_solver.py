@@ -29,6 +29,13 @@ def _load_deck(path) -> list[int]:
     return json.load(open(path))
 
 
+def _onehot(idx: int, length: int) -> np.ndarray:
+    v = np.zeros(int(length), dtype=np.float64)
+    if length > 0:
+        v[min(int(idx), int(length) - 1)] = 1.0
+    return v
+
+
 def make_policy_actor(policy):
     """Default actor: sample directly from the net (no search)."""
     def actor(env, obs, prior_weight):
@@ -48,23 +55,33 @@ def make_mcts_actor(mcts, policy):
     yields a legal action (incl. STOP). This keeps every recorded action legal so its
     re-eval log-prob is finite — an illegal action gives log_prob=-inf, which poisons
     the objective (CISPO -> NaN, REINFORCE -> +inf) and stalls multi-pick selects in a
-    no-op loop."""
+    no-op loop.
+
+    Also returns a 4th element ``info`` carrying the full MCTS visit distribution
+    ``pi`` (length n_options+1, aligned to the policy logits incl. the STOP slot)
+    as the AlphaZero policy target. When deferring to the net, ``pi`` is a one-hot
+    on the chosen action (imitate-the-move target)."""
     def actor(env, obs, prior_weight):
-        if getattr(env, "mode", None) != "search":
-            return policy.act(obs, prior_weight)
-        _, pi, value = mcts.search_policy(env.search_state())
         n = obs["n_options"]
+        if getattr(env, "mode", None) != "search":
+            a, lp, v = policy.act(obs, prior_weight)
+            return a, lp, v, {"pi": _onehot(a, n + 1)}
+        _, pi, value = mcts.search_policy(env.search_state())
         mask = np.asarray(obs["mask"], dtype=np.float64)
         pi = np.asarray(pi, dtype=np.float64)
         if n > 0 and pi.shape[0] == n:
             legal_pi = pi * mask[:n]            # restrict to options legal right now
             s = legal_pi.sum()
             if s > 0:
+                legal_pi = legal_pi / s
                 a = int(legal_pi.argmax())
-                return a, float(np.log(legal_pi[a] / s + 1e-12)), float(value)
+                pi_full = np.zeros(n + 1, dtype=np.float64)
+                pi_full[:n] = legal_pi          # STOP slot target = 0
+                return a, float(np.log(legal_pi[a] + 1e-12)), float(value), {"pi": pi_full}
         # No legal MCTS option (mid multi-pick its mass sat on a picked option, or
         # n == 0): the masked net policy always returns a legal action / STOP.
-        return policy.act(obs, prior_weight)
+        a, lp, v = policy.act(obs, prior_weight)
+        return a, lp, v, {"pi": _onehot(a, n + 1)}
     return actor
 
 
@@ -86,9 +103,13 @@ def collect_rollouts(policy, env: TCGEnv, scenarios, k: int, prior_weight: float
             guard = 0
             while not env.done and guard < CONFIG.max_steps:
                 guard += 1
-                action, logp, value = actor(env, obs, prior_weight)
+                res = actor(env, obs, prior_weight)
+                if len(res) == 4:
+                    action, logp, value, info = res
+                else:
+                    action, logp, value = res; info = {}
                 steps.append({"obs": obs, "action": action, "logp": float(logp),
-                              "value": float(value)})
+                              "value": float(value), **info})
                 obs, _, done, _ = env.step(action)
             reward = env._reward()
             rollouts.append(Rollout(scenario_id=sid, steps=steps,

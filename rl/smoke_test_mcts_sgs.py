@@ -18,7 +18,7 @@ from pathlib import Path
 # Tiny, fast settings BEFORE importing CONFIG-consumers.
 os.environ.setdefault("RL_MCTS_SIMS", "8")
 os.environ.setdefault("RL_K", "2")
-os.environ.setdefault("RL_OBJECTIVE", "reinforce_half")
+os.environ.setdefault("RL_OBJECTIVE", "alphazero")
 
 from .targets import build_target_set
 from .problem_set import load_problem_set, seed_scenarios, write_problem_set
@@ -49,7 +49,7 @@ def main() -> int:
     #    (with the default conjecture_after=2 it would never fire inside 2 gens).
     policy, history = run_sgs(generations=2, batch_size=min(4, len(D)),
                               run_name="smoke_mcts_sgs", use_mcts=True,
-                              problem_set=str(tmp), objective="reinforce_half",
+                              problem_set=str(tmp), objective="alphazero",
                               conjecture_after=0)
     assert len(history) == 2, history
     for rec in history:
