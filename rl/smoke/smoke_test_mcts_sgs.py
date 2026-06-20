@@ -2,7 +2,7 @@
 
   docker build --platform=linux/amd64 -f rl/Dockerfile -t cabt-rl .
   docker run --rm --platform=linux/amd64 -v "$PWD":/app -w /app cabt-rl \
-      python -m rl.smoke_test_mcts_sgs
+      python -m rl.smoke.smoke_test_mcts_sgs
 
 Verifies: parametric problem-set export -> load/seed -> 2 SGS generations with the
 MCTS actor under CISPO -> a finite loss and a written checkpoint. Tiny knobs so it
@@ -20,11 +20,11 @@ os.environ.setdefault("RL_MCTS_SIMS", "8")
 os.environ.setdefault("RL_K", "2")
 os.environ.setdefault("RL_OBJECTIVE", "alphazero")
 
-from .targets import build_target_set
-from .problem_set import load_problem_set, seed_scenarios, write_problem_set
-from .conjecturer import get_conjecturer
-from .conjecturer.export_problems import export_problems
-from .outer_loop import run_sgs
+from rl.core.targets import build_target_set
+from rl.core.problem_set import load_problem_set, seed_scenarios, write_problem_set
+from rl.conjecturer import get_conjecturer
+from rl.conjecturer.export_problems import export_problems
+from rl.solver.outer_loop import run_sgs
 
 
 def main() -> int:

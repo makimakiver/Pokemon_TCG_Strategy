@@ -10,9 +10,9 @@ import importlib
 import json
 import os
 
-from ..config import DECKS_DIR, EVAL_GAUNTLET, solver_deck_path
-from ..env import TCGEnv, STOP   # reuse the env for play; STOP imported for parity
-from .. import dsl_agent
+from rl.config import DECKS_DIR, EVAL_GAUNTLET, solver_deck_path
+from rl.core.env import TCGEnv, STOP   # reuse the env for play; STOP imported for parity
+from rl.agents import dsl_agent
 
 
 def _bare_for(deck_path):

@@ -22,8 +22,8 @@ import os
 import numpy as np
 
 from cg.api import to_observation_class
-from . import encode
-from .config import CONFIG, RUNS_DIR, solver_deck_path
+from rl.core import encode
+from rl.config import CONFIG, RUNS_DIR, solver_deck_path
 
 my_deck = json.load(open(solver_deck_path()))
 assert len(my_deck) == 60
@@ -38,7 +38,7 @@ def _get_policy():
     if _policy is not None or _failed:
         return _policy
     try:
-        from .policy import load
+        from rl.solver.policy import load
         _policy = load(_CKPT)
         print(f"[net_agent] loaded checkpoint {_CKPT}")
     except Exception as e:

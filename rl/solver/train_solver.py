@@ -16,13 +16,13 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from .config import CONFIG, RUNS_DIR, solver_deck_path
+from rl.config import CONFIG, RUNS_DIR, solver_deck_path
 try:
-    from .env import TCGEnv          # engine-only; used only as a type annotation
+    from rl.core.env import TCGEnv          # engine-only; used only as a type annotation
 except Exception:                    # non-engine host: annotation is a string (PEP 563)
     TCGEnv = None
-from .policy import PointerPolicy, prior_weight_at, save as save_policy
-from .solver_objectives import get_objective, Rollout
+from rl.solver.policy import PointerPolicy, prior_weight_at, save as save_policy
+from rl.solver.solver_objectives import get_objective, Rollout
 
 
 def _load_deck(path) -> list[int]:

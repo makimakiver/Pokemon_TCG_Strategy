@@ -5,8 +5,8 @@ from __future__ import annotations
 import json
 import os
 
-from .config import solver_deck_path, REPO_ROOT
-from .dsl.interpret import compile, load
+from rl.config import solver_deck_path, REPO_ROOT
+from rl.dsl.interpret import compile, load
 
 with open(solver_deck_path()) as _f:
     my_deck = json.load(_f)

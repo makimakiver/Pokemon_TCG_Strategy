@@ -28,10 +28,10 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from .config import CONFIG, RUNS_DIR, solver_deck_path
-from .env import TCGEnv
-from .policy import PointerPolicy, save as save_policy
-from .sft import collect_traces, train_sft
+from rl.config import CONFIG, RUNS_DIR, solver_deck_path
+from rl.core.env import TCGEnv
+from rl.solver.policy import PointerPolicy, save as save_policy
+from rl.bootstrap.sft import collect_traces, train_sft
 
 
 def _load(p):
@@ -91,7 +91,7 @@ def main():
         print(f"[1] loaded {len(data)} cached teacher decisions from {args.traces}")
     else:
         print(f"[1] collecting {args.teacher_games} teacher games (rl.llm_agent as solver) ...")
-        data = collect_traces(solver_deck, opp_deck, "rl.llm_agent", "agents.bare_agent",
+        data = collect_traces(solver_deck, opp_deck, "rl.agents.llm_agent", "agents.bare_agent",
                               n_games=args.teacher_games)
         print(f"    {len(data)} (state -> pick) decisions collected")
         # Cache so re-SFT never re-pays for Claude calls.

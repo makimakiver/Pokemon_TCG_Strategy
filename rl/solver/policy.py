@@ -20,7 +20,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from .config import CONFIG
+from rl.config import CONFIG
 
 # Last option feature is the normalized scripted prior (see encode.OPTION_FEATURE_NAMES).
 PRIOR_FEATURE_INDEX = CONFIG.option_feat_dim - 1

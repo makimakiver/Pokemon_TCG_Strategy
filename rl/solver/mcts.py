@@ -20,11 +20,11 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from .config import CONFIG
+from rl.config import CONFIG
 
 try:                                  # engine-only deps; absent on a non-engine host
     from cg.api import search_step, search_release
-    from . import encode
+    from rl.core import encode
 except Exception:                     # module still imports for pure-Python helpers
     search_step = search_release = encode = None
 
@@ -208,7 +208,7 @@ class MCTS:
         """Step the scripted opponent (and forced selects) until it's the solver's
         turn or the game ends — mirroring TCGEnv._advance_to_solver inside search."""
         import dataclasses
-        from .env import _to_dict
+        from rl.core.env import _to_dict
         guard = 0
         while True:
             guard += 1

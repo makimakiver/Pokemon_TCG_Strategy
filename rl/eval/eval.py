@@ -17,8 +17,8 @@ from pathlib import Path
 
 import numpy as np
 
-from .config import CONFIG, DECKS_DIR, EVAL_GAUNTLET, solver_deck_path
-from .env import TCGEnv
+from rl.config import CONFIG, DECKS_DIR, EVAL_GAUNTLET, solver_deck_path
+from rl.core.env import TCGEnv
 
 # Meta-share weights (limitlesstcg TEF-CRI). Uniform placeholder until the exact
 # shares are wired in; keys are deck json filenames.
@@ -71,7 +71,7 @@ def evaluate(policy, games_each: int = 20, use_mcts: bool | None = None,
 
 
 if __name__ == "__main__":
-    from .policy import load
+    from rl.solver.policy import load
     import sys
     ckpt = sys.argv[1] if len(sys.argv) > 1 else str(Path(CONFIG.device))
     policy = load(ckpt)

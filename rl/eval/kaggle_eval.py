@@ -29,7 +29,7 @@ os.environ["RL_OUTER_ITERS"] = "0"
 
 import torch
 
-from rl.kaggle_mcts import MyModel, mcts_agent, random_agent, sample_deck
+from rl.kaggle.kaggle_mcts import MyModel, mcts_agent, random_agent, sample_deck
 from cg.game import battle_start, battle_finish, battle_select
 
 

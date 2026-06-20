@@ -30,9 +30,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from ..config import CONFIG
-from ..scenario import ScenarioSpec, EditScript, EditOp
-from .parametric import ParametricConjecturer
+from rl.config import CONFIG
+from rl.core.scenario import ScenarioSpec, EditScript, EditOp
+from rl.conjecturer.parametric import ParametricConjecturer
 
 
 # Structured-output contract (kinds MUST match scenario.EditKind exactly).
@@ -141,17 +141,30 @@ def _extract_json(text: str) -> dict:
         return {}
 
 
+def _as_int(v) -> int:
+    """Coerce a model-emitted value to int; small models often return strings/garbage."""
+    try:
+        return int(v)
+    except (TypeError, ValueError):
+        return 0
+
+
 def _clamp_ops(parsed: dict, spec: ScenarioSpec) -> list[EditOp]:
     """Keep only legal kinds with on-distribution card ids (mirrors parametric)."""
     ops: list[EditOp] = []
     your_deck = set(spec.your_deck)
     opp_hand_pool = set(spec.opponent_hand) | set(spec.opponent_deck)
-    for e in (parsed.get("edits") or [])[: CONFIG.edit_budget]:
+    raw_edits = parsed.get("edits") if isinstance(parsed, dict) else None
+    if not isinstance(raw_edits, list):          # model may emit a non-list "edits"
+        raw_edits = []
+    for e in raw_edits[: CONFIG.edit_budget]:
+        if not isinstance(e, dict):              # ...or list items that aren't dicts
+            continue
         kind = e.get("kind")
         if kind not in _LEGAL_KINDS:
             continue
-        cid = int(e.get("card_id", 0) or 0)
-        slot = int(e.get("slot", 0) or 0)
+        cid = _as_int(e.get("card_id", 0))
+        slot = _as_int(e.get("slot", 0))
         if kind == "stack_your_deck_top" and cid not in your_deck:
             continue                                  # must be a card we actually own
         if kind in ("set_opponent_hand", "weaken_opponent_hand") and opp_hand_pool \
@@ -213,8 +226,11 @@ class LLMConjecturer:
     def _ids_for(self, prompt: str):
         msgs = [{"role": "system", "content": _SYSTEM},
                 {"role": "user", "content": prompt}]
-        return self._tok.apply_chat_template(
-            msgs, add_generation_prompt=True, return_tensors="pt").to(self._model.device)
+        enc = self._tok.apply_chat_template(
+            msgs, add_generation_prompt=True, return_tensors="pt")
+        if hasattr(enc, "input_ids"):          # newer transformers returns a BatchEncoding
+            enc = enc.input_ids
+        return enc.to(self._model.device)
 
     def _generate(self, prompt: str):
         """Sample a completion; return (text, old_logp) where old_logp is the summed

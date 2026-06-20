@@ -16,8 +16,8 @@ from __future__ import annotations
 
 import math
 
-from ..config import CONFIG
-from ..scenario import ScenarioSpec, EditScript, EditOp
+from rl.config import CONFIG
+from rl.core.scenario import ScenarioSpec, EditScript, EditOp
 
 
 # Edit-script templates. Each maps (target -> list[EditOp]); card ids are filled

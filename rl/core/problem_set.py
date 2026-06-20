@@ -11,7 +11,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from .scenario import ScenarioSpec, EditScript, EditOp
+from rl.core.scenario import ScenarioSpec, EditScript, EditOp
 
 
 def problem_row(target_id: str, source: str, backend: str, edits: EditScript) -> dict:

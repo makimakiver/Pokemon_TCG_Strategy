@@ -22,8 +22,8 @@ import json
 from collections import Counter
 from pathlib import Path
 
-from .config import LOSER_DIR
-from .scenario import ScenarioSpec
+from rl.config import LOSER_DIR
+from rl.core.scenario import ScenarioSpec
 
 
 def _deck_from_step1(replay: dict, agent: int) -> list[int] | None:

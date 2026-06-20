@@ -19,10 +19,10 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from .config import CONFIG
-from . import encode
-from .env import TCGEnv, STOP, _to_dict
-from .policy import PointerPolicy
+from rl.config import CONFIG
+from rl.core import encode
+from rl.core.env import TCGEnv, STOP, _to_dict
+from rl.solver.policy import PointerPolicy
 
 
 # Card-id signature of the Team Rocket's Honchkrow ("Crow") deck, used to detect

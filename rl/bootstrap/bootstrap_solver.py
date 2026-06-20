@@ -31,10 +31,10 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from .config import CONFIG, RUNS_DIR, solver_deck_path
-from .policy import PointerPolicy, save as save_policy
-from .sft import collect_traces, train_sft
-from .distill_claude import head_to_head   # net (greedy) vs a module pilot, seats swapped
+from rl.config import CONFIG, RUNS_DIR, solver_deck_path
+from rl.solver.policy import PointerPolicy, save as save_policy
+from rl.bootstrap.sft import collect_traces, train_sft
+from rl.bootstrap.distill_claude import head_to_head   # net (greedy) vs a module pilot, seats swapped
 
 TEACHER = "agents.main_v5"
 

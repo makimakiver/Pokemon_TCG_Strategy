@@ -6,17 +6,17 @@ documented stubs.
 """
 from __future__ import annotations
 
-from .parametric import ParametricConjecturer
+from rl.conjecturer.parametric import ParametricConjecturer
 
 __all__ = ["ParametricConjecturer", "get_conjecturer"]
 
 
 def get_conjecturer(name: str | None = None):
-    from ..config import CONFIG
+    from rl.config import CONFIG
     name = name or CONFIG.conjecturer
     if name == "parametric":
         return ParametricConjecturer()
     if name == "llm":
-        from .author import LLMConjecturer
+        from rl.conjecturer.author import LLMConjecturer
         return LLMConjecturer()
     raise ValueError(f"unknown conjecturer '{name}'")

@@ -22,7 +22,7 @@ from dataclasses import dataclass, field
 import numpy as np
 import torch
 
-from .config import CONFIG
+from rl.config import CONFIG
 
 
 @dataclass

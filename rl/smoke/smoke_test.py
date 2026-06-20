@@ -8,7 +8,7 @@ Verifies, inside the Docker engine image:
   5. no battle_ptr / search leaks across many reset cycles.
 
 Run: docker run --rm --platform=linux/amd64 -v "$PWD":/app -w /app cabt-rl \
-       python -m rl.smoke_test
+       python -m rl.smoke.smoke_test
 """
 from __future__ import annotations
 
@@ -17,10 +17,10 @@ import random
 import numpy as np
 import torch
 
-from .config import solver_deck_path
-from .env import TCGEnv, STOP
-from .policy import PointerPolicy
-from .targets import build_target_set
+from rl.config import solver_deck_path
+from rl.core.env import TCGEnv, STOP
+from rl.solver.policy import PointerPolicy
+from rl.core.targets import build_target_set
 import json
 import importlib
 

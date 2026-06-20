@@ -7,7 +7,7 @@ the harness agent interface (``agent(obs_dict) -> list[int]`` + module-level
 
   * opponent in ``TCGEnv``            → ``RL_OPP=rl.llm_agent``
   * head-to-head in the runner        → ``python runner.py --a rl.llm_agent --b agents.bare_agent``
-  * **SFT teacher** (the best use)    → ``sft.collect_traces(..., scripted_module="rl.llm_agent")``
+  * **SFT teacher** (the best use)    → ``sft.collect_traces(..., scripted_module="rl.agents.llm_agent")``
     lets Claude play and clones its moves into the shippable net.
 
 How it decides: for a real (non-forced) selection it renders the board + the
@@ -32,8 +32,8 @@ import os
 from cg.api import (
     AreaType, CardType, OptionType, Pokemon, SelectContext, to_observation_class,
 )
-from . import encode
-from .config import solver_deck_path
+from rl.core import encode
+from rl.config import solver_deck_path
 
 # ---- Deck this LLM agent pilots (the Honchkrow 26267 solver deck) ----
 my_deck = json.load(open(solver_deck_path()))

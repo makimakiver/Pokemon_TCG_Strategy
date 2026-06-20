@@ -20,7 +20,7 @@ import os
 import random
 import sys
 
-from ..problem_set import problem_row, write_problem_set
+from rl.core.problem_set import problem_row, write_problem_set
 
 
 def export_problems(conjecturer, D, rng, backend: str) -> list[dict]:
@@ -46,7 +46,7 @@ def main(argv=None) -> int:
         os.environ["RL_CONJ_LORA"] = args.lora
     os.environ["RL_CONJ"] = args.backend
 
-    from ..targets import build_target_set
+    from rl.core.targets import build_target_set
     from . import get_conjecturer
 
     D = build_target_set()

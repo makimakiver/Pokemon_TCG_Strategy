@@ -24,17 +24,17 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from .config import CONFIG, RUNS_DIR, solver_deck_path
-from .env import TCGEnv
-from .policy import PointerPolicy, prior_weight_at, save as save_policy
-from .solver_objectives import get_objective, Rollout
-from .targets import build_target_set
-from .conjecturer import get_conjecturer
-from .guide import guide_score
-from .train_solver import collect_rollouts, _load_deck, make_mcts_actor
-from .mcts import MCTS
-from .problem_set import load_problem_set, seed_scenarios
-from .scenario import ScenarioSpec
+from rl.config import CONFIG, RUNS_DIR, solver_deck_path
+from rl.core.env import TCGEnv
+from rl.solver.policy import PointerPolicy, prior_weight_at, save as save_policy, load as load_policy
+from rl.solver.solver_objectives import get_objective, Rollout
+from rl.core.targets import build_target_set
+from rl.conjecturer import get_conjecturer
+from rl.solver.guide import guide_score
+from rl.solver.train_solver import collect_rollouts, _load_deck, make_mcts_actor
+from rl.solver.mcts import MCTS
+from rl.core.problem_set import load_problem_set, seed_scenarios
+from rl.core.scenario import ScenarioSpec
 
 
 def _winrate(policy, env, scenario, k, pw, actor=None):
@@ -44,7 +44,8 @@ def _winrate(policy, env, scenario, k, pw, actor=None):
 
 def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs",
             use_mcts: bool = False, problem_set=None, objective: str | None = None,
-            conjecture_after: int = 2):
+            conjecture_after: int = 2, init_ckpt: str | None = None,
+            live_games: int = 0):
     random.seed(CONFIG.seed); np.random.seed(CONFIG.seed); torch.manual_seed(CONFIG.seed)
     rng = random.Random(CONFIG.seed)
 
@@ -67,7 +68,12 @@ def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs"
     opp_deck = list(getattr(opponent, "my_deck", solver_deck))
     env = TCGEnv(solver_deck, opp_deck, opponent)
 
-    policy = PointerPolicy()
+    import os
+    if init_ckpt and os.path.exists(init_ckpt):
+        policy = load_policy(init_ckpt)
+        print(f"[sgs] warm-started solver from {init_ckpt}")
+    else:
+        policy = PointerPolicy()
     objective = get_objective(objective)   # default (None) -> CONFIG.objective (reinforce_half)
     conjecturer = get_conjecturer()
     opt = torch.optim.Adam(policy.parameters(), lr=CONFIG.lr)
@@ -118,6 +124,21 @@ def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs"
                 r_synth = r_solve * r_guide
                 synth_updates.append((conj_idx, r_synth))
 
+        # --- Live turn-0 full games (teach the OPENING, which the problem set lacks) ---
+        # MCTS is search-mode only, so the actor falls back to the net (no search) in
+        # live mode. Win-gate the policy target: winning openings are reinforced
+        # (pi=one-hot kept); losing openings update only the value head (pi=None), so we
+        # never reinforce a losing line.
+        live_wr = None
+        if live_games > 0:
+            live_rs = collect_rollouts(policy, env, [None], live_games, pw, actor=actor)
+            for r in live_rs:
+                if not r.win:
+                    for s in r.steps:
+                        s["pi"] = None
+            rollouts.extend(live_rs)
+            live_wr = float(np.mean([r.win for r in live_rs])) if live_rs else 0.0
+
         # --- Solver update ---
         loss, metrics = objective.compute_loss(policy, rollouts, pw)
         if isinstance(loss, torch.Tensor) and loss.requires_grad:
@@ -136,12 +157,14 @@ def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs"
         rec = {"gen": gen, "cum_solved": cum_solved, "n_targets": len(D),
                "solve_rate": cum_solved / len(D), "loss": loss_val,
                "grad_norm": float(gnorm), "prior_weight": pw,
+               "live_winrate": live_wr,
                "conjecturer": conjecturer.snapshot()
                if hasattr(conjecturer, "snapshot") else None, **metrics}
         history.append(rec)
+        live_str = f" | live_win {live_wr:.2f}" if live_wr is not None else ""
         print(f"[sgs] gen {gen:3d} | solved {cum_solved}/{len(D)} "
               f"({cum_solved/len(D):.0%}) | loss {loss_val:+.3f} "
-              f"| ent {metrics.get('entropy', 0):.3f} | synth {len(synth_updates)}")
+              f"| ent {metrics.get('entropy', 0):.3f} | synth {len(synth_updates)}{live_str}")
         json.dump(history, open(out / "history.json", "w"), indent=2)
         if gen % 5 == 0 or gen == generations - 1:
             save_policy(policy, out / f"solver_{gen:04d}.pt")

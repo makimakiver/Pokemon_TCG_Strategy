@@ -13,8 +13,8 @@ obviously-degenerate edits before paying for a rollout.
 """
 from __future__ import annotations
 
-from .config import CONFIG
-from .scenario import ScenarioSpec, EditScript
+from rl.config import CONFIG
+from rl.core.scenario import ScenarioSpec, EditScript
 
 
 def non_degeneracy(spec: ScenarioSpec) -> float:

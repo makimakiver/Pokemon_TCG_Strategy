@@ -3,7 +3,7 @@
 #   docker build --platform=linux/amd64 -f rl/Dockerfile -t cabt-rl .
 # Run (mount the repo for data/*.json which .dockerignore excludes from COPY):
 #   docker run --rm --platform=linux/amd64 -v "$PWD":/app -w /app cabt-rl \
-#     python -m rl.smoke_test
+#     python -m rl.smoke.smoke_test
 FROM --platform=linux/amd64 python:3.11-slim
 
 WORKDIR /app
@@ -13,4 +13,4 @@ COPY . /app
 
 # Default: run the P0 smoke test. Override with any `python -m rl.<module>`.
 ENTRYPOINT ["python"]
-CMD ["-m", "rl.smoke_test"]
+CMD ["-m", "rl.smoke.smoke_test"]

@@ -5,7 +5,7 @@ This is the Kaggle notebook script verbatim EXCEPT for two host-portability chan
   1. Import bootstrap. Kaggle locates the engine with
          sys.path.append(glob.glob('/kaggle/input/**/cg-lib', recursive=True)[0])
      Locally `cg` is a package at the repo root, so we just make sure the repo
-     root is importable (it already is when run as `python -m rl.kaggle_mcts`
+     root is importable (it already is when run as `python -m rl.kaggle.kaggle_mcts`
      from /app; the fallback below also covers `python rl/kaggle_mcts.py`).
 
   2. Loop sizes are env-overridable so you can smoke-test cheaply. The defaults
@@ -596,7 +596,16 @@ def progress(count: int, text: str):
         current += 1
 
 # A sample deck for training.
-sample_deck = [721,721,722,722,722,722,723,723,723,723,1092,1121,1121,1145,1145,1163,1163,1219,1219,1219,1219,1227,1227,1227,1227,1262,1262,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
+sample_deck = [721,721,722,722,722,722,723,723,723,723,1092,1121,1121,1145,1145,1163,1163,1219,1219,1219,1219,1227,1227,1227,1227,1262,1262,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
+
+# Optional: train the net on a DIFFERENT deck (RL_DECK = path to a 60-card JSON
+# list), e.g. the Honchkrow 26267 list. The net is deck-conditioned, so it must be
+# trained on whatever deck it will ship with.
+_deck_override = os.environ.get("RL_DECK", "")
+if _deck_override and os.path.exists(_deck_override):
+    sample_deck = json.load(open(_deck_override))
+    assert len(sample_deck) == 60, f"RL_DECK has {len(sample_deck)} cards"
+    print(f"[deck] training on RL_DECK={_deck_override} (first ids {sample_deck[:6]})", flush=True)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = MyModel(128, 2, 256, 1, 1)
@@ -621,36 +630,60 @@ SELFPLAY_GAMES = int(os.environ.get("RL_SELFPLAY_GAMES", "100"))
 metrics = []
 
 # --- Opponents: decoupled eval metric vs self-play data generation -----------
-# RL_EVAL_OPP:     who the eval win rate is measured against. "self" = random_agent
-#                  baseline, "bare" = agents.bare_agent (the real target pilot).
-# RL_SELFPLAY_OPP: how training DATA is generated. "self" = MCTS vs MCTS (balanced
-#                  +/-1 signal — the only thing that reliably trains this net),
-#                  "bare" = vs bare_agent (collapses — see runs), "mix" = mostly
-#                  self-play with a fraction of vs-bare games (keeps bare IN the
-#                  data without the all-loss collapse).
-# RL_MIX_FRAC:     fraction of self-play games played vs bare when mode is "mix".
+# RL_EVAL_OPP / RL_SELFPLAY_OPP accept:
+#   "self"    -> MCTS vs MCTS self-play (for eval, scored against random_agent).
+#   "random"  -> random_agent.
+#   "bare"    -> agents.bare_agent forced onto a MIRROR sample_deck.
+#   "<name>"  -> any agents.<name> module (e.g. "main_v5") playing its OWN my_deck.
+#   "mix"     -> (RL_SELFPLAY_OPP only) mostly self-play + RL_MIX_FRAC of games vs
+#                the EVAL opponent — keeps the target opponent IN the data without
+#                the all-loss value-collapse a pure-opponent diet causes.
+# RL_MIX_FRAC: fraction of self-play games played vs the eval opponent when "mix".
 # (Back-compat: RL_OPPONENT seeds both if the new vars aren't set.)
+import importlib
+
 _legacy = os.environ.get("RL_OPPONENT")
 RL_EVAL_OPP = os.environ.get("RL_EVAL_OPP", _legacy or "self")
 RL_SELFPLAY_OPP = os.environ.get("RL_SELFPLAY_OPP", _legacy or "self")
 RL_MIX_FRAC = float(os.environ.get("RL_MIX_FRAC", "0.25"))
 _bare_every = max(1, round(1.0 / RL_MIX_FRAC)) if RL_MIX_FRAC > 0 else 0
 
-if (RL_EVAL_OPP == "bare") or (RL_SELFPLAY_OPP in ("bare", "mix")):
-    # bare_agent derives its deck roles from BARE_DECK at import time, so point it
-    # at our deck first so it pilots sample_deck (mirror, not its fallback list).
-    with open("out/sample_deck.json", "w") as _f:
-        json.dump(sample_deck, _f)
-    os.environ["BARE_DECK"] = "out/sample_deck.json"
-    from agents import bare_agent as _opponent
-    bare_move = _opponent.agent
-else:
-    bare_move = None
 
-# Eval move-fn (the win rate is measured against this opponent).
-opponent_move = bare_move if RL_EVAL_OPP == "bare" else random_agent
+def _resolve_opponent(spec):
+    """spec -> (move_fn(obs_dict)->list[int], opp_deck). opp_deck == sample_deck is
+    a mirror; a different list means the opponent pilots its own deck."""
+    if spec in ("self", "random"):
+        return (random_agent, list(sample_deck))
+    if spec == "bare":
+        # generic pilot forced onto a MIRROR sample_deck (BARE_DECK set pre-import).
+        with open("out/sample_deck.json", "w") as f:
+            json.dump(sample_deck, f)
+        os.environ["BARE_DECK"] = "out/sample_deck.json"
+        mod = importlib.import_module("agents.bare_agent")
+        return (mod.agent, list(sample_deck))
+    # any other agent module, playing its OWN deck (e.g. main_v5 -> Honchkrow 26267).
+    mod = importlib.import_module(spec if "." in spec else f"agents.{spec}")
+    return (mod.agent, list(mod.my_deck))
+
+
+def start_game(net_seat, opp_deck):
+    """Start a battle: net's sample_deck at net_seat, opp_deck on the other seat."""
+    return battle_start(sample_deck, opp_deck) if net_seat == 0 else battle_start(opp_deck, sample_deck)
+
+
+# Eval opponent (the win rate is measured against this).
+opponent_move, EVAL_OPP_DECK = _resolve_opponent(RL_EVAL_OPP)
+
+# Self-play opponent for the non-self portion of data.
+if RL_SELFPLAY_OPP == "self":
+    SP_OPP_MOVE, SP_OPP_DECK = None, None
+elif RL_SELFPLAY_OPP == "mix":
+    SP_OPP_MOVE, SP_OPP_DECK = opponent_move, EVAL_OPP_DECK  # mix in the eval opponent
+else:
+    SP_OPP_MOVE, SP_OPP_DECK = _resolve_opponent(RL_SELFPLAY_OPP)
+
 print(f"[opponent] eval vs {RL_EVAL_OPP}; self-play data = {RL_SELFPLAY_OPP}"
-      + (f" (1 in {_bare_every} games vs bare)" if RL_SELFPLAY_OPP == "mix" else ""),
+      + (f" (1 in {_bare_every} games vs {RL_EVAL_OPP})" if RL_SELFPLAY_OPP == "mix" else ""),
       flush=True)
 
 # The main training loop.
@@ -664,7 +697,8 @@ for counter in range(OUTER_ITERS):
         results = [0, 0, 0]
 
         for i in progress(EVAL_GAMES, "Evaluating... "):
-            obs, start_data = battle_start(sample_deck, sample_deck)
+            your_index = i % 2
+            obs, start_data = start_game(your_index, EVAL_OPP_DECK)
             if start_data.errorPlayer >= 0:
                 error = "Deck error."
                 if start_data.errorType == 1:
@@ -676,7 +710,6 @@ for counter in range(OUTER_ITERS):
                 elif start_data.errorType == 4:
                     error = "You can include only one Ace Spec card in the deck."
                 raise ValueError(error)
-            your_index = i % 2
             while True:
                 # Break the loop if the game has ended.
                 if obs["current"]["result"] >= 0:
@@ -724,18 +757,17 @@ for counter in range(OUTER_ITERS):
                 sample_list.append(sample)
 
         for g in progress(SELFPLAY_GAMES, "Training Data Collecting... "):
-            obs, _ = battle_start(sample_deck, sample_deck)
+            # Decide this game's data source: self-play (MCTS vs MCTS) or vs-opponent.
+            if SP_OPP_MOVE is None:               # pure self-play
+                opp_game = False
+            elif RL_SELFPLAY_OPP == "mix":        # mostly self-play, some vs opponent
+                opp_game = (_bare_every > 0 and g % _bare_every == 0)
+            else:                                  # pure vs opponent
+                opp_game = True
 
-            # Decide this game's data source: self-play (MCTS vs MCTS) or vs-bare.
-            if RL_SELFPLAY_OPP == "bare":
-                bare_game = True
-            elif RL_SELFPLAY_OPP == "mix":
-                bare_game = (_bare_every > 0 and g % _bare_every == 0)
-            else:  # "self"
-                bare_game = False
-
-            if not bare_game:
+            if not opp_game:
                 # MCTS vs MCTS — collect a trajectory for BOTH seats (balanced).
+                obs, _ = battle_start(sample_deck, sample_deck)
                 samples:list[list[LearnSample]] = [[], []]
                 while obs["current"]["result"] < 0:
                     selected, sample = mcts_agent(obs, sample_deck, model)
@@ -746,15 +778,16 @@ for counter in range(OUTER_ITERS):
                 for i in range(2):
                     label_trajectory(samples[i], won=(i == result))
             else:
-                # MCTS net vs bare_agent — collect ONLY the net's seat.
+                # MCTS net vs the scripted opponent (its own deck) — net seat only.
                 net_seat = g % 2  # alternate seats so the net learns both sides
+                obs, _ = start_game(net_seat, SP_OPP_DECK)
                 net_samples = []
                 while obs["current"]["result"] < 0:
                     if obs["current"]["yourIndex"] == net_seat:
                         selected, sample = mcts_agent(obs, sample_deck, model)
                         net_samples.append(sample)
                     else:
-                        selected = bare_move(obs)
+                        selected = SP_OPP_MOVE(obs)
                     obs = battle_select(selected)
                 battle_finish()
                 label_trajectory(net_samples, won=(net_seat == obs["current"]["result"]))

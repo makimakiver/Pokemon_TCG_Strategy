@@ -31,9 +31,9 @@ import numpy as np
 from cg.api import to_observation_class, search_begin, search_step, search_release
 from cg.game import battle_start, battle_select, battle_finish
 
-from .config import CONFIG
-from . import encode
-from .scenario import ScenarioSpec
+from rl.config import CONFIG
+from rl.core import encode
+from rl.core.scenario import ScenarioSpec
 
 
 STOP = "STOP"  # sentinel action: close a variable-length select

@@ -1,6 +1,6 @@
 import numpy as np
 
-from rl.mcts import visit_policy
+from rl.solver.mcts import visit_policy
 
 
 def test_visit_policy_normalizes_over_options():

@@ -14,7 +14,7 @@ from __future__ import annotations
 import multiprocessing as mp
 from typing import Callable
 
-from .env import TCGEnv, STOP
+from rl.core.env import TCGEnv, STOP
 
 
 def _worker(remote, parent_remote, env_fn):

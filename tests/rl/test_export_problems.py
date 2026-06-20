@@ -1,6 +1,6 @@
 import random
 
-from rl.scenario import ScenarioSpec, EditScript, EditOp
+from rl.core.scenario import ScenarioSpec, EditScript, EditOp
 from rl.conjecturer.export_problems import export_problems
 
 

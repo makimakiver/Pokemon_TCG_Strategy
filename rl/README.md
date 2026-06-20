@@ -45,19 +45,19 @@ docker build --platform=linux/amd64 -f rl/Dockerfile -t cabt-rl .
 
 # P0 — smoke test (scenario primitive + env + target set)
 docker run --rm --platform=linux/amd64 -v "$PWD":/app -w /app cabt-rl \
-  python -m rl.smoke_test
+  python -m rl.smoke.smoke_test
 
 # P1 — train the Solver vs a fixed anchor (bare_agent on the same deck)
 docker run --rm --platform=linux/amd64 -v "$PWD":/app -w /app cabt-rl \
-  python -m rl.train_solver
+  python -m rl.solver.train_solver
 
 # P2 — SGS loop (fixed D + parametric conjecturer + rule guide)
 docker run --rm --platform=linux/amd64 -v "$PWD":/app -w /app cabt-rl \
-  python -m rl.outer_loop
+  python -m rl.solver.outer_loop
 
 # Eval a checkpoint on the held-out gauntlet
 docker run --rm --platform=linux/amd64 -v "$PWD":/app -w /app cabt-rl \
-  python -m rl.eval rl/runs/p1/solver_final.pt
+  python -m rl.eval.eval rl/runs/p1/solver_final.pt
 ```
 
 ### LLM-driven policy (Claude picks moves live)
@@ -75,7 +75,7 @@ docker run --rm --platform=linux/amd64 -v "$PWD":/app -w /app \
   runner.py --a rl.llm_agent --b agents.bare_agent -n 10
 
 # Distill Claude into the shippable net (SFT teacher)
-#   sft.collect_traces(deck, opp_deck, "rl.llm_agent", "agents.bare_agent", n_games=...)
+#   sft.collect_traces(deck, opp_deck, "rl.agents.llm_agent", "agents.bare_agent", n_games=...)
 ```
 
 `RL_LLM_ALL=1` consults the LLM on every selection (default: only MAIN decisions,

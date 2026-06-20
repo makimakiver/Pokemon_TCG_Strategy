@@ -7,7 +7,7 @@ silently run the wrong objective.
 """
 from __future__ import annotations
 
-from .cispo_train import train_conjecturer_cispo
+from rl.conjecturer.cispo_train import train_conjecturer_cispo
 
 
 def train_conjecturer_grpo(*_, **__):

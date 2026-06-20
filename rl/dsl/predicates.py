@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .grammar import PREDICATE_ARITY
+from rl.dsl.grammar import PREDICATE_ARITY
 
 
 @dataclass

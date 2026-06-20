@@ -29,7 +29,7 @@ import math
 from collections import defaultdict
 from pathlib import Path
 
-from ..config import CONFIG
+from rl.config import CONFIG
 
 
 # --- buffer loading + CISPO group advantages (pure-python, host-testable) ----
@@ -95,7 +95,9 @@ def train_conjecturer_cispo(buffer_path: str | None = None, epochs: int | None =
     tok = AutoTokenizer.from_pretrained(name)
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
-    model = AutoModelForCausalLM.from_pretrained(name, torch_dtype=torch.bfloat16).to(device)
+    # bf16 only on CUDA; MPS/CPU use fp32 (bf16 on MPS falls back to CPU per-op and thrashes).
+    dtype = torch.bfloat16 if str(device).startswith("cuda") else torch.float32
+    model = AutoModelForCausalLM.from_pretrained(name, torch_dtype=dtype).to(device)
     lora = LoraConfig(r=CONFIG.conj_lora_r, lora_alpha=CONFIG.conj_lora_alpha,
                       lora_dropout=CONFIG.conj_lora_dropout, task_type="CAUSAL_LM",
                       target_modules=["q_proj", "k_proj", "v_proj", "o_proj"])
@@ -105,47 +107,63 @@ def train_conjecturer_cispo(buffer_path: str | None = None, epochs: int | None =
                             lr=CONFIG.conj_cispo_lr)
     clip = CONFIG.cispo_clip
 
-    from .author import _SYSTEM   # same system prompt the buffer rows were sampled under
+    from rl.conjecturer.author import _SYSTEM   # same system prompt the buffer rows were sampled under
 
-    def completion_logp_and_entropy(prompt: str, completion: str):
-        """Σ logπ_θ(completion tokens) and mean token entropy under the current policy."""
-        msgs = [{"role": "system", "content": _SYSTEM},
-                {"role": "user", "content": prompt}]
-        pre = tok.apply_chat_template(msgs, add_generation_prompt=True, return_tensors="pt")
-        comp = tok(completion, return_tensors="pt", add_special_tokens=False).input_ids
-        ids = torch.cat([pre, comp], dim=1).to(device)
-        out = model(ids)
-        logits = out.logits[0]                              # [T, V]
+    pad_id = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
+
+    def batch_logp_entropy(batch_rows):
+        """Per-row Σ logπ_θ(completion) and mean entropy via ONE padded forward over
+        the whole batch (vs one forward per row — fixes the MPS slowdown + memory hang
+        that wedged the per-row loop on large buffers)."""
+        seqs, spans = [], []
+        for r in batch_rows:
+            msgs = [{"role": "system", "content": _SYSTEM},
+                    {"role": "user", "content": r["prompt"]}]
+            pre = tok.apply_chat_template(msgs, add_generation_prompt=True, return_tensors="pt")
+            if hasattr(pre, "input_ids"):          # newer transformers returns a BatchEncoding
+                pre = pre.input_ids
+            comp = tok(r["completion"], return_tensors="pt", add_special_tokens=False).input_ids
+            ids = torch.cat([pre, comp], dim=1)[0]              # [T]
+            seqs.append(ids); spans.append((pre.shape[1], ids.shape[0]))   # (start, T)
+        maxlen, B = max(s.shape[0] for s in seqs), len(seqs)
+        input_ids = torch.full((B, maxlen), pad_id, dtype=torch.long)
+        attn = torch.zeros((B, maxlen), dtype=torch.long)
+        for b, s in enumerate(seqs):
+            input_ids[b, :s.shape[0]] = s; attn[b, :s.shape[0]] = 1
+        input_ids, attn = input_ids.to(device), attn.to(device)
+        logits = model(input_ids=input_ids, attention_mask=attn).logits   # [B, maxlen, V]
         logprobs = torch.log_softmax(logits.float(), dim=-1)
-        start = pre.shape[1]
-        lp, ent, k = torch.zeros((), device=device), torch.zeros((), device=device), 0
-        for t in range(start, ids.shape[1]):
-            dist = logprobs[t - 1]                          # predicts token at t
-            tok_id = ids[0, t]
-            lp = lp + dist[tok_id]
-            ent = ent - (dist.exp() * dist).sum()
-            k += 1
-        return lp, ent / max(1, k)
+        lps, ents = [], []
+        for b, (start, T) in enumerate(spans):
+            if T <= start:                                      # no completion tokens
+                z = torch.zeros((), device=device); lps.append(z); ents.append(z); continue
+            pred = logprobs[b, start - 1:T - 1]                 # [L,V] dist predicting tokens start..T-1
+            tgt = input_ids[b, start:T]                         # [L] actual completion tokens
+            lps.append(pred.gather(-1, tgt.unsqueeze(-1)).squeeze(-1).sum())
+            ents.append((-(pred.exp() * pred).sum(-1)).mean())  # mean per-token entropy
+        return lps, ents
 
     bs = CONFIG.conj_cispo_batch
+    is_mps = str(device).startswith("mps")
     print(f"[cispo_train] {len(rows)} rows | {epochs} epochs | model {name} | clip {clip}")
     for ep in range(epochs):
         total, n, deg = 0.0, 0, 0
         for i in range(0, len(rows), bs):
             batch = rows[i:i + bs]
             opt.zero_grad()
+            lps, ents = batch_logp_entropy(batch)               # ONE forward for the whole batch
             loss = torch.zeros((), device=device)
-            for r in batch:
-                lp, ent = completion_logp_and_entropy(r["prompt"], r["completion"])
+            for r, lp, ent in zip(batch, lps, ents):
                 is_w = torch.clamp(torch.exp(lp.detach() - float(r["old_logp"])), max=clip)
-                adv = float(r["_adv"])
-                loss = loss - is_w * adv * lp - CONFIG.entropy_coef * ent
+                loss = loss - is_w * float(r["_adv"]) * lp - CONFIG.entropy_coef * ent
                 deg += int(r["_degenerate"])
             loss = loss / max(1, len(batch))
             loss.backward()
             torch.nn.utils.clip_grad_norm_(
                 (p for p in model.parameters() if p.requires_grad), CONFIG.grad_clip)
             opt.step()
+            if is_mps:
+                torch.mps.empty_cache()                         # bound memory growth across batches
             total += float(loss.detach()); n += 1
         print(f"[cispo_train] epoch {ep+1}/{epochs}  loss={total/max(1,n):+.4f}  "
               f"batches={n}  degenerate_rows={deg}")
