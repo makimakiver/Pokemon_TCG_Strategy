@@ -43,7 +43,8 @@ def _winrate(policy, env, scenario, k, pw, actor=None):
 
 
 def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs",
-            use_mcts: bool = False, problem_set=None, objective: str | None = None):
+            use_mcts: bool = False, problem_set=None, objective: str | None = None,
+            conjecture_after: int = 2):
     random.seed(CONFIG.seed); np.random.seed(CONFIG.seed); torch.manual_seed(CONFIG.seed)
     rng = random.Random(CONFIG.seed)
 
@@ -78,6 +79,8 @@ def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs"
         print(f"[sgs] MCTS actor ON ({CONFIG.mcts_simulations} sims/decision)")
 
     solve_rate = defaultdict(float)
+    stale = defaultdict(int)        # target_id -> consecutive unsolved attempts (seed-first)
+    seeding = bool(problem_set)
     out = Path(RUNS_DIR) / run_name
     out.mkdir(parents=True, exist_ok=True)
     history = []
@@ -89,13 +92,16 @@ def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs"
         synth_updates = []
 
         for target in batch:
-            solved = solve_rate[target.target_id] >= CONFIG.tau
-            scenario = seeded.get(target.target_id, target)   # warm-started lemma
+            tid = target.target_id
+            solved = solve_rate[tid] >= CONFIG.tau
+            base = seeded.get(tid, target)        # the SmolLM problem (or raw target if unseeded)
+            scenario = base
             edits = None
             conj_idx = None
-            if not solved:
-                # Conjecture an easier lemma for an unsolved target (parametric in-loop).
-                edited, edits, conj_idx = conjecturer.propose(target, rng)
+            # Generate a similar, easier variation only when stuck on the seed
+            # (or always, when there is no seed to practice first).
+            if not solved and (not seeding or stale[tid] >= conjecture_after):
+                edited, edits, conj_idx = conjecturer.propose(base, rng)
                 scenario = edited
             try:
                 wr, rs = _winrate(policy, env, scenario, CONFIG.k_rollouts, pw, actor=actor)
@@ -103,9 +109,10 @@ def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs"
             except Exception:
                 wr, rs, legal = 0.0, [], False
             rollouts.extend(rs)
-            solve_rate[target.target_id] = float(wr)
+            solve_rate[tid] = float(wr)
+            stale[tid] = 0 if wr >= CONFIG.tau else stale[tid] + 1
 
-            if not solved and edits is not None:
+            if edits is not None:
                 r_solve = 1.0 * (1.0 - wr)               # reward hard-but-solvable lemmas
                 r_guide = guide_score(scenario, edits, legal=legal)
                 r_synth = r_solve * r_guide
