@@ -68,7 +68,7 @@ def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs"
     env = TCGEnv(solver_deck, opp_deck, opponent)
 
     policy = PointerPolicy()
-    objective = get_objective(objective or ("cispo" if use_mcts else None))
+    objective = get_objective(objective)   # default (None) -> CONFIG.objective (reinforce_half)
     conjecturer = get_conjecturer()
     opt = torch.optim.Adam(policy.parameters(), lr=CONFIG.lr)
 

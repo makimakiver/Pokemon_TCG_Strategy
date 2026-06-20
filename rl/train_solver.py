@@ -37,17 +37,34 @@ def make_policy_actor(policy):
 
 
 def make_mcts_actor(mcts, policy):
-    """MCTS actor: pick via MCTS in search mode; record log(pi_mcts[action]) as the
-    behavior log-prob CISPO consumes. Falls back to the net in live (turn-0) mode."""
+    """MCTS actor: pick via MCTS, but ALWAYS return an action that is legal in the
+    env's CURRENT obs mask, recording log(pi_mcts[action]) as the behavior log-prob.
+
+    MCTS roots at the engine search node and is unaware of the env's per-micro-step
+    ``pending`` mask (which zeroes already-picked options during a multi-select), so
+    its raw visit-argmax can be an illegal/duplicate option. We mask the MCTS visit
+    distribution by ``obs["mask"]`` and renormalize; if no legal option carries MCTS
+    mass (or in live turn-0 mode), we defer to the masked net policy, which always
+    yields a legal action (incl. STOP). This keeps every recorded action legal so its
+    re-eval log-prob is finite — an illegal action gives log_prob=-inf, which poisons
+    the objective (CISPO -> NaN, REINFORCE -> +inf) and stalls multi-pick selects in a
+    no-op loop."""
     def actor(env, obs, prior_weight):
         if getattr(env, "mode", None) != "search":
             return policy.act(obs, prior_weight)
-        action, pi, value = mcts.search_policy(env.search_state())
+        _, pi, value = mcts.search_policy(env.search_state())
         n = obs["n_options"]
-        if action is None:                      # no option edge -> close with STOP
-            return n, 0.0, float(value)
-        logp = float(np.log(pi[action] + 1e-12))
-        return int(action), logp, float(value)
+        mask = np.asarray(obs["mask"], dtype=np.float64)
+        pi = np.asarray(pi, dtype=np.float64)
+        if n > 0 and pi.shape[0] == n:
+            legal_pi = pi * mask[:n]            # restrict to options legal right now
+            s = legal_pi.sum()
+            if s > 0:
+                a = int(legal_pi.argmax())
+                return a, float(np.log(legal_pi[a] / s + 1e-12)), float(value)
+        # No legal MCTS option (mid multi-pick its mass sat on a picked option, or
+        # n == 0): the masked net policy always returns a legal action / STOP.
+        return policy.act(obs, prior_weight)
     return actor
 
 
