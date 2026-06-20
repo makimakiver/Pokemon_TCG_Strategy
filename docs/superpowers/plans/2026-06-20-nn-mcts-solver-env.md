@@ -713,7 +713,8 @@ Replace the `run_sgs` signature and the lines that build `objective`, plus add s
 
 ```python
 def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs",
-            use_mcts: bool = False, problem_set=None, objective: str | None = None):
+            use_mcts: bool = False, problem_set=None, objective: str | None = None,
+            conjecture_after: int = 2):
     random.seed(CONFIG.seed); np.random.seed(CONFIG.seed); torch.manual_seed(CONFIG.seed)
     rng = random.Random(CONFIG.seed)
 
@@ -748,6 +749,8 @@ def run_sgs(generations: int = 20, batch_size: int = 8, run_name: str = "p2_sgs"
         print(f"[sgs] MCTS actor ON ({CONFIG.mcts_simulations} sims/decision)")
 
     solve_rate = defaultdict(float)
+    stale = defaultdict(int)        # target_id -> consecutive unsolved attempts (seed-first)
+    seeding = bool(problem_set)
     out = Path(RUNS_DIR) / run_name
     out.mkdir(parents=True, exist_ok=True)
     history = []
@@ -759,28 +762,50 @@ Add the `ScenarioSpec` import at the top with the other imports:
 from .scenario import ScenarioSpec
 ```
 
-- [ ] **Step 3: Use the seeded lemma + actor inside the generation loop**
+- [ ] **Step 3: Use the seeded lemma + actor inside the generation loop (seed-first curriculum)**
 
-In the `for target in batch:` loop, replace the block that sets `scenario = target` and computes `wr`:
+In the `for target in batch:` loop, replace the block that sets `scenario` and computes `wr`.
+Behavior: an unsolved target is practiced on its **pure SmolLM seed** until it has stayed
+unsolved for `conjecture_after` attempts; only then does the parametric conjecturer
+`propose(base=seed)` a *similar, easier variation around that position* (edits stack on the
+seed). With **no** problem set, the conjecturer proposes immediately (base = raw target),
+preserving the original P2 reference behavior. A win resets the staleness counter.
 
 ```python
         for target in batch:
-            solved = solve_rate[target.target_id] >= CONFIG.tau
-            scenario = seeded.get(target.target_id, target)   # warm-started lemma
+            tid = target.target_id
+            solved = solve_rate[tid] >= CONFIG.tau
+            base = seeded.get(tid, target)        # the SmolLM problem (or raw target if unseeded)
+            scenario = base
             edits = None
             conj_idx = None
-            if not solved:
-                # Conjecture an easier lemma for an unsolved target (parametric in-loop).
-                edited, edits, conj_idx = conjecturer.propose(target, rng)
+            # Generate a similar, easier variation only when stuck on the seed
+            # (or always, when there is no seed to practice first).
+            if not solved and (not seeding or stale[tid] >= conjecture_after):
+                edited, edits, conj_idx = conjecturer.propose(base, rng)
                 scenario = edited
             try:
                 wr, rs = _winrate(policy, env, scenario, CONFIG.k_rollouts, pw, actor=actor)
                 legal = True
             except Exception:
                 wr, rs, legal = 0.0, [], False
+            rollouts.extend(rs)
+            solve_rate[tid] = float(wr)
+            stale[tid] = 0 if wr >= CONFIG.tau else stale[tid] + 1
+
+            if edits is not None:
+                r_solve = 1.0 * (1.0 - wr)               # reward hard-but-solvable lemmas
+                r_guide = guide_score(scenario, edits, legal=legal)
+                r_synth = r_solve * r_guide
+                synth_updates.append((conj_idx, r_synth))
 ```
 
-(The rest of the loop body — `rollouts.extend`, `solve_rate[...]`, the `synth_updates` block, the solver/conjecturer updates, logging, and checkpointing — is unchanged.)
+Note: this block now INCLUDES the `rollouts.extend` / `solve_rate` / `synth_updates`
+lines (replacing the originals), because staleness tracking is interleaved with them.
+The ORIGINAL loop body had a separate `rollouts.extend(rs)` + `solve_rate[...] =` +
+`if not solved and edits is not None:` block right after the `try/except` — DELETE that
+original block so it is not duplicated. Everything after it (the `# --- Solver update ---`
+section onward) is unchanged.
 
 - [ ] **Step 4: Verify it parses and imports on a pure-Python host**
 

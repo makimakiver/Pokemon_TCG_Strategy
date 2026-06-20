@@ -117,15 +117,24 @@ Add a training-facing search that returns CISPO's behavior policy.
   verbatim. Forced-STOP (no legal option edge) records `logp=0.0`.
 
 ### 4.6 `rl/outer_loop.py` (extend)
-- `run_sgs(generations=…, batch_size=…, run_name=…, use_mcts=False, problem_set=None, objective=None)`.
+- `run_sgs(generations=…, batch_size=…, run_name=…, use_mcts=False, problem_set=None, objective=None, conjecture_after=2)`.
   - `objective` default for this path = `"cispo"` (per memory; overridable).
-  - `problem_set`: warm-start `current_scenario[target_id]` via `seed_scenarios`;
-    a target's first-seen lemma is the SmolLM one rather than the raw target.
+  - `problem_set`: warm-start each target's lemma via `seed_scenarios` (the
+    SmolLM problem for that losing position).
   - `use_mcts`: build `MCTS(policy, opponent)` once; pass the MCTS actor into
     `collect_rollouts`.
-  - Co-evolution (conjecturer.propose for unsolved, guide score, solve-rate τ,
-    REINFORCE on `R_synth`) is the **existing loop, unchanged**; the in-loop
-    conjecturer is `get_conjecturer("parametric")`.
+  - **Seed-first curriculum (solve the SmolLM problems before generating
+    around them).** Every lost position starts unsolved. For an unsolved target
+    the solver attacks the **pure SmolLM seed** until it has stayed unsolved for
+    `conjecture_after` consecutive attempts (a per-target staleness counter);
+    only then does the in-loop **parametric** conjecturer `propose(base=seed)` a
+    *similar, easier variation around that same position* (edits stack on the
+    SmolLM seed), and that proposal earns `R_synth`. A win resets the counter.
+  - **No problem set → original behavior:** when `problem_set` is falsy the
+    conjecturer proposes immediately for every unsolved target (base = raw
+    target), preserving the existing P2 reference path. The in-loop conjecturer
+    is `get_conjecturer("parametric")`; guide score / solve-rate τ / REINFORCE
+    on `R_synth` are unchanged.
 
 ### 4.7 Tests
 - `rl/tests/test_problem_set.py` (new, pure-Python, no engine): build a tiny `D`
