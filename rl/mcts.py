@@ -22,6 +22,12 @@ import numpy as np
 
 from .config import CONFIG
 
+try:                                  # engine-only deps; absent on a non-engine host
+    from cg.api import search_step, search_release
+    from . import encode
+except Exception:                     # module still imports for pure-Python helpers
+    search_step = search_release = encode = None
+
 
 @dataclass
 class _Node:
