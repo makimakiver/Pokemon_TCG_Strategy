@@ -50,13 +50,14 @@ Append each turn as one block:
 
 Always 3 rounds, increasing n to wash out noise (early-abort OFF):
 
-    docker run --rm --platform=linux/amd64 cabt-sim --a <cand> --b <baseline> -n 100
-    docker run --rm --platform=linux/amd64 cabt-sim --a <cand> --b <baseline> -n 200
-    docker run --rm --platform=linux/amd64 cabt-sim --a <cand> --b <baseline> -n 300
+    docker run --rm --platform=linux/amd64 -v "$(pwd)":/app cabt-sim --a <cand> --b <baseline> -n 100
+    docker run --rm --platform=linux/amd64 -v "$(pwd)":/app cabt-sim --a <cand> --b <baseline> -n 200
+    docker run --rm --platform=linux/amd64 -v "$(pwd)":/app cabt-sim --a <cand> --b <baseline> -n 300
 
-If the `cabt-sim` image is missing, build first:
+The image is only needed once as the runtime base; new or changed candidate agents are
+picked up live via the volume mount (no rebuild required). Build it once if missing:
 
-    docker build --platform=linux/amd64 -t cabt-sim .
+    docker image inspect cabt-sim >/dev/null 2>&1 || docker build --platform=linux/amd64 -t cabt-sim .
 
 Module names use the harness convention (`runner.py` resolves `--a`/`--b`).
 The runner swaps seats each game, so the reported % is seat-bias-corrected.

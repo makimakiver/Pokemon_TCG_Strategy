@@ -12,7 +12,7 @@
 
 - File location: everything lives under `discussion/` in the repo root (`/Users/makimakiver/pokemon-tcg/discussion/`).
 - Pi agents run with cwd = repo root (the `open` recipe does `cd {{justfile_directory()}}`), so `discussion/...` relative paths resolve correctly.
-- Sim command (verbatim): `docker run --rm --platform=linux/amd64 cabt-sim --a <cand> --b <baseline> -n <N>`; build with `docker build --platform=linux/amd64 -t cabt-sim .`.
+- Sim command (verbatim): `docker run --rm --platform=linux/amd64 -v "$(pwd)":/app cabt-sim --a <cand> --b <baseline> -n <N>`; build once with `docker build --platform=linux/amd64 -t cabt-sim .`.
 - Experiment is **3 rounds at n=100, 200, 300**, early-abort OFF (always run all 3).
 - Gate is **propose-then-confirm**: Claude writes `@claude PLAN:` and waits for `@claude GO` before running.
 - Pi launch recipes follow the existing `local`-family pattern: `{{PI_REPO}}/extensions/{coms,minimal,theme-cycler}.ts`, `--project "{{PROJECT}}"`. `PI_REPO := "/Users/makimakiver/pi-vs-claude-code"`, `PROJECT := "strategy-lab"`.
@@ -95,13 +95,14 @@ Append each turn as one block:
 
 Always 3 rounds, increasing n to wash out noise (early-abort OFF):
 
-    docker run --rm --platform=linux/amd64 cabt-sim --a <cand> --b <baseline> -n 100
-    docker run --rm --platform=linux/amd64 cabt-sim --a <cand> --b <baseline> -n 200
-    docker run --rm --platform=linux/amd64 cabt-sim --a <cand> --b <baseline> -n 300
+    docker run --rm --platform=linux/amd64 -v "$(pwd)":/app cabt-sim --a <cand> --b <baseline> -n 100
+    docker run --rm --platform=linux/amd64 -v "$(pwd)":/app cabt-sim --a <cand> --b <baseline> -n 200
+    docker run --rm --platform=linux/amd64 -v "$(pwd)":/app cabt-sim --a <cand> --b <baseline> -n 300
 
-If the `cabt-sim` image is missing, build first:
+The image is only needed once as the runtime base; new or changed candidate agents are
+picked up live via the volume mount (no rebuild required). Build it once if missing:
 
-    docker build --platform=linux/amd64 -t cabt-sim .
+    docker image inspect cabt-sim >/dev/null 2>&1 || docker build --platform=linux/amd64 -t cabt-sim .
 
 Module names use the harness convention (`runner.py` resolves `--a`/`--b`).
 The runner swaps seats each game, so the reported % is seat-bias-corrected.
@@ -247,7 +248,7 @@ Find the newest `@claude EXPERIMENT:` block that has NO `@claude PLAN:`,
     1. Ensure the image exists: `docker image inspect cabt-sim >/dev/null 2>&1 ||
        docker build --platform=linux/amd64 -t cabt-sim .`
     2. Run 3 rounds (always all 3, no early abort):
-       `docker run --rm --platform=linux/amd64 cabt-sim --a <cand> --b <baseline> -n 100`
+       `docker run --rm --platform=linux/amd64 -v "$(pwd)":/app cabt-sim --a <cand> --b <baseline> -n 100`
        then `-n 200`, then `-n 300`.
     3. Parse the candidate (side A) win-rate from each run's output.
     4. Append a `@discussion RESULT:` block: each round's %, the pooled %
@@ -325,7 +326,7 @@ Append the GO, then run the experiment with **n=2 per round** (smoke speed, not 
 ```bash
 printf '\n@claude GO\n' >> discussion/discussion.log
 docker image inspect cabt-sim >/dev/null 2>&1 || docker build --platform=linux/amd64 -t cabt-sim .
-docker run --rm --platform=linux/amd64 cabt-sim --a agents.honchkrow_v8 --b agents.main_v3_pure -n 2
+docker run --rm --platform=linux/amd64 -v "$(pwd)":/app cabt-sim --a agents.honchkrow_v8 --b agents.main_v3_pure -n 2
 ```
 Expected: the runner prints `A = ... vs B = ...` and two win-count lines with percentages (proves the sim path works end-to-end). If module import names differ, adjust `--a/--b` to the form the image expects and note it.
 
@@ -341,7 +342,7 @@ Expected: `1`. Re-running the loop's "find newest unanswered trigger" logic now 
 
 Inject a trigger with a nonexistent module and confirm the correct response is an ERROR, not a silent hang:
 ```bash
-docker run --rm --platform=linux/amd64 cabt-sim --a agents.does_not_exist --b agents.main_v3_pure -n 1; echo "exit=$?"
+docker run --rm --platform=linux/amd64 -v "$(pwd)":/app cabt-sim --a agents.does_not_exist --b agents.main_v3_pure -n 1; echo "exit=$?"
 ```
 Expected: a non-zero exit / import traceback — i.e. the condition under which the loop prompt instructs Claude to write `@discussion ERROR:`. (No commit; this confirms the failure mode is detectable.)
 
@@ -376,3 +377,14 @@ echo "log reset"
 ## Execution Handoff
 
 See the offer in the chat after this plan is saved.
+
+---
+
+## Amendment (2026-06-23)
+
+The Dockerfile COPYs agent code at build time (`COPY . /app`), so a newly-written
+candidate would have been tested against stale baked-in code if the image was not
+rebuilt. The loop now volume-mounts the live repo into the container
+(`-v "$(pwd)":/app`) so experiments always run the current candidate code on disk.
+The `inspect || build` guard remains — the image is still required as the runtime
+base (binary + dependencies), but rebuilding it is no longer needed when agents change.

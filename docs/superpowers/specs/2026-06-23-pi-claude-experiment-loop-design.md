@@ -67,10 +67,12 @@ On GO, run the gauntlet **three times at increasing n** and report all three so 
 is visible:
 
 ```
-docker run --rm --platform=linux/amd64 cabt-sim --a <cand> --b <baseline> -n 100   # R1
-docker run --rm --platform=linux/amd64 cabt-sim --a <cand> --b <baseline> -n 200   # R2
-docker run --rm --platform=linux/amd64 cabt-sim --a <cand> --b <baseline> -n 300   # R3
+docker run --rm --platform=linux/amd64 -v "$(pwd)":/app cabt-sim --a <cand> --b <baseline> -n 100   # R1
+docker run --rm --platform=linux/amd64 -v "$(pwd)":/app cabt-sim --a <cand> --b <baseline> -n 200   # R2
+docker run --rm --platform=linux/amd64 -v "$(pwd)":/app cabt-sim --a <cand> --b <baseline> -n 300   # R3
 ```
+
+The repo is volume-mounted (`-v "$(pwd)":/app`) so candidate code is always read live from disk — no rebuild needed for new or changed agents.
 
 - If the `cabt-sim` image is missing, build it first:
   `docker build --platform=linux/amd64 -t cabt-sim .`
