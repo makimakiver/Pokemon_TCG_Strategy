@@ -179,6 +179,7 @@ loop-agent name role:
       --project "{{PROJECT}}"
 
 # Open the full protocol-aware team in macOS Terminal windows.
+# Note: no 'sim' agent — the experiment/sim role is handled by Claude Code's /loop.
 loop-team:
     just open "loop-agent planner 'high-level strategy planner; decomposes game plans into testable hypotheses'"
     just open "loop-agent strategist 'creates new candidate strategies, heuristics, and policy rules'"

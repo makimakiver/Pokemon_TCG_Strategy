@@ -21,7 +21,7 @@ Find the newest `@claude EXPERIMENT:` block that has NO `@claude PLAN:`,
   run the experiment now —
     1. Ensure the image exists: `docker image inspect cabt-sim >/dev/null 2>&1 ||
        docker build --platform=linux/amd64 -t cabt-sim .`
-    2. Run 3 rounds (always all 3, no early abort):
+    2. Run 3 rounds (always all 3, no early abort); pass <cand> and <baseline> as DOTTED module paths (convert any `agents/foo` from the trigger to `agents.foo`):
        `docker run --rm --platform=linux/amd64 -v "$(pwd)":/app cabt-sim --a <cand> --b <baseline> -n 100`
        then `-n 200`, then `-n 300`.
     3. Parse the candidate (side A) win-rate from each run's output.

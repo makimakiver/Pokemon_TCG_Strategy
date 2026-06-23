@@ -59,7 +59,7 @@ picked up live via the volume mount (no rebuild required). Build it once if miss
 
     docker image inspect cabt-sim >/dev/null 2>&1 || docker build --platform=linux/amd64 -t cabt-sim .
 
-Module names use the harness convention (`runner.py` resolves `--a`/`--b`).
+Module names: `runner.py` takes DOTTED Python module paths for `--a`/`--b` (e.g. `agents.honchkrow_v8`). The `candidate:`/`baseline:` lines may be written with slashes (`agents/honchkrow_v8`) for readability — Claude converts `/` to `.` before invoking the runner.
 The runner swaps seats each game, so the reported % is seat-bias-corrected.
 
 ## Rules
