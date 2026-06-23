@@ -12,6 +12,17 @@ HOST := env_var_or_default("PI_COMS_NET_HOST", "127.0.0.1")
 # Repo holding the coms extensions (coms.ts / coms-net.ts / minimal.ts / theme-cycler.ts)
 PI_REPO := "/Users/makimakiver/pi-vs-claude-code"
 
+# Cross-machine coms-net: the hub runs ON THE MAC MINI, because laptop->mini is the only
+# routable Tailscale direction (mini->laptop is "no matching peer"). Every agent — wherever it
+# runs — must share NET_PROJECT and point at this same hub.
+MINI_SSH    := "takayuki"                                    # ssh alias for the mac mini
+MINI_HOST   := "takayukimac-mini.tail1be28a.ts.net"          # MagicDNS name, reachable from the laptop
+NET_PORT    := "8799"                                        # hub port on the mini (8787 was taken)
+NET_PROJECT := "pokemon-tcg"                                 # coms-net namespace; MUST match on every agent
+MINI_PI     := "/Users/makimakiver/.local/bin/pi"            # pi on the mini (not on non-interactive PATH)
+MINI_BUN    := "/Users/makimakiver/.bun/bin/bun"             # bun on the mini
+MINI_SECRET := "~/.pi/coms-net/projects/" + NET_PROJECT + "/server.secret.json"  # token source-of-truth (0600)
+
 # Default: show available commands
 default:
     @just --list
@@ -58,6 +69,68 @@ server-lan:
 kill-server:
     @lsof -ti :{{PORT}} | xargs -r kill -TERM 2>/dev/null || true
     @echo "🛑 killed anything on port {{PORT}}"
+
+# ─────────────────────────────────────────────
+# Cross-machine coms-net (hub on the mac mini)
+# ─────────────────────────────────────────────
+
+# Start the coms-net hub ON THE MINI (binds 0.0.0.0; token read from its server.secret.json)
+net-hub:
+    @echo "🌐 Starting coms-net hub on mini ({{MINI_HOST}}:{{NET_PORT}}, project={{NET_PROJECT}})"
+    ssh {{MINI_SSH}} 'P=$(lsof -ti :{{NET_PORT}}); [ -n "$P" ] && kill -TERM $P || true; \
+      TOK=$(grep -oE "[0-9a-f]{40,}" {{MINI_SECRET}} | head -1); \
+      [ -n "$TOK" ] || { echo "❌ no token in {{MINI_SECRET}} — run: just net-token-init <token>"; exit 1; }; \
+      PI_COMS_NET_AUTH_TOKEN=$TOK PI_COMS_NET_HOST=0.0.0.0 PI_COMS_NET_PORT={{NET_PORT}} PI_COMS_NET_PROJECT={{NET_PROJECT}} \
+        nohup {{MINI_BUN}} ~/pi-vs-claude-code/scripts/coms-net-server.ts > /tmp/coms_hub.log 2>&1 & \
+      sleep 2; cat /tmp/coms_hub.log'
+    @echo "✅ verify with: just net-health  /  just net-roster"
+
+# Stop the coms-net hub on the mini
+net-hub-stop:
+    ssh {{MINI_SSH}} 'P=$(lsof -ti :{{NET_PORT}}); [ -n "$P" ] && kill -TERM $P || true; echo "🛑 stopped hub on {{NET_PORT}}"'
+
+# Is the mini hub reachable from this laptop?
+net-health:
+    @curl -s -m 8 http://{{MINI_HOST}}:{{NET_PORT}}/health && echo "  ✅ reachable" || echo "❌ unreachable"
+
+# Who is connected to the hub?
+net-roster:
+    @TOK=$(ssh {{MINI_SSH}} 'grep -oE "[0-9a-f]{40,}" {{MINI_SECRET}} | head -1'); \
+      curl -s -H "Authorization: Bearer $TOK" "http://{{MINI_HOST}}:{{NET_PORT}}/v1/agents?project={{NET_PROJECT}}"; echo
+
+# Write/replace the hub token on the mini (0600). e.g. just net-token-init $(openssl rand -hex 32)
+net-token-init token:
+    ssh {{MINI_SSH}} 'D=~/.pi/coms-net/projects/{{NET_PROJECT}}; mkdir -p "$D"; umask 077; \
+      printf "{\n  \"token\": \"%s\"\n}\n" "{{token}}" > "$D/server.secret.json"; chmod 600 "$D/server.secret.json"; \
+      echo "✅ wrote $D/server.secret.json (0600)"'
+
+# Launch a coms-net agent on THIS laptop, dialing the mini hub.
+#   just net-agent strategist "discuss with other agents and compile the strategy" "#FF7EDB"
+net-agent name purpose color="#FF7EDB":
+    TOK=$(ssh {{MINI_SSH}} 'grep -oE "[0-9a-f]{40,}" {{MINI_SECRET}} | head -1'); \
+    [ -n "$TOK" ] || { echo "❌ could not fetch token from mini"; exit 1; }; \
+    pi \
+      -e {{PI_REPO}}/extensions/coms-net.ts \
+      -e {{PI_REPO}}/extensions/minimal.ts \
+      -e {{PI_REPO}}/extensions/theme-cycler.ts \
+      --cname "{{name}}" \
+      --purpose "{{purpose}}" \
+      --color "{{color}}" \
+      --project "{{NET_PROJECT}}" \
+      --server-url http://{{MINI_HOST}}:{{NET_PORT}} \
+      --auth-token "$TOK"
+
+# Launch a coms-net agent ON THE MINI (auto-discovers the local hub; interactive TUI over ssh -t).
+#   just net-agent-mini planner "plan the work" "#7EFFB0"
+net-agent-mini name purpose color="#7EFFB0":
+    ssh -t {{MINI_SSH}} '{{MINI_PI}} \
+      -e ~/pi-vs-claude-code/extensions/coms-net.ts \
+      -e ~/pi-vs-claude-code/extensions/minimal.ts \
+      -e ~/pi-vs-claude-code/extensions/theme-cycler.ts \
+      --cname "{{name}}" \
+      --purpose "{{purpose}}" \
+      --color "{{color}}" \
+      --project "{{NET_PROJECT}}"'
 
 # ─────────────────────────────────────────────
 # Single Pi agents
@@ -178,12 +251,23 @@ loop-agent name role:
       --purpose "{{role}}. At session start, read ./discussion/PROTOCOL.md and follow it exactly. Append every turn to ./discussion/discussion.log. When the team agrees on a testable hypothesis, write an '@claude EXPERIMENT:' block naming candidate and baseline agent modules, then read discussion.log until '@discussion RESULT:' or '@discussion ERROR:' appears and continue." \
       --project "{{PROJECT}}"
 
+# Per-role protocol-aware agents (no-arg, so `open` can launch them by bare name).
+loop-planner:
+    just loop-agent planner "high-level strategy planner; decomposes game plans into testable hypotheses"
+
+loop-strategist:
+    just loop-agent strategist "creates new candidate strategies, heuristics, and policy rules"
+
+loop-critic:
+    just loop-agent critic "checks strategic claims against rules, math, legality, and counterplay"
+
 # Open the full protocol-aware team in macOS Terminal windows.
 # Note: no 'sim' agent — the experiment/sim role is handled by Claude Code's /loop.
+# Pass bare recipe names to `open` (inner quotes break the osascript -e '...' wrapper).
 loop-team:
-    just open "loop-agent planner 'high-level strategy planner; decomposes game plans into testable hypotheses'"
-    just open "loop-agent strategist 'creates new candidate strategies, heuristics, and policy rules'"
-    just open "loop-agent critic 'checks strategic claims against rules, math, legality, and counterplay'"
+    just open loop-planner
+    just open loop-strategist
+    just open loop-critic
 
 local-planner:
     just local planner "local planning agent"
