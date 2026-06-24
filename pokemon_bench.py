@@ -42,33 +42,34 @@ SIDE_A, SIDE_B = "agents._bench_a", "agents._bench_b"
 PALACE = sorted([1]*19 + [11]*4 + [14]*4 + [18]*4 + [344]*4 + [345]*4 +
                 [1086]*4 + [1147]*4 + [1212]*4 + [1227]*4 + [1235]*4 + [1159])
 
-# ── CANDIDATE decks: what WE could adopt and run with the generic engine ──
-#   name : key used on the CLI and as the matrix row
-#   deck : JSON under data/decks/
-#   meta_wr : Kaggle-meta tracker ladder win rate (2026-06-23) — real-pilot signal, sim-independent
-CANDIDATES = [
-    {"name": "walrein",          "deck": "deck_walrein.json",                 "meta_wr": "74% (our current sub)"},
-    {"name": "hoptrevenant",     "deck": "deck_cand_hoptrevenant.json",       "meta_wr": "62.3% / 848g (top robust)"},
-    {"name": "kadabra_alakazam", "deck": "deck_cand_kadabra_alakazam.json",   "meta_wr": "61.4% / 207g"},
-    {"name": "abra_kadabra",     "deck": "deck_cand_abra_kadabra.json",        "meta_wr": "59.6% / 617g"},
-    {"name": "enrich_nighttime", "deck": "deck_cand_enrich_nighttime.json",   "meta_wr": "64.7% / 102g (combo)"},
-    {"name": "colress_dunsparce","deck": "deck_colress_dunsparce.json",        "meta_wr": "prior bare champ"},
-    {"name": "harlequin",        "deck": "deck_harlequin.json",                "meta_wr": "beats walrein 95%"},
-]
+# ── ROSTER: auto-discover EVERY distinct, legal 60-card deck in data/decks/ ──
+# Every bare-agent deck is included automatically. Exact-content duplicates are collapsed (the
+# first filename wins) so we never waste runs on identical decks (e.g. deck_walrein == deck_walrein_real).
+# Candidates and opponents are the SAME full set → every deck is scored against the whole field.
+def discover_decks():
+    import glob
+    seen, roster = {}, []
+    for f in sorted(glob.glob(os.path.join(DECKS, "*.json"))):
+        base = os.path.basename(f)
+        if base.endswith(".meta.json"):
+            continue
+        try:
+            deck = json.load(open(f))
+        except Exception:
+            continue
+        if not isinstance(deck, list) or len(deck) != 60 or sorted(deck) == PALACE:
+            continue
+        key = tuple(sorted(deck))
+        if key in seen:        # exact duplicate of an already-included deck → skip
+            continue
+        seen[key] = True
+        name = base[:-5].replace("deck_", "")
+        roster.append({"name": name, "deck": base})
+    return roster
 
-# ── OPPONENT field: the meta we'd face on the ladder ──
-OPPONENTS = [
-    {"name": "starmie_cinderace", "deck": "deck_bench_starmie_cinderace.json", "label": "Mega Starmie / Cinderace"},
-    {"name": "starmie",           "deck": "deck_starmie.json",                 "label": "Mega Starmie ex"},
-    {"name": "harlequin",         "deck": "deck_harlequin.json",               "label": "Harlequin"},
-    {"name": "megalucario",       "deck": "deck_bench_megalucario.json",       "label": "Mega Lucario ex"},
-    {"name": "dragapult",         "deck": "deck_dragapult.json",               "label": "Dragapult ex"},
-    {"name": "crustle",           "deck": "deck_crustle.json",                 "label": "Crustle"},
-    {"name": "colress_dunsparce", "deck": "deck_colress_dunsparce.json",       "label": "Colress / Dunsparce"},
-    {"name": "bellibolt",         "deck": "deck_bellibolt.json",               "label": "Iono's Bellibolt"},
-    {"name": "tarountula",        "deck": "deck_tarountula.json",              "label": "Tarountula"},
-    {"name": "walrein",           "deck": "deck_walrein.json",                 "label": "Walrein (mirror)"},
-]
+ROSTER = discover_decks()
+CANDIDATES = ROSTER
+OPPONENTS = ROSTER
 
 
 def _deck_path(deckfile):
@@ -89,18 +90,47 @@ def _check_deck(deckfile):
 
 def validate_decks():
     ok = True
-    seen = {}
-    print(f"{'deck file':<38}{'status':<18}role")
-    print("-" * 70)
-    for role, roster in (("candidate", CANDIDATES), ("opponent", OPPONENTS)):
-        for d in roster:
-            st = seen.get(d["deck"]) or _check_deck(d["deck"])
-            seen[d["deck"]] = st
-            if st != "ok":
-                ok = False
-            print(f"{d['deck']:<38}{('✅ '+st if st=='ok' else '❌ '+st):<18}{role}")
-    print("-" * 70)
+    bad = []
+    for d in ROSTER:
+        st = _check_deck(d["deck"])
+        if st != "ok":
+            ok = False; bad.append((d["deck"], st))
+    print(f"roster: {len(ROSTER)} distinct legal decks → {len(ROSTER)*len(ROSTER)} matchups")
+    if bad:
+        for f, st in bad:
+            print(f"  ❌ {f}: {st}")
+    else:
+        print("  ✅ all decks legal (60 cards, no Palace fallback)")
     return ok
+
+
+def validate_legality():
+    """Run battle_start on every roster deck in Docker — catches the illegal decks that host-side
+    checks (60 cards / not-Palace) miss. An illegal deck fails battle_start and silently scores 0%
+    (this exact bug made deck_fire_ceruledge look like a 'hard counter' — errorType 2, 8 Charcadet)."""
+    code = """
+import json
+from cg.game import battle_start, battle_finish
+bad=[]
+for b in {decks!r}.split(','):
+    d=json.load(open('/app/data/decks/'+b))
+    o,s=battle_start(list(d),list(d))
+    try:
+        battle_finish()
+    except Exception:
+        pass
+    if o is None:
+        bad.append((b, getattr(s,'errorType',None)))
+print('ILLEGAL:', bad if bad else 'NONE')
+""".format(decks=",".join(d["deck"] for d in ROSTER))
+    out = subprocess.run(
+        ["docker", "run", "--rm", "--platform=linux/amd64", "-v", f"{REPO}:/app",
+         "--entrypoint", "python", IMAGE, "-c", code],
+        capture_output=True, text=True, timeout=600).stdout
+    line = next((l for l in out.splitlines() if l.startswith("ILLEGAL:")), "ILLEGAL: ?")
+    passed = "NONE" in line
+    print(f"legality (battle_start): {'✅ all decks legal' if passed else '❌ ' + line}")
+    return passed
 
 
 def validate_collision():
@@ -113,8 +143,8 @@ def validate_collision():
     )
     out = subprocess.run(
         ["docker", "run", "--rm", "--platform=linux/amd64", "-v", f"{REPO}:/app",
-         "-e", f"BENCH_A_DECK=/app/data/decks/{CANDIDATES[0]['deck']}",
-         "-e", f"BENCH_B_DECK=/app/data/decks/{OPPONENTS[0]['deck']}",
+         "-e", f"BENCH_A_DECK=/app/data/decks/{ROSTER[0]['deck']}",
+         "-e", f"BENCH_B_DECK=/app/data/decks/{ROSTER[1]['deck']}",
          "--entrypoint", "python", IMAGE, "-c", code],
         capture_output=True, text=True, timeout=300).stdout
     passed = "DIFFERENT" in out
@@ -196,13 +226,14 @@ if __name__ == "__main__":
 
     decks_ok = validate_decks()
     if args.run or args.validate:
+        legal_ok = validate_legality()
         coll_ok = validate_collision()
     else:
-        coll_ok = True
+        legal_ok = coll_ok = True
     if args.run:
-        if not (decks_ok and coll_ok):
-            print("\n❌ refusing to run — fix decks/collision first."); sys.exit(1)
+        if not (decks_ok and legal_ok and coll_ok):
+            print("\n❌ refusing to run — fix decks/legality/collision first."); sys.exit(1)
         print()
         run_matrix(args.n, _filter(CANDIDATES, args.candidates), _filter(OPPONENTS, args.opponents), args.out)
         sys.exit(0)
-    sys.exit(0 if decks_ok and coll_ok else 1)
+    sys.exit(0 if decks_ok and legal_ok and coll_ok else 1)
