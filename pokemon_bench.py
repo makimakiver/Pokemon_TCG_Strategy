@@ -207,6 +207,59 @@ def run_matrix(n, candidates, opponents, out_path=None):
     return results
 
 
+def run_agent_field(agent_modules, opponents, n, out_path=None):
+    """Benchmark REAL agent modules (custom pilots) vs the opponent field — collision-safe.
+    Each agent (side A) keeps its own deck (BARE_DECK / inline); the field deck loads into agents.meta_opp
+    (side B) via META_DECK — a DIFFERENT env var, so no deck collision. This is the entrypoint for
+    'simulate <agent> vs the field' (e.g. starmie_cind_v1, dragapult_v6, walrein_v15)."""
+    results = {}
+    total = len(agent_modules) * len(opponents)
+    done = 0
+    print(f"Agent-vs-field: {len(agent_modules)} agents × {len(opponents)} decks @ n={n} "
+          f"({total} matchups). Candidate=real pilot (side A) vs generic field (meta_opp+META_DECK).\n")
+    for a in agent_modules:
+        short = a.split(".")[-1]
+        for o in opponents:
+            done += 1
+            print(f"  [{done}/{total}] {short:>20} vs {o['name']:<20} ", end="", flush=True)
+            cmd = ["docker", "run", "--rm", "--platform=linux/amd64", "-v", f"{REPO}:/app", "-w", "/app",
+                   "-e", f"META_DECK=data/decks/{o['deck']}", IMAGE, "--a", a, "--b", "agents.meta_opp", "-n", str(n)]
+            try:
+                out = subprocess.run(cmd, capture_output=True, text=True, timeout=2400).stdout
+                m = re.search(r"A \(" + re.escape(a) + r"\):\s*(\d+)\s*\(([\d.]+)%\)", out)
+                r = {"pct": float(m.group(2))} if m else None
+            except subprocess.TimeoutExpired:
+                r = None
+            results[(short, o["name"])] = r
+            print(f"{r['pct']:.0f}%" if r else "ERR")
+
+    shorts = [a.split(".")[-1] for a in agent_modules]
+    w = max(len(o["name"]) for o in opponents) + 1
+    print("\n" + "=" * (w + 12*len(shorts)))
+    print("opponent deck".ljust(w) + "".join(f"{s[:11]:>12}" for s in shorts))
+    print("-" * (w + 12*len(shorts)))
+    col = {s: [] for s in shorts}
+    for o in opponents:
+        row = o["name"].ljust(w)
+        for s in shorts:
+            r = results[(s, o["name"])]
+            if r:
+                row += f"{r['pct']:>11.0f}%"; col[s].append(r["pct"])
+            else:
+                row += f"{'ERR':>12}"
+        print(row)
+    print("-" * (w + 12*len(shorts)))
+    arow = "MEAN".ljust(w)
+    for s in shorts:
+        arow += (f"{sum(col[s])/len(col[s]):>11.0f}%" if col[s] else f"{'-':>12}")
+    print(arow); print("=" * (w + 12*len(shorts)))
+    if out_path:
+        json.dump({"n": n, "results": [{"agent": s, "opponent": o, **(r or {"error": True})}
+                   for (s, o), r in results.items()]}, open(out_path, "w"), indent=1)
+        print(f"full results → {out_path}")
+    return results
+
+
 def _filter(roster, csv):
     if not csv:
         return roster
@@ -222,7 +275,16 @@ if __name__ == "__main__":
     ap.add_argument("--candidates", help="comma-separated candidate names to limit to")
     ap.add_argument("--opponents", help="comma-separated opponent names to limit to")
     ap.add_argument("--out", help="write full results JSON here")
+    ap.add_argument("--agent", help="comma-separated REAL agent modules to benchmark vs the field "
+                    "(e.g. agents.starmie_cind_v1,agents.dragapult_v6) — uses meta_opp+META_DECK, collision-safe")
     args = ap.parse_args()
+
+    if args.agent:
+        if not validate_decks() or not validate_legality():
+            print("\n❌ refusing to run — fix decks/legality first."); sys.exit(1)
+        opps = _filter(OPPONENTS, args.opponents)
+        run_agent_field([m.strip() for m in args.agent.split(",")], opps, args.n, args.out)
+        sys.exit(0)
 
     decks_ok = validate_decks()
     if args.run or args.validate:
