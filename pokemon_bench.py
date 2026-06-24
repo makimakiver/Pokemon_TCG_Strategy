@@ -1,213 +1,208 @@
-"""pokemon_bench.py — single-file benchmark harness for the cabt sim.
+"""pokemon_bench.py — collision-proof deck benchmark for the cabt sim.
 
-Measures a set of CANDIDATE agents against the full fixed OPPONENT roster (every validated
-benchmark deck) via the Docker runner, seat-swapped, and prints a win-rate matrix.
+Measures how well each CANDIDATE deck performs against the OPPONENT field, with a UNIFORM generic
+pilot on BOTH sides — so the result reflects DECK strength, not pilot skill. Answers: "which deck,
+if we adopt it, clears ~X% vs the meta field?"
 
-STEP 1 (this commit): define the roster — every deck/agent that goes into the benchmark — and a
-deck-validity guard. The guard exists because bare_agent SILENTLY falls back to the Palace deck when
-its BARE_DECK file is missing (this already corrupted a whole gauntlet once: bench_* decks vanished on
-a branch-switch and every bench cell secretly tested Palace). `validate_roster()` fails loudly if any
-opponent's deck file is missing or has degenerated into the Palace fallback.
+──────────────────────────────────────────────────────────────────────────────────────────────
+WHY THIS DESIGN (read before trusting any number):
+  The naive approach — gauntlet two bare-deck agents (agents.meta_X vs agents.meta_Y) — is BROKEN.
+  Both read the same BARE_DECK env var at import; the runner imports both into one process, so the
+  SECOND agent silently loads the FIRST agent's deck (a mirror). This corrupted earlier gauntlets
+  (a walrein candidate made every "opponent" play walrein → fake 58% "wins"). Proven via import test.
+
+  FIX: each side is a DISTINCT module reading a DISTINCT env var:
+     side A = agents._bench_a   (reads BENCH_A_DECK)   ← candidate deck
+     side B = agents._bench_b   (reads BENCH_B_DECK)   ← opponent deck
+  Different module objects + different env vars = no shared deck state. Both are copies of the
+  self-contained generic pilot (meta_opp.py), so the pilot is identical on both sides and only the
+  DECK differs. `validate_collision()` asserts the two sides load different decks before any run.
+
+  CAVEAT: combo decks (Nighttime Mine, etc.) are UNDER-piloted by a generic engine, so their sim
+  number understates their real-pilot ceiling. Cross-check with the Kaggle-meta tracker win rate
+  (the `meta_wr` field below) which reflects real-pilot ladder performance.
+──────────────────────────────────────────────────────────────────────────────────────────────
 
 Run:
-  python3 pokemon_bench.py --validate        # step 1: prove the roster decks are real (no Docker)
-  python3 pokemon_bench.py --run -n 100      # step 2 (next): run the full matrix in Docker
+  python3 pokemon_bench.py --validate              # decks legal + collision-proof self-test (Docker)
+  python3 pokemon_bench.py --run -n 100            # full candidate × opponent matrix
+  python3 pokemon_bench.py --run -n 100 --candidates hoptrevenant,walrein --out out/bench.json
 """
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 DECKS = os.path.join(REPO, "data", "decks")
+IMAGE = "cabt-sim"
+SIDE_A, SIDE_B = "agents._bench_a", "agents._bench_b"
+PALACE = sorted([1]*19 + [11]*4 + [14]*4 + [18]*4 + [344]*4 + [345]*4 +
+                [1086]*4 + [1147]*4 + [1212]*4 + [1227]*4 + [1235]*4 + [1159])
 
-# The Palace fallback deck baked into bare_agent.py / meta_opp.py — if an opponent's deck equals this,
-# its real deck file is missing and the benchmark would silently test the wrong thing.
-PALACE_FALLBACK = sorted([1]*19 + [11]*4 + [14]*4 + [18]*4 + [344]*4 + [345]*4 +
-                         [1086]*4 + [1147]*4 + [1212]*4 + [1227]*4 + [1235]*4 + [1159])
-
-# ─────────────────────────────────────────────────────────────────────────────
-# OPPONENT ROSTER — the fixed "field" we measure candidates against.
-# Each opponent is a self-loading agent MODULE (no shared BARE_DECK env → no deck collision).
-# `deck` is the JSON the module loads (for the validity guard); None = intentionally the generic
-# Palace field deck (meta_opp), which is expected and not a bug.
-#   key       : dotted module path passed to runner.py --b
-#   archetype : human label
-#   deck      : deck file under data/decks/ (or None for the Palace generic field)
-#   note      : why it's in the roster
-# ─────────────────────────────────────────────────────────────────────────────
-OPPONENTS = [
-    # --- walrein's known hard matchups (measured holes) ---
-    {"key": "agents.bench_starmie_cinderace", "archetype": "Mega Starmie ex / Cinderace", "deck": "deck_bench_starmie_cinderace.json", "note": "worst matchup (~95% vs walrein); real ladder deck"},
-    {"key": "agents.meta_harlequin",          "archetype": "Harlequin",                   "deck": "deck_harlequin.json",                "note": "second 95% hole surfaced in gauntlet"},
-    {"key": "agents.meta_starmie",            "archetype": "Mega Starmie ex",             "deck": "deck_starmie.json",                  "note": "water/Starmie family (~75%)"},
-    {"key": "agents.bench_megalucario",       "archetype": "Mega Lucario ex (tuned pilot)","deck": "deck_bench_megalucario.json",        "note": "tuned-pilot Lucario (faithful to ladder); the REAL Lucario benchmark"},
-    {"key": "agents.meta_dragapult",          "archetype": "Dragapult ex",                "deck": "deck_dragapult.json",                "note": "coin-flip tempo deck"},
-    # --- favorable / mid matchups (range coverage) ---
-    {"key": "agents.meta_tarountula",         "archetype": "Tarountula",                  "deck": "deck_tarountula.json",               "note": "near-even"},
-    {"key": "agents.meta_walrein",            "archetype": "Walrein (mirror)",            "deck": "deck_walrein.json",                  "note": "mirror sanity check"},
-    {"key": "agents.meta_crustle",            "archetype": "Crustle",                     "deck": "deck_crustle.json",                  "note": "favorable"},
-    {"key": "agents.meta_colress_dunsparce",  "archetype": "Colress / Dunsparce",         "deck": "deck_colress_dunsparce.json",        "note": "favorable; top meta-share deck"},
-    {"key": "agents.meta_bellibolt",          "archetype": "Iono's Bellibolt",            "deck": "deck_bellibolt.json",                "note": "favorable (combo, bare pilot under-plays it)"},
-    {"key": "agents.meta_nighttime_mine",     "archetype": "Nighttime Mine (combo)",      "deck": "deck_nighttime_mine.json",           "note": "weak benchmark (combo needs its engine)"},
-    {"key": "agents.meta_opp",                "archetype": "Generic field (Palace)",      "deck": None,                                 "note": "the loop's 'field' yardstick; intentionally the Palace generic deck"},
-]
-# Deliberately EXCLUDED: agents.mega_lucario — it's an untuned-pilot duplicate of bench_megalucario
-# and caused exactly the tuned/untuned confusion we just debugged. bench_megalucario is the canonical
-# Lucario benchmark. (Add it back as a separate weak-pilot baseline only if explicitly wanted.)
-
-# ─────────────────────────────────────────────────────────────────────────────
-# CANDIDATE ROSTER — the agents under test. Includes BOTH engine families on purpose:
-#   agents.walrein_*           = the real bare_agent engine (what the loop optimizes)
-#   submissions.submission_*   = the self-contained inline engine (what actually shipped to Kaggle)
-# Keeping both exposes the ~44pt engine divergence vs the water decks.
-# ─────────────────────────────────────────────────────────────────────────────
+# ── CANDIDATE decks: what WE could adopt and run with the generic engine ──
+#   name : key used on the CLI and as the matrix row
+#   deck : JSON under data/decks/
+#   meta_wr : Kaggle-meta tracker ladder win rate (2026-06-23) — real-pilot signal, sim-independent
 CANDIDATES = [
-    {"key": "agents.walrein_v15", "code": "v15", "label": "v15 (bare_agent, sim champion)"},
-    {"key": "agents.walrein_v21", "code": "v21", "label": "v21 (bare_agent, force/swap hybrid)"},
-    {"key": "agents.walrein_v23", "code": "v23", "label": "v23 (bare_agent, ID-gated two-mode)"},
-    {"key": "agents.walrein_v24", "code": "v24", "label": "v24 (bare_agent, race-during-charge)"},
-    {"key": "submissions.submission_walrein_v22", "code": "sub22", "label": "sub_v22 (inline engine, on ladder)"},
-    {"key": "submissions.submission_walrein_v23", "code": "sub23", "label": "sub_v23 (inline engine, faithful port)"},
+    {"name": "walrein",          "deck": "deck_walrein.json",                 "meta_wr": "74% (our current sub)"},
+    {"name": "hoptrevenant",     "deck": "deck_cand_hoptrevenant.json",       "meta_wr": "62.3% / 848g (top robust)"},
+    {"name": "kadabra_alakazam", "deck": "deck_cand_kadabra_alakazam.json",   "meta_wr": "61.4% / 207g"},
+    {"name": "abra_kadabra",     "deck": "deck_cand_abra_kadabra.json",        "meta_wr": "59.6% / 617g"},
+    {"name": "enrich_nighttime", "deck": "deck_cand_enrich_nighttime.json",   "meta_wr": "64.7% / 102g (combo)"},
+    {"name": "colress_dunsparce","deck": "deck_colress_dunsparce.json",        "meta_wr": "prior bare champ"},
+    {"name": "harlequin",        "deck": "deck_harlequin.json",                "meta_wr": "beats walrein 95%"},
+]
+
+# ── OPPONENT field: the meta we'd face on the ladder ──
+OPPONENTS = [
+    {"name": "starmie_cinderace", "deck": "deck_bench_starmie_cinderace.json", "label": "Mega Starmie / Cinderace"},
+    {"name": "starmie",           "deck": "deck_starmie.json",                 "label": "Mega Starmie ex"},
+    {"name": "harlequin",         "deck": "deck_harlequin.json",               "label": "Harlequin"},
+    {"name": "megalucario",       "deck": "deck_bench_megalucario.json",       "label": "Mega Lucario ex"},
+    {"name": "dragapult",         "deck": "deck_dragapult.json",               "label": "Dragapult ex"},
+    {"name": "crustle",           "deck": "deck_crustle.json",                 "label": "Crustle"},
+    {"name": "colress_dunsparce", "deck": "deck_colress_dunsparce.json",       "label": "Colress / Dunsparce"},
+    {"name": "bellibolt",         "deck": "deck_bellibolt.json",               "label": "Iono's Bellibolt"},
+    {"name": "tarountula",        "deck": "deck_tarountula.json",              "label": "Tarountula"},
+    {"name": "walrein",           "deck": "deck_walrein.json",                 "label": "Walrein (mirror)"},
 ]
 
 
-def _load_deck(deckfile):
-    with open(os.path.join(DECKS, deckfile)) as f:
-        return json.load(f)
+def _deck_path(deckfile):
+    return os.path.join(DECKS, deckfile)
 
 
-def validate_roster():
-    """Fail loudly if any opponent deck is missing or has degenerated to the Palace fallback."""
+def _check_deck(deckfile):
+    p = _deck_path(deckfile)
+    if not os.path.exists(p):
+        return "MISSING"
+    deck = json.load(open(p))
+    if len(deck) != 60:
+        return f"{len(deck)}≠60"
+    if sorted(deck) == PALACE:
+        return "PALACE-FALLBACK"
+    return "ok"
+
+
+def validate_decks():
     ok = True
-    print(f"{'opponent module':<38}{'archetype':<30}{'deck':<34}{'status'}")
-    print("-" * 120)
-    for o in OPPONENTS:
-        deckfile = o["deck"]
-        if deckfile is None:
-            status = "OK (Palace field, by design)"
-        else:
-            path = os.path.join(DECKS, deckfile)
-            if not os.path.exists(path):
-                status = "❌ MISSING DECK → would Palace-fallback"; ok = False
-            else:
-                deck = _load_deck(deckfile)
-                if len(deck) != 60:
-                    status = f"❌ {len(deck)} cards (expected 60)"; ok = False
-                elif sorted(deck) == PALACE_FALLBACK:
-                    status = "❌ IS the Palace fallback deck"; ok = False
-                else:
-                    status = "✅ ok (60, real deck)"
-        print(f"{o['key']:<38}{o['archetype']:<30}{str(deckfile):<34}{status}")
-    print("-" * 120)
-    print(f"opponents: {len(OPPONENTS)}   candidates: {len(CANDIDATES)}   "
-          f"matrix: {len(OPPONENTS) * len(CANDIDATES)} matchups")
-    print("ROSTER VALID ✅" if ok else "ROSTER INVALID ❌ — fix decks before benchmarking")
+    seen = {}
+    print(f"{'deck file':<38}{'status':<18}role")
+    print("-" * 70)
+    for role, roster in (("candidate", CANDIDATES), ("opponent", OPPONENTS)):
+        for d in roster:
+            st = seen.get(d["deck"]) or _check_deck(d["deck"])
+            seen[d["deck"]] = st
+            if st != "ok":
+                ok = False
+            print(f"{d['deck']:<38}{('✅ '+st if st=='ok' else '❌ '+st):<18}{role}")
+    print("-" * 70)
     return ok
 
 
-import re
+def validate_collision():
+    """Prove side A and side B load DIFFERENT decks (the whole point of the redesign)."""
+    code = (
+        "import importlib,json,os;"
+        "CARDS={c['id']:c['name'] for c in json.load(open('/app/data/cards.json'))['cards']};"
+        "A=importlib.import_module('agents._bench_a');B=importlib.import_module('agents._bench_b');"
+        "print('A_len',len(A.my_deck),'B_len',len(B.my_deck),'SAME' if A.my_deck==B.my_deck else 'DIFFERENT')"
+    )
+    out = subprocess.run(
+        ["docker", "run", "--rm", "--platform=linux/amd64", "-v", f"{REPO}:/app",
+         "-e", f"BENCH_A_DECK=/app/data/decks/{CANDIDATES[0]['deck']}",
+         "-e", f"BENCH_B_DECK=/app/data/decks/{OPPONENTS[0]['deck']}",
+         "--entrypoint", "python", IMAGE, "-c", code],
+        capture_output=True, text=True, timeout=300).stdout
+    passed = "DIFFERENT" in out
+    print(f"collision self-test: {out.strip().splitlines()[-1] if out.strip() else 'no output'}  "
+          f"→ {'✅ collision-proof' if passed else '❌ COLLISION'}")
+    return passed
 
-IMAGE = "cabt-sim"
-RESULT_RE = re.compile(r"\(([\d.]+)%\)")
 
-
-def run_matchup(cand_key, opp_key, n, timeout=1800):
-    """Run one candidate-vs-opponent match (n games, seat-swapped) in Docker.
-    Returns {wins, games, pct, draws} from the CANDIDATE's perspective (side A), or None on error."""
-    cmd = ["docker", "run", "--rm", "--platform=linux/amd64", "-v", f"{REPO}:/app", IMAGE,
-           "--a", cand_key, "--b", opp_key, "-n", str(n)]
+def run_matchup(deck_a, deck_b, n, timeout=2400):
+    cmd = ["docker", "run", "--rm", "--platform=linux/amd64", "-v", f"{REPO}:/app",
+           "-e", f"BENCH_A_DECK=/app/data/decks/{deck_a}",
+           "-e", f"BENCH_B_DECK=/app/data/decks/{deck_b}",
+           IMAGE, "--a", SIDE_A, "--b", SIDE_B, "-n", str(n)]
     try:
         out = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout).stdout
     except subprocess.TimeoutExpired:
         return None
-    wins = pct = draws = None
-    # candidate is side A: line looks like "  A (agents.walrein_v23): 61  (61.0%)"
-    a_re = re.compile(r"A \(" + re.escape(cand_key) + r"\):\s*(\d+)\s*\(([\d.]+)%\)")
-    for line in out.splitlines():
-        m = a_re.search(line)
-        if m:
-            wins, pct = int(m.group(1)), float(m.group(2))
-        if line.strip().startswith("draws:"):
-            try:
-                draws = int(line.split(":")[1])
-            except (ValueError, IndexError):
-                pass
-    if pct is None:
-        return None
-    return {"wins": wins, "games": n, "pct": pct, "draws": draws}
+    m = re.search(r"A \(" + re.escape(SIDE_A) + r"\):\s*(\d+)\s*\(([\d.]+)%\)", out)
+    return {"wins": int(m.group(1)), "pct": float(m.group(2)), "n": n} if m else None
 
 
 def run_matrix(n, candidates, opponents, out_path=None):
-    """Run the full candidate × opponent matrix, print a win-rate table, return results."""
-    results = {}  # (cand_code, opp_key) -> result dict
     total = len(candidates) * len(opponents)
     done = 0
-    print(f"Running {total} matchups @ n={n} each ({total * n} games). Candidate = side A (win% shown).\n")
-    for opp in opponents:
-        for c in candidates:
+    results = {}
+    print(f"Matrix: {len(candidates)} candidate decks × {len(opponents)} opponents @ n={n} "
+          f"({total} matchups, {total*n} games). Uniform generic pilot both sides → DECK strength.\n")
+    for c in candidates:
+        for o in opponents:
             done += 1
-            print(f"  [{done}/{total}] {c['code']:>6} vs {opp['key'].split('.')[-1]:<26} ", end="", flush=True)
-            r = run_matchup(c["key"], opp["key"], n)
-            results[(c["code"], opp["key"])] = r
+            print(f"  [{done}/{total}] {c['name']:>16} vs {o['name']:<20} ", end="", flush=True)
+            r = run_matchup(c["deck"], o["deck"], n)
+            results[(c["name"], o["name"])] = r
             print(f"{r['pct']:.0f}%" if r else "ERR")
 
-    # ── matrix table: rows = opponents, cols = candidate codes ──
-    codes = [c["code"] for c in candidates]
-    w_opp = max(len(o["archetype"]) for o in opponents) + 1
-    header = "opponent".ljust(w_opp) + "".join(f"{c:>7}" for c in codes)
-    print("\n" + "=" * len(header)); print(header); print("-" * len(header))
-    col_sum = {c: [] for c in codes}
-    for opp in opponents:
-        row = opp["archetype"].ljust(w_opp)
-        for c in candidates:
-            r = results[(c["code"], opp["key"])]
+    w = max(len(c["name"]) for c in candidates) + 1
+    onames = [o["name"][:9] for o in opponents]
+    print("\n" + "=" * (w + 9*len(onames) + 8))
+    print("candidate deck".ljust(w) + "".join(f"{x:>10}" for x in onames) + f"{'AVG':>8}")
+    print("-" * (w + 9*len(onames) + 8))
+    for c in candidates:
+        vals = []
+        row = c["name"].ljust(w)
+        for o in opponents:
+            r = results[(c["name"], o["name"])]
             if r:
-                row += f"{r['pct']:>6.0f}%"; col_sum[c["code"]].append(r["pct"])
+                row += f"{r['pct']:>9.0f}%"; vals.append(r["pct"])
             else:
-                row += f"{'ERR':>7}"
+                row += f"{'ERR':>10}"
+        row += f"{(sum(vals)/len(vals) if vals else 0):>7.0f}%"
         print(row)
-    print("-" * len(header))
-    avg_row = "AVG (mean win%)".ljust(w_opp)
-    for c in codes:
-        vals = col_sum[c]
-        avg_row += (f"{sum(vals)/len(vals):>6.0f}%" if vals else f"{'-':>7}")
-    print(avg_row); print("=" * len(header))
+    print("=" * (w + 9*len(onames) + 8))
+    print("AVG = candidate's mean win% across the field. Target: a deck with AVG ≥ 70%.")
 
     if out_path:
-        flat = [{"candidate": code, "opponent": opp, **(r or {"error": True})}
-                for (code, opp), r in results.items()]
-        with open(out_path, "w") as f:
-            json.dump({"n": n, "results": flat}, f, indent=1)
-        print(f"\nfull results → {out_path}")
+        flat = [{"candidate": c, "opponent": o, **(r or {"error": True})} for (c, o), r in results.items()]
+        os.makedirs(os.path.dirname(out_path), exist_ok=True) if os.path.dirname(out_path) else None
+        json.dump({"n": n, "results": flat}, open(out_path, "w"), indent=1)
+        print(f"full results → {out_path}")
     return results
 
 
-def _filter(roster, codes_or_keys, field):
-    if not codes_or_keys:
+def _filter(roster, csv):
+    if not csv:
         return roster
-    wanted = set(codes_or_keys.split(","))
-    return [r for r in roster if r[field] in wanted or r["key"] in wanted or r["key"].split(".")[-1] in wanted]
+    want = set(csv.split(","))
+    return [r for r in roster if r["name"] in want]
 
 
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser(description="cabt benchmark matrix")
-    ap.add_argument("--validate", action="store_true", help="step 1: check the roster decks are real")
-    ap.add_argument("--run", action="store_true", help="step 2: run the full candidate × opponent matrix in Docker")
-    ap.add_argument("-n", type=int, default=100, help="games per matchup (default 100)")
-    ap.add_argument("--candidates", help="comma-separated candidate codes/keys to limit to (e.g. v23,sub23)")
-    ap.add_argument("--opponents", help="comma-separated opponent keys/module-names to limit to")
+    ap = argparse.ArgumentParser(description="collision-proof cabt deck benchmark")
+    ap.add_argument("--validate", action="store_true", help="check decks + collision self-test")
+    ap.add_argument("--run", action="store_true", help="run the candidate × opponent matrix")
+    ap.add_argument("-n", type=int, default=100, help="games per matchup")
+    ap.add_argument("--candidates", help="comma-separated candidate names to limit to")
+    ap.add_argument("--opponents", help="comma-separated opponent names to limit to")
     ap.add_argument("--out", help="write full results JSON here")
     args = ap.parse_args()
 
+    decks_ok = validate_decks()
+    if args.run or args.validate:
+        coll_ok = validate_collision()
+    else:
+        coll_ok = True
     if args.run:
-        if not validate_roster():
-            print("\nrefusing to run — fix the roster decks first."); sys.exit(1)
+        if not (decks_ok and coll_ok):
+            print("\n❌ refusing to run — fix decks/collision first."); sys.exit(1)
         print()
-        cands = _filter(CANDIDATES, args.candidates, "code")
-        opps = _filter(OPPONENTS, args.opponents, "archetype")
-        run_matrix(args.n, cands, opps, out_path=args.out)
+        run_matrix(args.n, _filter(CANDIDATES, args.candidates), _filter(OPPONENTS, args.opponents), args.out)
         sys.exit(0)
-    # default + --validate: print and validate the chosen roster
-    sys.exit(0 if validate_roster() else 1)
+    sys.exit(0 if decks_ok and coll_ok else 1)
