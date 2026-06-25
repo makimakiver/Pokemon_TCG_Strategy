@@ -25,6 +25,12 @@ MEGA_BRAVE = 983          # 270 dmg, 2x{F} — the OHKO; can't use 2 turns runni
 AURA_JAB = 982            # 130 dmg, 1x{F} — accelerates Basic {F} from discard to bench
 PREMIUM_POWER_PRO = 1141  # damage-boost item
 FIGHTING_GONG = 1142      # damage-boost item
+CARMINE = 1192            # ramp/draw supporter — real ladder Lucario plays it EVERY game to dig
+                          # for the energy pieces fast (recent episodes: 1x Carmine + 4 Gong + 4 PPP).
+
+
+def _has_attack(opts, attack_id):
+    return any(o.type == OptionType.ATTACK and getattr(o, "attackId", None) == attack_id for o in opts)
 
 
 def agent(obs_dict):
@@ -42,6 +48,16 @@ def agent(obs_dict):
     for i, o in enumerate(opts):
         if o.type == OptionType.ATTACK and getattr(o, "attackId", None) == MEGA_BRAVE:
             return [i]
+
+    # 1b. RAMP FASTER (the recent-episode fix): when Mega Brave isn't online yet, force Carmine to
+    #     dig for the {F} energy / boost pieces — this is how the real ladder Lucario reaches the
+    #     270 OHKO a turn earlier than the generic pilot (which lost us the Carmine-speed race).
+    if not _has_attack(opts, MEGA_BRAVE) and not getattr(obs.current, "supporterPlayed", False):
+        for i, o in enumerate(opts):
+            if o.type == OptionType.PLAY:
+                c = get_card(obs, AreaType.HAND, o.index, my_index)
+                if c is not None and c.id == CARMINE:
+                    return [i] if select.minCount <= 1 else chosen
 
     # 2. Stack damage before attacking: force-play the boost trainers (bare pilot never does).
     for i, o in enumerate(opts):
